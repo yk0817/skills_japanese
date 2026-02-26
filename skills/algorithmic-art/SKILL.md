@@ -1,138 +1,138 @@
 ---
 name: algorithmic-art
-description: Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using code, generative art, algorithmic art, flow fields, or particle systems. Create original algorithmic art rather than copying existing artists' work to avoid copyright violations.
+description: p5.jsとシード付きランダム性、インタラクティブなパラメータ探索を用いたアルゴリズミックアートの制作。コードを使ったアート、ジェネラティブアート、アルゴリズミックアート、フローフィールド、パーティクルシステムの作成をユーザーが依頼した際に使用する。著作権侵害を避けるため、既存のアーティストの作品をコピーせず、オリジナルのアルゴリズミックアートを制作すること。
 license: Complete terms in LICENSE.txt
 ---
 
-Algorithmic philosophies are computational aesthetic movements that are then expressed through code. Output .md files (philosophy), .html files (interactive viewer), and .js files (generative algorithms).
+アルゴリズミック・フィロソフィーとは、コードによって表現される計算的な美学運動である。出力は .md ファイル（フィロソフィー）、.html ファイル（インタラクティブビューア）、.js ファイル（ジェネラティブアルゴリズム）。
 
-This happens in two steps:
-1. Algorithmic Philosophy Creation (.md file)
-2. Express by creating p5.js generative art (.html + .js files)
+以下の2つのステップで進行する：
+1. アルゴリズミック・フィロソフィーの策定（.md ファイル）
+2. p5.js ジェネラティブアートとして表現（.html + .js ファイル）
 
-First, undertake this task:
+まず、以下のタスクに取り組む：
 
-## ALGORITHMIC PHILOSOPHY CREATION
+## アルゴリズミック・フィロソフィーの策定
 
-To begin, create an ALGORITHMIC PHILOSOPHY (not static images or templates) that will be interpreted through:
-- Computational processes, emergent behavior, mathematical beauty
-- Seeded randomness, noise fields, organic systems
-- Particles, flows, fields, forces
-- Parametric variation and controlled chaos
+まず、以下の要素を通じて解釈されるアルゴリズミック・フィロソフィー（静的な画像やテンプレートではない）を策定する：
+- 計算プロセス、創発的挙動、数学的美
+- シード付きランダム性、ノイズフィールド、有機的システム
+- パーティクル、フロー、フィールド、フォース
+- パラメトリックな変化と制御されたカオス
 
-### THE CRITICAL UNDERSTANDING
-- What is received: Some subtle input or instructions by the user to take into account, but use as a foundation; it should not constrain creative freedom.
-- What is created: An algorithmic philosophy/generative aesthetic movement.
-- What happens next: The same version receives the philosophy and EXPRESSES IT IN CODE - creating p5.js sketches that are 90% algorithmic generation, 10% essential parameters.
+### 重要な理解
+- 受け取るもの：ユーザーからのさりげないインプットや指示。考慮に入れるが、あくまで土台として使い、創造的自由を制限するものではない。
+- 作り出すもの：アルゴリズミック・フィロソフィー／ジェネラティブな美学運動。
+- 次に起こること：同じバージョンがそのフィロソフィーを受け取り、コードで表現する。90%がアルゴリズムによる生成、10%が必要最小限のパラメータである p5.js スケッチを制作する。
 
-Consider this approach:
-- Write a manifesto for a generative art movement
-- The next phase involves writing the algorithm that brings it to life
+以下のアプローチを検討する：
+- ジェネラティブアート運動のマニフェストを書く
+- 次のフェーズではそれに命を吹き込むアルゴリズムを書く
 
-The philosophy must emphasize: Algorithmic expression. Emergent behavior. Computational beauty. Seeded variation.
+フィロソフィーが強調すべきこと：アルゴリズミックな表現。創発的挙動。計算的な美。シードによるバリエーション。
 
-### HOW TO GENERATE AN ALGORITHMIC PHILOSOPHY
+### アルゴリズミック・フィロソフィーの生成方法
 
-**Name the movement** (1-2 words): "Organic Turbulence" / "Quantum Harmonics" / "Emergent Stillness"
+**運動の命名**（1-2語）："Organic Turbulence" / "Quantum Harmonics" / "Emergent Stillness"
 
-**Articulate the philosophy** (4-6 paragraphs - concise but complete):
+**フィロソフィーの明文化**（4-6段落 - 簡潔だが完全に）：
 
-To capture the ALGORITHMIC essence, express how this philosophy manifests through:
-- Computational processes and mathematical relationships?
-- Noise functions and randomness patterns?
-- Particle behaviors and field dynamics?
-- Temporal evolution and system states?
-- Parametric variation and emergent complexity?
+アルゴリズミックな本質を捉えるために、このフィロソフィーが以下を通じてどのように発現するかを表現する：
+- 計算プロセスと数学的関係性
+- ノイズ関数とランダム性のパターン
+- パーティクルの挙動とフィールドのダイナミクス
+- 時間的進化とシステムの状態
+- パラメトリックな変化と創発的複雑性
 
-**CRITICAL GUIDELINES:**
-- **Avoid redundancy**: Each algorithmic aspect should be mentioned once. Avoid repeating concepts about noise theory, particle dynamics, or mathematical principles unless adding new depth.
-- **Emphasize craftsmanship REPEATEDLY**: The philosophy MUST stress multiple times that the final algorithm should appear as though it took countless hours to develop, was refined with care, and comes from someone at the absolute top of their field. This framing is essential - repeat phrases like "meticulously crafted algorithm," "the product of deep computational expertise," "painstaking optimization," "master-level implementation."
-- **Leave creative space**: Be specific about the algorithmic direction, but concise enough that the next Claude has room to make interpretive implementation choices at an extremely high level of craftsmanship.
+**重要なガイドライン：**
+- **冗長性の回避**：各アルゴリズムの側面は一度だけ言及する。新たな深みを加えない限り、ノイズ理論、パーティクルダイナミクス、数学的原理についての概念の繰り返しは避ける。
+- **職人技の繰り返し強調**：フィロソフィーでは、最終的なアルゴリズムが膨大な時間をかけて開発され、細心の注意を払って洗練され、その分野の頂点に立つ人物によるものに見えるべきことを何度も強調しなければならない。この枠組みは不可欠であり、「入念に作り込まれたアルゴリズム」「深い計算的専門知識の産物」「丹念な最適化」「マスターレベルの実装」といったフレーズを繰り返すこと。
+- **創造的余地を残す**：アルゴリズムの方向性について具体的に述べつつも、次の Claude が極めて高い職人技のレベルで解釈的な実装の選択をする余地を残せるよう簡潔にする。
 
-The philosophy must guide the next version to express ideas ALGORITHMICALLY, not through static images. Beauty lives in the process, not the final frame.
+フィロソフィーは、次のバージョンがアイデアを静的な画像ではなくアルゴリズミックに表現するよう導くものでなければならない。美はプロセスの中にあり、最終フレームにあるのではない。
 
-### PHILOSOPHY EXAMPLES
+### フィロソフィーの例
 
 **"Organic Turbulence"**
-Philosophy: Chaos constrained by natural law, order emerging from disorder.
-Algorithmic expression: Flow fields driven by layered Perlin noise. Thousands of particles following vector forces, their trails accumulating into organic density maps. Multiple noise octaves create turbulent regions and calm zones. Color emerges from velocity and density - fast particles burn bright, slow ones fade to shadow. The algorithm runs until equilibrium - a meticulously tuned balance where every parameter was refined through countless iterations by a master of computational aesthetics.
+フィロソフィー：自然法則に拘束されたカオス、無秩序から秩序が生まれる。
+アルゴリズム的表現：多層の Perlin ノイズによって駆動されるフローフィールド。数千のパーティクルがベクトルフォースに従い、その軌跡が有機的な密度マップに蓄積される。複数のノイズオクターブが乱流領域と静穏領域を作り出す。色は速度と密度から生まれ、速いパーティクルは明るく輝き、遅いものは影へと消えていく。アルゴリズムは平衡状態に達するまで実行される。計算的美学のマスターによって無数の反復を経て洗練された、入念にチューニングされたバランス。
 
 **"Quantum Harmonics"**
-Philosophy: Discrete entities exhibiting wave-like interference patterns.
-Algorithmic expression: Particles initialized on a grid, each carrying a phase value that evolves through sine waves. When particles are near, their phases interfere - constructive interference creates bright nodes, destructive creates voids. Simple harmonic motion generates complex emergent mandalas. The result of painstaking frequency calibration where every ratio was carefully chosen to produce resonant beauty.
+フィロソフィー：波の干渉パターンを示す離散的実体。
+アルゴリズム的表現：グリッド上に初期化されたパーティクル、それぞれが正弦波によって進化する位相値を持つ。パーティクルが近接すると位相が干渉し、建設的干渉は明るいノードを、破壊的干渉はボイドを生み出す。単純な調和運動が複雑な創発的マンダラを生成する。あらゆる比率が共鳴する美しさを生み出すよう慎重に選ばれた、丹念な周波数較正の結果。
 
 **"Recursive Whispers"**
-Philosophy: Self-similarity across scales, infinite depth in finite space.
-Algorithmic expression: Branching structures that subdivide recursively. Each branch slightly randomized but constrained by golden ratios. L-systems or recursive subdivision generate tree-like forms that feel both mathematical and organic. Subtle noise perturbations break perfect symmetry. Line weights diminish with each recursion level. Every branching angle the product of deep mathematical exploration.
+フィロソフィー：スケールを超えた自己相似性、有限の空間に無限の深さ。
+アルゴリズム的表現：再帰的に細分化される分岐構造。各枝はわずかにランダム化されるが黄金比によって制約される。L-system や再帰的分割が、数学的でありながら有機的に感じられる樹木状の形態を生成する。微妙なノイズ擾乱が完全な対称性を崩す。線の太さは各再帰レベルごとに減少する。すべての分岐角度が深い数学的探究の産物。
 
 **"Field Dynamics"**
-Philosophy: Invisible forces made visible through their effects on matter.
-Algorithmic expression: Vector fields constructed from mathematical functions or noise. Particles born at edges, flowing along field lines, dying when they reach equilibrium or boundaries. Multiple fields can attract, repel, or rotate particles. The visualization shows only the traces - ghost-like evidence of invisible forces. A computational dance meticulously choreographed through force balance.
+フィロソフィー：物質への作用を通じて見えない力を可視化する。
+アルゴリズム的表現：数学関数やノイズから構築されたベクトルフィールド。端で生まれ、フィールドラインに沿って流れ、平衡点や境界に達すると消えるパーティクル。複数のフィールドがパーティクルを引き付け、反発し、回転させる。可視化されるのは痕跡のみ、見えない力の幽霊のような証拠。力のバランスを通じて入念に振り付けられた計算的な舞。
 
 **"Stochastic Crystallization"**
-Philosophy: Random processes crystallizing into ordered structures.
-Algorithmic expression: Randomized circle packing or Voronoi tessellation. Start with random points, let them evolve through relaxation algorithms. Cells push apart until equilibrium. Color based on cell size, neighbor count, or distance from center. The organic tiling that emerges feels both random and inevitable. Every seed produces unique crystalline beauty - the mark of a master-level generative algorithm.
+フィロソフィー：ランダムなプロセスが秩序ある構造へと結晶化する。
+アルゴリズム的表現：ランダム化されたサークルパッキングや Voronoi テッセレーション。ランダムな点から始め、緩和アルゴリズムを通じて進化させる。セルは平衡状態になるまで互いに押し離される。色はセルサイズ、隣接数、中心からの距離に基づく。生まれる有機的なタイリングはランダムでありながら必然的に感じられる。すべてのシードがユニークな結晶の美を生み出す、マスターレベルのジェネラティブアルゴリズムの証。
 
-*These are condensed examples. The actual algorithmic philosophy should be 4-6 substantial paragraphs.*
+*これらは要約された例である。実際のアルゴリズミック・フィロソフィーは4-6段落の充実した内容であるべき。*
 
-### ESSENTIAL PRINCIPLES
-- **ALGORITHMIC PHILOSOPHY**: Creating a computational worldview to be expressed through code
-- **PROCESS OVER PRODUCT**: Always emphasize that beauty emerges from the algorithm's execution - each run is unique
-- **PARAMETRIC EXPRESSION**: Ideas communicate through mathematical relationships, forces, behaviors - not static composition
-- **ARTISTIC FREEDOM**: The next Claude interprets the philosophy algorithmically - provide creative implementation room
-- **PURE GENERATIVE ART**: This is about making LIVING ALGORITHMS, not static images with randomness
-- **EXPERT CRAFTSMANSHIP**: Repeatedly emphasize the final algorithm must feel meticulously crafted, refined through countless iterations, the product of deep expertise by someone at the absolute top of their field in computational aesthetics
+### 基本原則
+- **アルゴリズミック・フィロソフィー**：コードを通じて表現される計算的世界観を作る
+- **プロダクトよりプロセス**：美はアルゴリズムの実行から生まれることを常に強調する。各実行はユニーク
+- **パラメトリックな表現**：アイデアは数学的関係性、力、挙動を通じて伝達される。静的な構図ではない
+- **芸術的自由**：次の Claude がフィロソフィーをアルゴリズミックに解釈する。創造的な実装の余地を提供する
+- **純粋なジェネラティブアート**：これは生きたアルゴリズムを作ることであり、ランダム性を加えた静的画像ではない
+- **専門家の職人技**：最終的なアルゴリズムが入念に作り込まれ、無数の反復を経て洗練され、計算的美学の分野の頂点に立つ人物による深い専門知識の産物に感じられるべきことを繰り返し強調する
 
-**The algorithmic philosophy should be 4-6 paragraphs long.** Fill it with poetic computational philosophy that brings together the intended vision. Avoid repeating the same points. Output this algorithmic philosophy as a .md file.
-
----
-
-## DEDUCING THE CONCEPTUAL SEED
-
-**CRITICAL STEP**: Before implementing the algorithm, identify the subtle conceptual thread from the original request.
-
-**THE ESSENTIAL PRINCIPLE**:
-The concept is a **subtle, niche reference embedded within the algorithm itself** - not always literal, always sophisticated. Someone familiar with the subject should feel it intuitively, while others simply experience a masterful generative composition. The algorithmic philosophy provides the computational language. The deduced concept provides the soul - the quiet conceptual DNA woven invisibly into parameters, behaviors, and emergence patterns.
-
-This is **VERY IMPORTANT**: The reference must be so refined that it enhances the work's depth without announcing itself. Think like a jazz musician quoting another song through algorithmic harmony - only those who know will catch it, but everyone appreciates the generative beauty.
+**アルゴリズミック・フィロソフィーは4-6段落の長さであるべき。** 意図されたビジョンをまとめる詩的な計算フィロソフィーで満たすこと。同じポイントの繰り返しは避ける。このアルゴリズミック・フィロソフィーを .md ファイルとして出力する。
 
 ---
 
-## P5.JS IMPLEMENTATION
+## コンセプチュアル・シードの推定
 
-With the philosophy AND conceptual framework established, express it through code. Pause to gather thoughts before proceeding. Use only the algorithmic philosophy created and the instructions below.
+**重要なステップ**：アルゴリズムを実装する前に、元のリクエストからさりげない概念的な糸を見出す。
 
-### ⚠️ STEP 0: READ THE TEMPLATE FIRST ⚠️
+**本質的な原則**：
+コンセプトとは、**アルゴリズム自体に埋め込まれた、さりげなくニッチな参照** である。常にリテラルではなく、常に洗練されている。そのテーマに精通した人は直感的にそれを感じ取り、それ以外の人はただ見事なジェネラティブ構成を体験する。アルゴリズミック・フィロソフィーは計算的な言語を提供する。推定されたコンセプトは魂を提供する。パラメータ、挙動、創発パターンに目に見えない形で織り込まれた静かな概念的DNAである。
 
-**CRITICAL: BEFORE writing any HTML:**
-
-1. **Read** `templates/viewer.html` using the Read tool
-2. **Study** the exact structure, styling, and Anthropic branding
-3. **Use that file as the LITERAL STARTING POINT** - not just inspiration
-4. **Keep all FIXED sections exactly as shown** (header, sidebar structure, Anthropic colors/fonts, seed controls, action buttons)
-5. **Replace only the VARIABLE sections** marked in the file's comments (algorithm, parameters, UI controls for parameters)
-
-**Avoid:**
-- ❌ Creating HTML from scratch
-- ❌ Inventing custom styling or color schemes
-- ❌ Using system fonts or dark themes
-- ❌ Changing the sidebar structure
-
-**Follow these practices:**
-- ✅ Copy the template's exact HTML structure
-- ✅ Keep Anthropic branding (Poppins/Lora fonts, light colors, gradient backdrop)
-- ✅ Maintain the sidebar layout (Seed → Parameters → Colors? → Actions)
-- ✅ Replace only the p5.js algorithm and parameter controls
-
-The template is the foundation. Build on it, don't rebuild it.
+これは**非常に重要**である：参照は、自らを主張することなく作品の深みを高めるほど洗練されていなければならない。ジャズミュージシャンがアルゴリズミックなハーモニーを通じて別の曲を引用するように考える。知っている人だけが気づくが、誰もがジェネラティブな美を楽しめる。
 
 ---
 
-To create gallery-quality computational art that lives and breathes, use the algorithmic philosophy as the foundation.
+## P5.JS 実装
 
-### TECHNICAL REQUIREMENTS
+フィロソフィーと概念的フレームワークの両方が確立されたら、それをコードで表現する。進む前に一度思考を整理する。作成したアルゴリズミック・フィロソフィーと以下の手順のみを使用する。
 
-**Seeded Randomness (Art Blocks Pattern)**:
+### ステップ 0：まずテンプレートを読む
+
+**重要：HTML を書く前に：**
+
+1. Read ツールを使って `templates/viewer.html` を**読む**
+2. 正確な構造、スタイリング、Anthropic ブランディングを**理解する**
+3. そのファイルを**文字通りの出発点として使用する**。インスピレーションとしてだけではない
+4. **固定セクションはすべてそのまま保持する**（ヘッダー、サイドバー構造、Anthropic のカラー／フォント、シードコントロール、アクションボタン）
+5. ファイルのコメントで示された**可変セクションのみを置き換える**（アルゴリズム、パラメータ、パラメータ用UIコントロール）
+
+**避けるべきこと：**
+- HTML をゼロから作成すること
+- カスタムスタイリングや配色を独自に考案すること
+- システムフォントやダークテーマを使用すること
+- サイドバー構造を変更すること
+
+**守るべきプラクティス：**
+- テンプレートの正確な HTML 構造をコピーする
+- Anthropic ブランディングを維持する（Poppins/Lora フォント、ライトカラー、グラデーション背景）
+- サイドバーレイアウトを維持する（Seed → Parameters → Colors? → Actions）
+- p5.js アルゴリズムとパラメータコントロールのみを置き換える
+
+テンプレートが基盤である。その上に構築し、再構築しないこと。
+
+---
+
+ギャラリークオリティの、生き生きとした計算アートを制作するために、アルゴリズミック・フィロソフィーを基盤とする。
+
+### 技術要件
+
+**シード付きランダム性（Art Blocks パターン）**：
 ```javascript
 // ALWAYS use a seed for reproducibility
 let seed = 12345; // or hash from user input
@@ -140,9 +140,9 @@ randomSeed(seed);
 noiseSeed(seed);
 ```
 
-**Parameter Structure - FOLLOW THE PHILOSOPHY**:
+**パラメータ構造 - フィロソフィーに従う**：
 
-To establish parameters that emerge naturally from the algorithmic philosophy, consider: "What qualities of this system can be adjusted?"
+アルゴリズミック・フィロソフィーから自然に導かれるパラメータを設定するために、「このシステムのどの特性が調整可能か？」を考える。
 
 ```javascript
 let params = {
@@ -158,34 +158,34 @@ let params = {
 };
 ```
 
-**To design effective parameters, focus on the properties the system needs to be tunable rather than thinking in terms of "pattern types".**
+**効果的なパラメータを設計するには、「パターンの種類」ではなく、システムが調整可能であるべき特性に焦点を当てる。**
 
-**Core Algorithm - EXPRESS THE PHILOSOPHY**:
+**コアアルゴリズム - フィロソフィーを表現する**：
 
-**CRITICAL**: The algorithmic philosophy should dictate what to build.
+**重要**：アルゴリズミック・フィロソフィーが何を構築すべきかを決定する。
 
-To express the philosophy through code, avoid thinking "which pattern should I use?" and instead think "how to express this philosophy through code?"
+フィロソフィーをコードで表現するには、「どのパターンを使うべきか？」ではなく「このフィロソフィーをコードでどう表現するか？」と考える。
 
-If the philosophy is about **organic emergence**, consider using:
-- Elements that accumulate or grow over time
-- Random processes constrained by natural rules
-- Feedback loops and interactions
+フィロソフィーが**有機的な創発**に関するものなら：
+- 時間とともに蓄積・成長する要素
+- 自然な法則に制約されたランダムプロセス
+- フィードバックループと相互作用
 
-If the philosophy is about **mathematical beauty**, consider using:
-- Geometric relationships and ratios
-- Trigonometric functions and harmonics
-- Precise calculations creating unexpected patterns
+フィロソフィーが**数学的美**に関するものなら：
+- 幾何学的な関係性と比率
+- 三角関数と調和
+- 精密な計算が生み出す予想外のパターン
 
-If the philosophy is about **controlled chaos**, consider using:
-- Random variation within strict boundaries
-- Bifurcation and phase transitions
-- Order emerging from disorder
+フィロソフィーが**制御されたカオス**に関するものなら：
+- 厳密な境界内でのランダムな変化
+- 分岐と相転移
+- 無秩序から生まれる秩序
 
-**The algorithm flows from the philosophy, not from a menu of options.**
+**アルゴリズムはフィロソフィーから流れ出るものであり、選択肢メニューからではない。**
 
-To guide the implementation, let the conceptual essence inform creative and original choices. Build something that expresses the vision for this particular request.
+実装を導くために、概念的な本質が創造的でオリジナルな選択に反映されるようにする。この特定のリクエストのビジョンを表現するものを構築する。
 
-**Canvas Setup**: Standard p5.js structure:
+**Canvas セットアップ**：標準的な p5.js 構造：
 ```javascript
 function setup() {
   createCanvas(1200, 1200);
@@ -198,80 +198,80 @@ function draw() {
 }
 ```
 
-### CRAFTSMANSHIP REQUIREMENTS
+### 職人技の要件
 
-**CRITICAL**: To achieve mastery, create algorithms that feel like they emerged through countless iterations by a master generative artist. Tune every parameter carefully. Ensure every pattern emerges with purpose. This is NOT random noise - this is CONTROLLED CHAOS refined through deep expertise.
+**重要**：マスタリーを達成するために、マスタージェネラティブアーティストによる無数の反復を経て生まれたかのように感じられるアルゴリズムを作成する。すべてのパラメータを注意深くチューニングする。すべてのパターンが目的を持って生まれることを確認する。これはランダムノイズではない。深い専門知識によって洗練された制御されたカオスである。
 
-- **Balance**: Complexity without visual noise, order without rigidity
-- **Color Harmony**: Thoughtful palettes, not random RGB values
-- **Composition**: Even in randomness, maintain visual hierarchy and flow
-- **Performance**: Smooth execution, optimized for real-time if animated
-- **Reproducibility**: Same seed ALWAYS produces identical output
+- **バランス**：視覚的ノイズのない複雑さ、硬直性のない秩序
+- **色彩の調和**：思慮深いパレット、ランダムな RGB 値ではない
+- **構図**：ランダム性の中にも視覚的階層とフローを維持する
+- **パフォーマンス**：スムーズな実行、アニメーションの場合はリアルタイム最適化
+- **再現性**：同じシードは常に同一の出力を生む
 
-### OUTPUT FORMAT
+### 出力形式
 
-Output:
-1. **Algorithmic Philosophy** - As markdown or text explaining the generative aesthetic
-2. **Single HTML Artifact** - Self-contained interactive generative art built from `templates/viewer.html` (see STEP 0 and next section)
+出力：
+1. **アルゴリズミック・フィロソフィー** - ジェネラティブな美学を説明する Markdown またはテキスト
+2. **単一の HTML アーティファクト** - `templates/viewer.html` から構築された、自己完結型のインタラクティブジェネラティブアート（ステップ 0 と次のセクションを参照）
 
-The HTML artifact contains everything: p5.js (from CDN), the algorithm, parameter controls, and UI - all in one file that works immediately in claude.ai artifacts or any browser. Start from the template file, not from scratch.
+HTML アーティファクトにはすべてが含まれる：p5.js（CDN から）、アルゴリズム、パラメータコントロール、UI。claude.ai のアーティファクトやあらゆるブラウザで即座に動作する単一ファイル。テンプレートファイルから始めること、ゼロからではない。
 
 ---
 
-## INTERACTIVE ARTIFACT CREATION
+## インタラクティブアーティファクトの作成
 
-**REMINDER: `templates/viewer.html` should have already been read (see STEP 0). Use that file as the starting point.**
+**注意：`templates/viewer.html` はすでに読んでいるはず（ステップ 0 参照）。そのファイルを出発点として使用する。**
 
-To allow exploration of the generative art, create a single, self-contained HTML artifact. Ensure this artifact works immediately in claude.ai or any browser - no setup required. Embed everything inline.
+ジェネラティブアートの探索を可能にするために、単一の自己完結型 HTML アーティファクトを作成する。このアーティファクトが claude.ai やあらゆるブラウザで即座に動作することを確認する。セットアップ不要。すべてインラインで埋め込む。
 
-### CRITICAL: WHAT'S FIXED VS VARIABLE
+### 重要：固定部分と可変部分
 
-The `templates/viewer.html` file is the foundation. It contains the exact structure and styling needed.
+`templates/viewer.html` ファイルが基盤である。必要な正確な構造とスタイリングが含まれている。
 
-**FIXED (always include exactly as shown):**
-- Layout structure (header, sidebar, main canvas area)
-- Anthropic branding (UI colors, fonts, gradients)
-- Seed section in sidebar:
-  - Seed display
-  - Previous/Next buttons
-  - Random button
-  - Jump to seed input + Go button
-- Actions section in sidebar:
-  - Regenerate button
-  - Reset button
+**固定（常にそのまま含める）：**
+- レイアウト構造（ヘッダー、サイドバー、メインキャンバスエリア）
+- Anthropic ブランディング（UIカラー、フォント、グラデーション）
+- サイドバーの Seed セクション：
+  - シード表示
+  - Previous/Next ボタン
+  - Random ボタン
+  - Jump to seed 入力欄 + Go ボタン
+- サイドバーの Actions セクション：
+  - Regenerate ボタン
+  - Reset ボタン
 
-**VARIABLE (customize for each artwork):**
-- The entire p5.js algorithm (setup/draw/classes)
-- The parameters object (define what the art needs)
-- The Parameters section in sidebar:
-  - Number of parameter controls
-  - Parameter names
-  - Min/max/step values for sliders
-  - Control types (sliders, inputs, etc.)
-- Colors section (optional):
-  - Some art needs color pickers
-  - Some art might use fixed colors
-  - Some art might be monochrome (no color controls needed)
-  - Decide based on the art's needs
+**可変（各アートワークに合わせてカスタマイズ）：**
+- p5.js アルゴリズム全体（setup/draw/classes）
+- パラメータオブジェクト（アートに必要なものを定義）
+- サイドバーの Parameters セクション：
+  - パラメータコントロールの数
+  - パラメータ名
+  - スライダーの min/max/step 値
+  - コントロールの種類（スライダー、入力欄など）
+- Colors セクション（任意）：
+  - カラーピッカーが必要なアートもある
+  - 固定色を使うアートもある
+  - モノクロのアートもある（カラーコントロール不要）
+  - アートのニーズに基づいて判断する
 
-**Every artwork should have unique parameters and algorithm!** The fixed parts provide consistent UX - everything else expresses the unique vision.
+**すべてのアートワークにはユニークなパラメータとアルゴリズムがあるべき！** 固定部分は一貫した UX を提供し、それ以外はすべてユニークなビジョンを表現する。
 
-### REQUIRED FEATURES
+### 必須機能
 
-**1. Parameter Controls**
-- Sliders for numeric parameters (particle count, noise scale, speed, etc.)
-- Color pickers for palette colors
-- Real-time updates when parameters change
-- Reset button to restore defaults
+**1. パラメータコントロール**
+- 数値パラメータ用のスライダー（パーティクル数、ノイズスケール、速度など）
+- パレットカラー用のカラーピッカー
+- パラメータ変更時のリアルタイム更新
+- デフォルトに戻すリセットボタン
 
-**2. Seed Navigation**
-- Display current seed number
-- "Previous" and "Next" buttons to cycle through seeds
-- "Random" button for random seed
-- Input field to jump to specific seed
-- Generate 100 variations when requested (seeds 1-100)
+**2. シードナビゲーション**
+- 現在のシード番号を表示
+- シードを順に切り替える "Previous" と "Next" ボタン
+- ランダムシード用の "Random" ボタン
+- 特定のシードにジャンプする入力フィールド
+- リクエストに応じて100種のバリエーションを生成（シード 1-100）
 
-**3. Single Artifact Structure**
+**3. 単一アーティファクト構造**
 ```html
 <!DOCTYPE html>
 <html>
@@ -299,17 +299,17 @@ The `templates/viewer.html` file is the foundation. It contains the exact struct
 </html>
 ```
 
-**CRITICAL**: This is a single artifact. No external files, no imports (except p5.js CDN). Everything inline.
+**重要**：これは単一のアーティファクトである。外部ファイルなし、インポートなし（p5.js CDN を除く）。すべてインライン。
 
-**4. Implementation Details - BUILD THE SIDEBAR**
+**4. 実装の詳細 - サイドバーの構築**
 
-The sidebar structure:
+サイドバーの構造：
 
-**1. Seed (FIXED)** - Always include exactly as shown:
-- Seed display
-- Prev/Next/Random/Jump buttons
+**1. Seed（固定）** - 常にそのまま含める：
+- シード表示
+- Prev/Next/Random/Jump ボタン
 
-**2. Parameters (VARIABLE)** - Create controls for the art:
+**2. Parameters（可変）** - アート用のコントロールを作成：
 ```html
 <div class="control-group">
     <label>Parameter Name</label>
@@ -317,89 +317,89 @@ The sidebar structure:
     <span class="value-display" id="param-value">...</span>
 </div>
 ```
-Add as many control-group divs as there are parameters.
+パラメータの数だけ control-group の div を追加する。
 
-**3. Colors (OPTIONAL/VARIABLE)** - Include if the art needs adjustable colors:
-- Add color pickers if users should control palette
-- Skip this section if the art uses fixed colors
-- Skip if the art is monochrome
+**3. Colors（任意／可変）** - アートに調整可能な色が必要な場合に含める：
+- ユーザーがパレットを制御すべき場合はカラーピッカーを追加
+- アートが固定色を使う場合はこのセクションをスキップ
+- アートがモノクロの場合はスキップ
 
-**4. Actions (FIXED)** - Always include exactly as shown:
-- Regenerate button
-- Reset button
-- Download PNG button
+**4. Actions（固定）** - 常にそのまま含める：
+- Regenerate ボタン
+- Reset ボタン
+- Download PNG ボタン
 
-**Requirements**:
-- Seed controls must work (prev/next/random/jump/display)
-- All parameters must have UI controls
-- Regenerate, Reset, Download buttons must work
-- Keep Anthropic branding (UI styling, not art colors)
+**要件**：
+- シードコントロールが動作すること（prev/next/random/jump/display）
+- すべてのパラメータに UI コントロールがあること
+- Regenerate、Reset、Download ボタンが動作すること
+- Anthropic ブランディングを維持すること（UI スタイリング。アートの色ではない）
 
-### USING THE ARTIFACT
+### アーティファクトの使用方法
 
-The HTML artifact works immediately:
-1. **In claude.ai**: Displayed as an interactive artifact - runs instantly
-2. **As a file**: Save and open in any browser - no server needed
-3. **Sharing**: Send the HTML file - it's completely self-contained
-
----
-
-## VARIATIONS & EXPLORATION
-
-The artifact includes seed navigation by default (prev/next/random buttons), allowing users to explore variations without creating multiple files. If the user wants specific variations highlighted:
-
-- Include seed presets (buttons for "Variation 1: Seed 42", "Variation 2: Seed 127", etc.)
-- Add a "Gallery Mode" that shows thumbnails of multiple seeds side-by-side
-- All within the same single artifact
-
-This is like creating a series of prints from the same plate - the algorithm is consistent, but each seed reveals different facets of its potential. The interactive nature means users discover their own favorites by exploring the seed space.
+HTML アーティファクトは即座に動作する：
+1. **claude.ai 上**：インタラクティブアーティファクトとして表示される。即座に実行
+2. **ファイルとして**：保存してあらゆるブラウザで開ける。サーバー不要
+3. **共有**：HTML ファイルを送るだけ。完全に自己完結
 
 ---
 
-## THE CREATIVE PROCESS
+## バリエーションと探索
 
-**User request** → **Algorithmic philosophy** → **Implementation**
+アーティファクトにはデフォルトでシードナビゲーション（prev/next/random ボタン）が含まれており、複数のファイルを作成せずにバリエーションを探索できる。ユーザーが特定のバリエーションのハイライトを望む場合：
 
-Each request is unique. The process involves:
+- シードプリセットを含める（"Variation 1: Seed 42"、"Variation 2: Seed 127" などのボタン）
+- 複数のシードのサムネイルを並べて表示する "Gallery Mode" を追加
+- すべて同じ単一アーティファクト内で
 
-1. **Interpret the user's intent** - What aesthetic is being sought?
-2. **Create an algorithmic philosophy** (4-6 paragraphs) describing the computational approach
-3. **Implement it in code** - Build the algorithm that expresses this philosophy
-4. **Design appropriate parameters** - What should be tunable?
-5. **Build matching UI controls** - Sliders/inputs for those parameters
-
-**The constants**:
-- Anthropic branding (colors, fonts, layout)
-- Seed navigation (always present)
-- Self-contained HTML artifact
-
-**Everything else is variable**:
-- The algorithm itself
-- The parameters
-- The UI controls
-- The visual outcome
-
-To achieve the best results, trust creativity and let the philosophy guide the implementation.
+これは同じ版から一連のプリントを作るようなものである。アルゴリズムは一貫しているが、各シードがそのポテンシャルの異なる側面を明らかにする。インタラクティブな性質により、ユーザーはシード空間を探索して自分のお気に入りを発見できる。
 
 ---
 
-## RESOURCES
+## クリエイティブプロセス
 
-This skill includes helpful templates and documentation:
+**ユーザーリクエスト** → **アルゴリズミック・フィロソフィー** → **実装**
 
-- **templates/viewer.html**: REQUIRED STARTING POINT for all HTML artifacts.
-  - This is the foundation - contains the exact structure and Anthropic branding
-  - **Keep unchanged**: Layout structure, sidebar organization, Anthropic colors/fonts, seed controls, action buttons
-  - **Replace**: The p5.js algorithm, parameter definitions, and UI controls in Parameters section
-  - The extensive comments in the file mark exactly what to keep vs replace
+各リクエストはユニークである。プロセスは以下の通り：
 
-- **templates/generator_template.js**: Reference for p5.js best practices and code structure principles.
-  - Shows how to organize parameters, use seeded randomness, structure classes
-  - NOT a pattern menu - use these principles to build unique algorithms
-  - Embed algorithms inline in the HTML artifact (don't create separate .js files)
+1. **ユーザーの意図を解釈する** - どのような美学が求められているか？
+2. **アルゴリズミック・フィロソフィーを策定する**（4-6段落）計算的アプローチを記述
+3. **コードで実装する** - このフィロソフィーを表現するアルゴリズムを構築
+4. **適切なパラメータを設計する** - 何が調整可能であるべきか？
+5. **対応する UI コントロールを構築する** - パラメータ用のスライダー／入力欄
 
-**Critical reminder**:
-- The **template is the STARTING POINT**, not inspiration
-- The **algorithm is where to create** something unique
-- Don't copy the flow field example - build what the philosophy demands
-- But DO keep the exact UI structure and Anthropic branding from the template
+**定数**：
+- Anthropic ブランディング（カラー、フォント、レイアウト）
+- シードナビゲーション（常に存在）
+- 自己完結型 HTML アーティファクト
+
+**それ以外はすべて可変**：
+- アルゴリズム自体
+- パラメータ
+- UI コントロール
+- 視覚的な出力
+
+最良の結果を得るために、創造性を信頼し、フィロソフィーに実装を導かせること。
+
+---
+
+## リソース
+
+このスキルには役立つテンプレートとドキュメントが含まれている：
+
+- **templates/viewer.html**：すべての HTML アーティファクトの必須の出発点。
+  - これが基盤であり、正確な構造と Anthropic ブランディングを含む
+  - **変更しないもの**：レイアウト構造、サイドバー構成、Anthropic のカラー／フォント、シードコントロール、アクションボタン
+  - **置き換えるもの**：p5.js アルゴリズム、パラメータ定義、Parameters セクションの UI コントロール
+  - ファイル内の詳細なコメントが、何を維持し何を置き換えるかを正確に示している
+
+- **templates/generator_template.js**：p5.js のベストプラクティスとコード構造の原則のリファレンス。
+  - パラメータの整理方法、シード付きランダム性の使い方、クラスの構造化方法を示す
+  - パターンメニューではない。これらの原則を使ってユニークなアルゴリズムを構築する
+  - アルゴリズムは HTML アーティファクト内にインラインで埋め込む（別の .js ファイルは作成しない）
+
+**重要な注意：**
+- **テンプレートは出発点**であり、インスピレーションではない
+- **アルゴリズムこそがユニークなものを生み出す場所**
+- フローフィールドの例をコピーしない。フィロソフィーが要求するものを構築する
+- ただしテンプレートの正確な UI 構造と Anthropic ブランディングは維持すること

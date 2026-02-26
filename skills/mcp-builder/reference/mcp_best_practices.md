@@ -1,97 +1,97 @@
-# MCP Server Best Practices
+# MCP サーバーベストプラクティス
 
-## Quick Reference
+## クイックリファレンス
 
-### Server Naming
-- **Python**: `{service}_mcp` (e.g., `slack_mcp`)
-- **Node/TypeScript**: `{service}-mcp-server` (e.g., `slack-mcp-server`)
+### サーバー命名規則
+- **Python**: `{service}_mcp`（例：`slack_mcp`）
+- **Node/TypeScript**: `{service}-mcp-server`（例：`slack-mcp-server`）
 
-### Tool Naming
-- Use snake_case with service prefix
-- Format: `{service}_{action}_{resource}`
-- Example: `slack_send_message`, `github_create_issue`
+### ツール命名規則
+- snake_case でサービスプレフィックスを使用
+- フォーマット：`{service}_{action}_{resource}`
+- 例：`slack_send_message`、`github_create_issue`
 
-### Response Formats
-- Support both JSON and Markdown formats
-- JSON for programmatic processing
-- Markdown for human readability
+### レスポンスフォーマット
+- JSON と Markdown の両方のフォーマットをサポート
+- JSON はプログラム的な処理向け
+- Markdown は人間の可読性向け
 
-### Pagination
-- Always respect `limit` parameter
-- Return `has_more`, `next_offset`, `total_count`
-- Default to 20-50 items
+### ページネーション
+- 常に `limit` パラメータを尊重する
+- `has_more`、`next_offset`、`total_count` を返す
+- デフォルトは20〜50件
 
-### Transport
-- **Streamable HTTP**: For remote servers, multi-client scenarios
-- **stdio**: For local integrations, command-line tools
-- Avoid SSE (deprecated in favor of streamable HTTP)
-
----
-
-## Server Naming Conventions
-
-Follow these standardized naming patterns:
-
-**Python**: Use format `{service}_mcp` (lowercase with underscores)
-- Examples: `slack_mcp`, `github_mcp`, `jira_mcp`
-
-**Node/TypeScript**: Use format `{service}-mcp-server` (lowercase with hyphens)
-- Examples: `slack-mcp-server`, `github-mcp-server`, `jira-mcp-server`
-
-The name should be general, descriptive of the service being integrated, easy to infer from the task description, and without version numbers.
+### トランスポート
+- **Streamable HTTP**：リモートサーバー、マルチクライアントシナリオ向け
+- **stdio**：ローカル統合、コマンドラインツール向け
+- SSE は避ける（Streamable HTTP に非推奨化）
 
 ---
 
-## Tool Naming and Design
+## サーバー命名規則
 
-### Tool Naming
+以下の標準化された命名パターンに従ってください：
 
-1. **Use snake_case**: `search_users`, `create_project`, `get_channel_info`
-2. **Include service prefix**: Anticipate that your MCP server may be used alongside other MCP servers
-   - Use `slack_send_message` instead of just `send_message`
-   - Use `github_create_issue` instead of just `create_issue`
-3. **Be action-oriented**: Start with verbs (get, list, search, create, etc.)
-4. **Be specific**: Avoid generic names that could conflict with other servers
+**Python**：`{service}_mcp` フォーマットを使用（アンダースコア付き小文字）
+- 例：`slack_mcp`、`github_mcp`、`jira_mcp`
 
-### Tool Design
+**Node/TypeScript**：`{service}-mcp-server` フォーマットを使用（ハイフン付き小文字）
+- 例：`slack-mcp-server`、`github-mcp-server`、`jira-mcp-server`
 
-- Tool descriptions must narrowly and unambiguously describe functionality
-- Descriptions must precisely match actual functionality
-- Provide tool annotations (readOnlyHint, destructiveHint, idempotentHint, openWorldHint)
-- Keep tool operations focused and atomic
+名前は一般的で、統合するサービスを説明的に示し、タスクの説明から推測しやすく、バージョン番号を含まないものにすべきです。
 
 ---
 
-## Response Formats
+## ツールの命名と設計
 
-All tools that return data should support multiple formats:
+### ツールの命名
 
-### JSON Format (`response_format="json"`)
-- Machine-readable structured data
-- Include all available fields and metadata
-- Consistent field names and types
-- Use for programmatic processing
+1. **snake_case を使用**：`search_users`、`create_project`、`get_channel_info`
+2. **サービスプレフィックスを含める**：MCP サーバーが他の MCP サーバーと並行して使用される可能性を想定する
+   - `send_message` ではなく `slack_send_message` を使用する
+   - `create_issue` ではなく `github_create_issue` を使用する
+3. **アクション指向にする**：動詞で始める（get、list、search、create など）
+4. **具体的にする**：他のサーバーと競合する可能性のある汎用的な名前を避ける
 
-### Markdown Format (`response_format="markdown"`, typically default)
-- Human-readable formatted text
-- Use headers, lists, and formatting for clarity
-- Convert timestamps to human-readable format
-- Show display names with IDs in parentheses
-- Omit verbose metadata
+### ツールの設計
+
+- ツールの説明は機能を狭くかつ明確に記述しなければならない
+- 説明は実際の機能と正確に一致しなければならない
+- ツールアノテーション（readOnlyHint、destructiveHint、idempotentHint、openWorldHint）を提供する
+- ツール操作は焦点を絞ったアトミックなものにする
 
 ---
 
-## Pagination
+## レスポンスフォーマット
 
-For tools that list resources:
+データを返すすべてのツールは複数のフォーマットをサポートすべきです：
 
-- **Always respect the `limit` parameter**
-- **Implement pagination**: Use `offset` or cursor-based pagination
-- **Return pagination metadata**: Include `has_more`, `next_offset`/`next_cursor`, `total_count`
-- **Never load all results into memory**: Especially important for large datasets
-- **Default to reasonable limits**: 20-50 items is typical
+### JSON フォーマット（`response_format="json"`）
+- 機械可読な構造化データ
+- 利用可能なすべてのフィールドとメタデータを含める
+- 一貫したフィールド名と型
+- プログラム的な処理に使用
 
-Example pagination response:
+### Markdown フォーマット（`response_format="markdown"`、通常デフォルト）
+- 人間が読みやすいフォーマットテキスト
+- 見出し、リスト、フォーマットを使用して明確に
+- タイムスタンプを人間が読みやすいフォーマットに変換
+- 表示名に括弧付きで ID を表示
+- 冗長なメタデータを省略
+
+---
+
+## ページネーション
+
+リソースをリストするツール向け：
+
+- **常に `limit` パラメータを尊重する**
+- **ページネーションを実装する**：`offset` またはカーソルベースのページネーションを使用
+- **ページネーションメタデータを返す**：`has_more`、`next_offset`/`next_cursor`、`total_count` を含める
+- **すべての結果をメモリにロードしない**：特に大規模なデータセットでは重要
+- **妥当なデフォルト制限を設定する**：20〜50件が一般的
+
+ページネーションレスポンスの例：
 ```json
 {
   "total": 150,
@@ -105,112 +105,112 @@ Example pagination response:
 
 ---
 
-## Transport Options
+## トランスポートオプション
 
 ### Streamable HTTP
 
-**Best for**: Remote servers, web services, multi-client scenarios
+**最適な用途**：リモートサーバー、Webサービス、マルチクライアントシナリオ
 
-**Characteristics**:
-- Bidirectional communication over HTTP
-- Supports multiple simultaneous clients
-- Can be deployed as a web service
-- Enables server-to-client notifications
+**特徴**：
+- HTTP 上の双方向通信
+- 複数の同時クライアントをサポート
+- Web サービスとしてデプロイ可能
+- サーバーからクライアントへの通知が可能
 
-**Use when**:
-- Serving multiple clients simultaneously
-- Deploying as a cloud service
-- Integration with web applications
+**使用する場面**：
+- 複数のクライアントに同時にサービスを提供する場合
+- クラウドサービスとしてデプロイする場合
+- Web アプリケーションとの統合
 
 ### stdio
 
-**Best for**: Local integrations, command-line tools
+**最適な用途**：ローカル統合、コマンドラインツール
 
-**Characteristics**:
-- Standard input/output stream communication
-- Simple setup, no network configuration needed
-- Runs as a subprocess of the client
+**特徴**：
+- 標準入出力ストリーム通信
+- シンプルなセットアップ、ネットワーク設定不要
+- クライアントのサブプロセスとして実行
 
-**Use when**:
-- Building tools for local development environments
-- Integrating with desktop applications
-- Single-user, single-session scenarios
+**使用する場面**：
+- ローカル開発環境向けのツールを構築する場合
+- デスクトップアプリケーションとの統合
+- シングルユーザー、シングルセッションのシナリオ
 
-**Note**: stdio servers should NOT log to stdout (use stderr for logging)
+**注意**：stdio サーバーは stdout にログを出力してはならない（ログには stderr を使用する）
 
-### Transport Selection
+### トランスポートの選択
 
-| Criterion | stdio | Streamable HTTP |
+| 基準 | stdio | Streamable HTTP |
 |-----------|-------|-----------------|
-| **Deployment** | Local | Remote |
-| **Clients** | Single | Multiple |
-| **Complexity** | Low | Medium |
-| **Real-time** | No | Yes |
+| **デプロイ** | ローカル | リモート |
+| **クライアント** | 単一 | 複数 |
+| **複雑さ** | 低 | 中 |
+| **リアルタイム** | いいえ | はい |
 
 ---
 
-## Security Best Practices
+## セキュリティベストプラクティス
 
-### Authentication and Authorization
+### 認証と認可
 
-**OAuth 2.1**:
-- Use secure OAuth 2.1 with certificates from recognized authorities
-- Validate access tokens before processing requests
-- Only accept tokens specifically intended for your server
+**OAuth 2.1**：
+- 認定された認証局の証明書を使用した安全な OAuth 2.1 を使用する
+- リクエストを処理する前にアクセストークンを検証する
+- サーバー専用に発行されたトークンのみを受け入れる
 
-**API Keys**:
-- Store API keys in environment variables, never in code
-- Validate keys on server startup
-- Provide clear error messages when authentication fails
+**API キー**：
+- API キーは環境変数に保存し、コードには含めない
+- サーバー起動時にキーを検証する
+- 認証失敗時に明確なエラーメッセージを提供する
 
-### Input Validation
+### 入力のバリデーション
 
-- Sanitize file paths to prevent directory traversal
-- Validate URLs and external identifiers
-- Check parameter sizes and ranges
-- Prevent command injection in system calls
-- Use schema validation (Pydantic/Zod) for all inputs
+- ディレクトリトラバーサルを防ぐためにファイルパスをサニタイズする
+- URL と外部識別子を検証する
+- パラメータのサイズと範囲を確認する
+- システムコールでのコマンドインジェクションを防ぐ
+- すべての入力に対してスキーマバリデーション（Pydantic/Zod）を使用する
 
-### Error Handling
+### エラーハンドリング
 
-- Don't expose internal errors to clients
-- Log security-relevant errors server-side
-- Provide helpful but not revealing error messages
-- Clean up resources after errors
+- 内部エラーをクライアントに公開しない
+- セキュリティ関連のエラーをサーバー側でログに記録する
+- 有用だが内部を暴露しないエラーメッセージを提供する
+- エラー後にリソースをクリーンアップする
 
-### DNS Rebinding Protection
+### DNS リバインディング保護
 
-For streamable HTTP servers running locally:
-- Enable DNS rebinding protection
-- Validate the `Origin` header on all incoming connections
-- Bind to `127.0.0.1` rather than `0.0.0.0`
+ローカルで実行する Streamable HTTP サーバー向け：
+- DNS リバインディング保護を有効にする
+- すべての着信接続で `Origin` ヘッダーを検証する
+- `0.0.0.0` ではなく `127.0.0.1` にバインドする
 
 ---
 
-## Tool Annotations
+## ツールアノテーション
 
-Provide annotations to help clients understand tool behavior:
+クライアントがツールの動作を理解するためのアノテーションを提供します：
 
-| Annotation | Type | Default | Description |
+| アノテーション | 型 | デフォルト | 説明 |
 |-----------|------|---------|-------------|
-| `readOnlyHint` | boolean | false | Tool does not modify its environment |
-| `destructiveHint` | boolean | true | Tool may perform destructive updates |
-| `idempotentHint` | boolean | false | Repeated calls with same args have no additional effect |
-| `openWorldHint` | boolean | true | Tool interacts with external entities |
+| `readOnlyHint` | boolean | false | ツールは環境を変更しない |
+| `destructiveHint` | boolean | true | ツールは破壊的な更新を行う可能性がある |
+| `idempotentHint` | boolean | false | 同じ引数での繰り返し呼び出しに追加効果がない |
+| `openWorldHint` | boolean | true | ツールは外部エンティティと対話する |
 
-**Important**: Annotations are hints, not security guarantees. Clients should not make security-critical decisions based solely on annotations.
+**重要**：アノテーションはヒントであり、セキュリティの保証ではありません。クライアントはアノテーションのみに基づいてセキュリティ上重要な判断を行うべきではありません。
 
 ---
 
-## Error Handling
+## エラーハンドリング
 
-- Use standard JSON-RPC error codes
-- Report tool errors within result objects (not protocol-level errors)
-- Provide helpful, specific error messages with suggested next steps
-- Don't expose internal implementation details
-- Clean up resources properly on errors
+- 標準的な JSON-RPC エラーコードを使用する
+- ツールエラーは結果オブジェクト内で報告する（プロトコルレベルのエラーではなく）
+- 次のステップを提案する有用で具体的なエラーメッセージを提供する
+- 内部実装の詳細を公開しない
+- エラー時にリソースを適切にクリーンアップする
 
-Example error handling:
+エラーハンドリングの例：
 ```typescript
 try {
   const result = performOperation();
@@ -228,22 +228,22 @@ try {
 
 ---
 
-## Testing Requirements
+## テスト要件
 
-Comprehensive testing should cover:
+包括的なテストでは以下をカバーすべきです：
 
-- **Functional testing**: Verify correct execution with valid/invalid inputs
-- **Integration testing**: Test interaction with external systems
-- **Security testing**: Validate auth, input sanitization, rate limiting
-- **Performance testing**: Check behavior under load, timeouts
-- **Error handling**: Ensure proper error reporting and cleanup
+- **機能テスト**：有効/無効な入力での正しい実行を検証
+- **統合テスト**：外部システムとの連携をテスト
+- **セキュリティテスト**：認証、入力サニタイズ、レート制限を検証
+- **パフォーマンステスト**：負荷時の動作、タイムアウトを確認
+- **エラーハンドリング**：適切なエラー報告とクリーンアップを確認
 
 ---
 
-## Documentation Requirements
+## ドキュメント要件
 
-- Provide clear documentation of all tools and capabilities
-- Include working examples (at least 3 per major feature)
-- Document security considerations
-- Specify required permissions and access levels
-- Document rate limits and performance characteristics
+- すべてのツールと機能の明確なドキュメントを提供する
+- 動作するサンプルを含める（主要な機能ごとに最低3つ）
+- セキュリティに関する考慮事項を文書化する
+- 必要な権限とアクセスレベルを指定する
+- レート制限とパフォーマンス特性を文書化する

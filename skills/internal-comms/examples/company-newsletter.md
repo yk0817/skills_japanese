@@ -1,65 +1,65 @@
-## Instructions
-You are being asked to write a company-wide newsletter update. You are meant to summarize the past week/month of a company in the form of a newsletter that the entire company will read. It should be maybe ~20-25 bullet points long. It will be sent via Slack and email, so make it consumable for that.
+## 手順
+全社向けニュースレターの作成を依頼されています。過去1週間/1ヶ月の会社の出来事を、全社員が読むニュースレター形式でまとめてください。約20〜25個の箇条書きで構成します。SlackとEmailで配信されるため、それらのプラットフォームで読みやすい形式にしてください。
 
-Ideally it includes the following attributes:
-- Lots of links: pulling documents from Google Drive that are very relevant, linking to prominent Slack messages in announce channels and from executives, perhgaps referencing emails that went company-wide, highlighting significant things that have happened in the company.
-- Short and to-the-point: each bullet should probably be no longer than ~1-2 sentences
-- Use the "we" tense, as you are part of the company. Many of the bullets should say "we did this" or "we did that"
+以下の要素を含めることが理想的です：
+- リンクを多く含める：関連性の高いGoogle Driveのドキュメント、アナウンスチャンネルや経営陣からの目立つSlackメッセージへのリンク、全社宛のメールの参照、会社で起きた重要な出来事のハイライトなど
+- 短く要点を押さえる：各箇条書きは1〜2文程度に収める
+- 「私たち」という一人称を使う：あなたも会社の一員です。多くの箇条書きで「私たちは〜を達成した」「私たちは〜を行った」といった表現を使ってください
 
-## Tools to use
-If you have access to the following tools, please try to use them. If not, you can also let the user know directly that their responses would be better if they gave them access.
+## 使用するツール
+以下のツールにアクセスできる場合は、積極的に活用してください。アクセスできない場合は、ツールへのアクセスがあればより良い内容が作成できることをユーザーに伝えてください。
 
-- Slack: look for messages in channels with lots of people, with lots of reactions or lots of responses within the thread
-- Email: look for things from executives that discuss company-wide announcements
-- Calendar: if there were meetings with large attendee lists, particularly things like All-Hands meetings, big company announcements, etc. If there were documents attached to those meetings, those are great links to include.
-- Documents: if there were new docs published in the last week or two that got a lot of attention, you can link them. These should be things like company-wide vision docs, plans for the upcoming quarter or half, things authored by critical executives, etc.
-- External press: if you see references to articles or press we've received over the past week, that could be really cool too.
+- Slack：多くの人がいるチャンネルで、リアクションやスレッド内の返信が多いメッセージを探す
+- Email：経営陣からの全社向けアナウンスに関するものを探す
+- Calendar：参加者の多い会議、特にAll-Handsミーティングや大きな全社アナウンスなど。会議に添付されたドキュメントがあれば、リンクとして含めるのに最適です
+- Documents：直近1〜2週間で公開され注目を集めた新しいドキュメント。全社ビジョン文書、次の四半期や半期の計画、主要な経営陣が作成したものなどが該当します
+- 外部プレス：直近1週間で受けた記事やプレス報道への言及があれば、それも含めると良いでしょう
 
-If you don't have access to any of these things, you can ask the user for things they want to cover. In this case, you'll mostly just be polishing up and fitting to this format more directly.
+これらのツールへのアクセスがない場合は、ユーザーにカバーしたい内容を確認してください。その場合は、主に内容を整えてこのフォーマットに合わせる作業が中心になります。
 
-## Sections
-The company is pretty big: 1000+ people. There are a variety of different teams and initiatives going on across the company. To make sure the update works well, try breaking it into sections of similar things. You might break into clusters like {product development, go to market, finance} or {recruiting, execution, vision}, or {external news, internal news} etc. Try to make sure the different areas of the company are highlighted well.
+## セクション
+会社はかなり大規模で1000人以上が在籍しています。社内では様々なチームやイニシアチブが進行しています。更新内容がうまくまとまるように、類似の項目をセクションごとに分類してください。たとえば {プロダクト開発、Go-to-Market、財務} や {採用、実行、ビジョン}、{外部ニュース、社内ニュース} などのクラスタに分けることが考えられます。会社の様々な領域がバランスよくハイライトされるようにしてください。
 
-## Prioritization
-Focus on:
-- Company-wide impact (not team-specific details)
-- Announcements from leadership
-- Major milestones and achievements
-- Information that affects most employees
-- External recognition or press
+## 優先順位付け
+重点を置くべき内容：
+- 全社的なインパクト（チーム固有の詳細ではなく）
+- リーダーシップからのアナウンス
+- 主要なマイルストーンと成果
+- 大多数の社員に影響する情報
+- 外部からの評価やプレス報道
 
-Avoid:
-- Overly granular team updates (save those for 3Ps)
-- Information only relevant to small groups
-- Duplicate information already communicated
+避けるべき内容：
+- 過度に細かいチームの更新情報（それは3Pに任せましょう）
+- 少数のグループにしか関係のない情報
+- すでに周知されている重複情報
 
-## Example Formats
+## フォーマット例
 
-:megaphone: Company Announcements
-- Announcement 1
-- Announcement 2
-- Announcement 3
+:megaphone: 全社アナウンス
+- アナウンス 1
+- アナウンス 2
+- アナウンス 3
 
-:dart: Progress on Priorities
-- Area 1
-    - Sub-area 1
-    - Sub-area 2
-    - Sub-area 3
-- Area 2
-    - Sub-area 1
-    - Sub-area 2
-    - Sub-area 3
-- Area 3
-    - Sub-area 1
-    - Sub-area 2
-    - Sub-area 3
+:dart: 重点施策の進捗
+- 領域 1
+    - 詳細 1
+    - 詳細 2
+    - 詳細 3
+- 領域 2
+    - 詳細 1
+    - 詳細 2
+    - 詳細 3
+- 領域 3
+    - 詳細 1
+    - 詳細 2
+    - 詳細 3
 
-:pillar: Leadership Updates
-- Post 1
-- Post 2
-- Post 3
+:pillar: リーダーシップの更新
+- 投稿 1
+- 投稿 2
+- 投稿 3
 
-:thread: Social Updates
-- Update 1
-- Update 2
-- Update 3
+:thread: ソーシャルの更新
+- 更新 1
+- 更新 2
+- 更新 3

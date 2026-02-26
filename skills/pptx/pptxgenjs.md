@@ -1,6 +1,6 @@
-# PptxGenJS Tutorial
+# PptxGenJS チュートリアル
 
-## Setup & Basic Structure
+## セットアップと基本構造
 
 ```javascript
 const pptxgen = require("pptxgenjs");
@@ -16,17 +16,17 @@ slide.addText("Hello World!", { x: 0.5, y: 0.5, fontSize: 36, color: "363636" })
 pres.writeFile({ fileName: "Presentation.pptx" });
 ```
 
-## Layout Dimensions
+## レイアウトの寸法
 
-Slide dimensions (coordinates in inches):
-- `LAYOUT_16x9`: 10" × 5.625" (default)
-- `LAYOUT_16x10`: 10" × 6.25"
-- `LAYOUT_4x3`: 10" × 7.5"
-- `LAYOUT_WIDE`: 13.3" × 7.5"
+スライドの寸法（座標はインチ単位）：
+- `LAYOUT_16x9`: 10" x 5.625"（デフォルト）
+- `LAYOUT_16x10`: 10" x 6.25"
+- `LAYOUT_4x3`: 10" x 7.5"
+- `LAYOUT_WIDE`: 13.3" x 7.5"
 
 ---
 
-## Text & Formatting
+## テキストとフォーマット
 
 ```javascript
 // Basic text
@@ -58,11 +58,11 @@ slide.addText("Title", {
 });
 ```
 
-**Tip:** Text boxes have internal margin by default. Set `margin: 0` when you need text to align precisely with shapes, lines, or icons at the same x-position.
+**ヒント：** テキストボックスにはデフォルトで内部マージンがあります。テキストを同じ x 位置にあるシェイプ、線、アイコンと正確に揃える必要がある場合は `margin: 0` を設定してください。
 
 ---
 
-## Lists & Bullets
+## リストと箇条書き
 
 ```javascript
 // ✅ CORRECT: Multiple bullets
@@ -82,7 +82,7 @@ slide.addText("• First item", { ... });  // Creates double bullets
 
 ---
 
-## Shapes
+## シェイプ
 
 ```javascript
 slide.addShape(pres.shapes.RECTANGLE, {
@@ -117,26 +117,26 @@ slide.addShape(pres.shapes.RECTANGLE, {
 });
 ```
 
-Shadow options:
+シャドウオプション：
 
-| Property | Type | Range | Notes |
+| プロパティ | 型 | 範囲 | 備考 |
 |----------|------|-------|-------|
 | `type` | string | `"outer"`, `"inner"` | |
-| `color` | string | 6-char hex (e.g. `"000000"`) | No `#` prefix, no 8-char hex — see Common Pitfalls |
+| `color` | string | 6文字の hex（例：`"000000"`） | `#` プレフィックスなし、8文字の hex 不可 -- よくある落とし穴を参照 |
 | `blur` | number | 0-100 pt | |
-| `offset` | number | 0-200 pt | **Must be non-negative** — negative values corrupt the file |
-| `angle` | number | 0-359 degrees | Direction the shadow falls (135 = bottom-right, 270 = upward) |
-| `opacity` | number | 0.0-1.0 | Use this for transparency, never encode in color string |
+| `offset` | number | 0-200 pt | **非負でなければならない** -- 負の値はファイルを破損する |
+| `angle` | number | 0-359 度 | シャドウが落ちる方向（135 = 右下、270 = 上向き） |
+| `opacity` | number | 0.0-1.0 | 透過にはこれを使用し、カラー文字列にエンコードしない |
 
-To cast a shadow upward (e.g. on a footer bar), use `angle: 270` with a positive offset — do **not** use a negative offset.
+シャドウを上方向に落とす（例：フッターバーに）場合は、正の offset で `angle: 270` を使用します -- 負の offset を使用**しないでください**。
 
-**Note**: Gradient fills are not natively supported. Use a gradient image as a background instead.
+**注意**：グラデーションフィルはネイティブにはサポートされていません。代わりにグラデーション画像を背景として使用してください。
 
 ---
 
-## Images
+## 画像
 
-### Image Sources
+### 画像ソース
 
 ```javascript
 // From file path
@@ -149,7 +149,7 @@ slide.addImage({ path: "https://example.com/image.jpg", x: 1, y: 1, w: 5, h: 3 }
 slide.addImage({ data: "image/png;base64,iVBORw0KGgo...", x: 1, y: 1, w: 5, h: 3 });
 ```
 
-### Image Options
+### 画像オプション
 
 ```javascript
 slide.addImage({
@@ -165,7 +165,7 @@ slide.addImage({
 });
 ```
 
-### Image Sizing Modes
+### 画像サイズモード
 
 ```javascript
 // Contain - fit inside, preserve ratio
@@ -178,7 +178,7 @@ slide.addImage({
 { sizing: { type: 'crop', x: 0.5, y: 0.5, w: 2, h: 2 } }
 ```
 
-### Calculate Dimensions (preserve aspect ratio)
+### 寸法の計算（アスペクト比を保持）
 
 ```javascript
 const origWidth = 1978, origHeight = 923, maxHeight = 3.0;
@@ -188,18 +188,18 @@ const centerX = (10 - calcWidth) / 2;
 slide.addImage({ path: "image.png", x: centerX, y: 1.2, w: calcWidth, h: maxHeight });
 ```
 
-### Supported Formats
+### サポートされるフォーマット
 
-- **Standard**: PNG, JPG, GIF (animated GIFs work in Microsoft 365)
-- **SVG**: Works in modern PowerPoint/Microsoft 365
+- **標準**：PNG、JPG、GIF（アニメーション GIF は Microsoft 365 で動作）
+- **SVG**：最新の PowerPoint/Microsoft 365 で動作
 
 ---
 
-## Icons
+## アイコン
 
-Use react-icons to generate SVG icons, then rasterize to PNG for universal compatibility.
+react-icons を使用して SVG アイコンを生成し、汎用的な互換性のために PNG にラスタライズします。
 
-### Setup
+### セットアップ
 
 ```javascript
 const React = require("react");
@@ -220,7 +220,7 @@ async function iconToBase64Png(IconComponent, color, size = 256) {
 }
 ```
 
-### Add Icon to Slide
+### スライドにアイコンを追加
 
 ```javascript
 const iconData = await iconToBase64Png(FaCheckCircle, "#4472C4", 256);
@@ -231,13 +231,13 @@ slide.addImage({
 });
 ```
 
-**Note**: Use size 256 or higher for crisp icons. The size parameter controls the rasterization resolution, not the display size on the slide (which is set by `w` and `h` in inches).
+**注意**：鮮明なアイコンにはサイズ 256 以上を使用してください。size パラメータはラスタライズの解像度を制御するもので、スライド上の表示サイズ（`w` と `h` でインチ単位で設定）ではありません。
 
-### Icon Libraries
+### アイコンライブラリ
 
-Install: `npm install -g react-icons react react-dom sharp`
+インストール：`npm install -g react-icons react react-dom sharp`
 
-Popular icon sets in react-icons:
+react-icons の人気アイコンセット：
 - `react-icons/fa` - Font Awesome
 - `react-icons/md` - Material Design
 - `react-icons/hi` - Heroicons
@@ -245,7 +245,7 @@ Popular icon sets in react-icons:
 
 ---
 
-## Slide Backgrounds
+## スライド背景
 
 ```javascript
 // Solid color
@@ -263,7 +263,7 @@ slide.background = { data: "image/png;base64,iVBORw0KGgo..." };
 
 ---
 
-## Tables
+## テーブル
 
 ```javascript
 slide.addTable([
@@ -284,7 +284,7 @@ slide.addTable(tableData, { x: 1, y: 3.5, w: 8, colW: [4, 4] });
 
 ---
 
-## Charts
+## チャート
 
 ```javascript
 // Bar chart
@@ -306,9 +306,9 @@ slide.addChart(pres.charts.PIE, [{
 }], { x: 7, y: 1, w: 5, h: 4, showPercent: true });
 ```
 
-### Better-Looking Charts
+### より見栄えの良いチャート
 
-Default charts look dated. Apply these options for a modern, clean appearance:
+デフォルトのチャートは古臭く見えます。モダンでクリーンな外観にするには以下のオプションを適用してください：
 
 ```javascript
 slide.addChart(pres.charts.BAR, chartData, {
@@ -338,16 +338,16 @@ slide.addChart(pres.charts.BAR, chartData, {
 });
 ```
 
-**Key styling options:**
-- `chartColors: [...]` - hex colors for series/segments
-- `chartArea: { fill, border, roundedCorners }` - chart background
-- `catGridLine/valGridLine: { color, style, size }` - grid lines (`style: "none"` to hide)
-- `lineSmooth: true` - curved lines (line charts)
-- `legendPos: "r"` - legend position: "b", "t", "l", "r", "tr"
+**主なスタイリングオプション：**
+- `chartColors: [...]` - シリーズ/セグメントの hex カラー
+- `chartArea: { fill, border, roundedCorners }` - チャートの背景
+- `catGridLine/valGridLine: { color, style, size }` - グリッド線（非表示にするには `style: "none"`）
+- `lineSmooth: true` - 曲線（折れ線チャート）
+- `legendPos: "r"` - 凡例の位置："b"、"t"、"l"、"r"、"tr"
 
 ---
 
-## Slide Masters
+## スライドマスター
 
 ```javascript
 pres.defineSlideMaster({
@@ -363,31 +363,31 @@ titleSlide.addText("My Title", { placeholder: "title" });
 
 ---
 
-## Common Pitfalls
+## よくある落とし穴
 
-⚠️ These issues cause file corruption, visual bugs, or broken output. Avoid them.
+以下の問題はファイルの破損、表示バグ、出力の不具合を引き起こします。避けてください。
 
-1. **NEVER use "#" with hex colors** - causes file corruption
+1. **hex カラーに "#" を使用しない** -- ファイルが破損する
    ```javascript
    color: "FF0000"      // ✅ CORRECT
    color: "#FF0000"     // ❌ WRONG
    ```
 
-2. **NEVER encode opacity in hex color strings** - 8-char colors (e.g., `"00000020"`) corrupt the file. Use the `opacity` property instead.
+2. **hex カラー文字列に不透明度をエンコードしない** -- 8文字のカラー（例：`"00000020"`）はファイルを破損する。代わりに `opacity` プロパティを使用する。
    ```javascript
    shadow: { type: "outer", blur: 6, offset: 2, color: "00000020" }          // ❌ CORRUPTS FILE
    shadow: { type: "outer", blur: 6, offset: 2, color: "000000", opacity: 0.12 }  // ✅ CORRECT
    ```
 
-3. **Use `bullet: true`** - NEVER unicode symbols like "•" (creates double bullets)
+3. **`bullet: true` を使用する** -- "・" などの Unicode 記号を使用しない（二重の箇条書きになる）
 
-4. **Use `breakLine: true`** between array items or text runs together
+4. **配列アイテム間に `breakLine: true` を使用する**、でないとテキストが連結される
 
-5. **Avoid `lineSpacing` with bullets** - causes excessive gaps; use `paraSpaceAfter` instead
+5. **箇条書きで `lineSpacing` を避ける** -- 過度な間隔が発生する。代わりに `paraSpaceAfter` を使用する
 
-6. **Each presentation needs fresh instance** - don't reuse `pptxgen()` objects
+6. **各プレゼンテーションには新しいインスタンスが必要** -- `pptxgen()` オブジェクトを再利用しない
 
-7. **NEVER reuse option objects across calls** - PptxGenJS mutates objects in-place (e.g. converting shadow values to EMU). Sharing one object between multiple calls corrupts the second shape.
+7. **呼び出し間でオプションオブジェクトを再利用しない** -- PptxGenJS はオブジェクトをインプレースで変更する（例：シャドウ値を EMU に変換）。1つのオブジェクトを複数の呼び出し間で共有すると、2番目のシェイプが破損する。
    ```javascript
    const shadow = { type: "outer", blur: 6, offset: 2, color: "000000", opacity: 0.15 };
    slide.addShape(pres.shapes.RECTANGLE, { shadow, ... });  // ❌ second call gets already-converted values
@@ -398,7 +398,7 @@ titleSlide.addText("My Title", { placeholder: "title" });
    slide.addShape(pres.shapes.RECTANGLE, { shadow: makeShadow(), ... });
    ```
 
-8. **Don't use `ROUNDED_RECTANGLE` with accent borders** - rectangular overlay bars won't cover rounded corners. Use `RECTANGLE` instead.
+8. **`ROUNDED_RECTANGLE` にアクセントボーダーを組み合わせない** -- 矩形のオーバーレイバーは角丸をカバーしない。代わりに `RECTANGLE` を使用する。
    ```javascript
    // ❌ WRONG: Accent bar doesn't cover rounded corners
    slide.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 1, y: 1, w: 3, h: 1.5, fill: { color: "FFFFFF" } });
@@ -411,10 +411,10 @@ titleSlide.addText("My Title", { placeholder: "title" });
 
 ---
 
-## Quick Reference
+## クイックリファレンス
 
-- **Shapes**: RECTANGLE, OVAL, LINE, ROUNDED_RECTANGLE
-- **Charts**: BAR, LINE, PIE, DOUGHNUT, SCATTER, BUBBLE, RADAR
-- **Layouts**: LAYOUT_16x9 (10"×5.625"), LAYOUT_16x10, LAYOUT_4x3, LAYOUT_WIDE
-- **Alignment**: "left", "center", "right"
-- **Chart data labels**: "outEnd", "inEnd", "center"
+- **シェイプ**: RECTANGLE, OVAL, LINE, ROUNDED_RECTANGLE
+- **チャート**: BAR, LINE, PIE, DOUGHNUT, SCATTER, BUBBLE, RADAR
+- **レイアウト**: LAYOUT_16x9 (10"x5.625"), LAYOUT_16x10, LAYOUT_4x3, LAYOUT_WIDE
+- **配置**: "left", "center", "right"
+- **チャートデータラベル**: "outEnd", "inEnd", "center"

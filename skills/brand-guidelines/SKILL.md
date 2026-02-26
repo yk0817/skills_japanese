@@ -1,73 +1,73 @@
 ---
 name: brand-guidelines
-description: Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting, or company design standards apply.
+description: Anthropic の公式ブランドカラーとタイポグラフィをあらゆるアーティファクトに適用する。ブランドカラーやスタイルガイドライン、ビジュアルフォーマット、企業のデザイン基準が適用される場面で使用する。
 license: Complete terms in LICENSE.txt
 ---
 
-# Anthropic Brand Styling
+# Anthropic ブランドスタイリング
 
-## Overview
+## 概要
 
-To access Anthropic's official brand identity and style resources, use this skill.
+Anthropic の公式ブランドアイデンティティとスタイルリソースにアクセスするには、このスキルを使用する。
 
-**Keywords**: branding, corporate identity, visual identity, post-processing, styling, brand colors, typography, Anthropic brand, visual formatting, visual design
+**キーワード**: ブランディング、コーポレートアイデンティティ、ビジュアルアイデンティティ、後処理、スタイリング、ブランドカラー、タイポグラフィ、Anthropic ブランド、ビジュアルフォーマット、ビジュアルデザイン
 
-## Brand Guidelines
+## ブランドガイドライン
 
-### Colors
+### カラー
 
-**Main Colors:**
+**メインカラー：**
 
-- Dark: `#141413` - Primary text and dark backgrounds
-- Light: `#faf9f5` - Light backgrounds and text on dark
-- Mid Gray: `#b0aea5` - Secondary elements
-- Light Gray: `#e8e6dc` - Subtle backgrounds
+- Dark: `#141413` - 主要テキストおよびダーク背景
+- Light: `#faf9f5` - ライト背景およびダーク上のテキスト
+- Mid Gray: `#b0aea5` - セカンダリ要素
+- Light Gray: `#e8e6dc` - 控えめな背景
 
-**Accent Colors:**
+**アクセントカラー：**
 
-- Orange: `#d97757` - Primary accent
-- Blue: `#6a9bcc` - Secondary accent
-- Green: `#788c5d` - Tertiary accent
+- Orange: `#d97757` - プライマリアクセント
+- Blue: `#6a9bcc` - セカンダリアクセント
+- Green: `#788c5d` - ターシャリアクセント
 
-### Typography
+### タイポグラフィ
 
-- **Headings**: Poppins (with Arial fallback)
-- **Body Text**: Lora (with Georgia fallback)
-- **Note**: Fonts should be pre-installed in your environment for best results
+- **見出し**: Poppins（Arial フォールバック）
+- **本文**: Lora（Georgia フォールバック）
+- **注意**: 最良の結果を得るには、フォントが環境にプリインストールされていることが推奨される
 
-## Features
+## 機能
 
-### Smart Font Application
+### スマートフォント適用
 
-- Applies Poppins font to headings (24pt and larger)
-- Applies Lora font to body text
-- Automatically falls back to Arial/Georgia if custom fonts unavailable
-- Preserves readability across all systems
+- 見出し（24pt以上）に Poppins フォントを適用
+- 本文に Lora フォントを適用
+- カスタムフォントが利用不可の場合、自動的に Arial/Georgia にフォールバック
+- すべてのシステムで読みやすさを維持
 
-### Text Styling
+### テキストスタイリング
 
-- Headings (24pt+): Poppins font
-- Body text: Lora font
-- Smart color selection based on background
-- Preserves text hierarchy and formatting
+- 見出し（24pt以上）: Poppins フォント
+- 本文: Lora フォント
+- 背景に基づくスマートなカラー選択
+- テキストの階層とフォーマットを維持
 
-### Shape and Accent Colors
+### シェイプとアクセントカラー
 
-- Non-text shapes use accent colors
-- Cycles through orange, blue, and green accents
-- Maintains visual interest while staying on-brand
+- テキスト以外のシェイプにはアクセントカラーを使用
+- Orange、Blue、Green のアクセントを順に適用
+- ブランドに沿いながらビジュアルの面白さを維持
 
-## Technical Details
+## 技術的詳細
 
-### Font Management
+### フォント管理
 
-- Uses system-installed Poppins and Lora fonts when available
-- Provides automatic fallback to Arial (headings) and Georgia (body)
-- No font installation required - works with existing system fonts
-- For best results, pre-install Poppins and Lora fonts in your environment
+- 利用可能な場合、システムにインストールされた Poppins と Lora フォントを使用
+- 自動的に Arial（見出し）および Georgia（本文）にフォールバック
+- フォントのインストールは不要。既存のシステムフォントで動作
+- 最良の結果を得るには、環境に Poppins と Lora フォントをプリインストールすること
 
-### Color Application
+### カラー適用
 
-- Uses RGB color values for precise brand matching
-- Applied via python-pptx's RGBColor class
-- Maintains color fidelity across different systems
+- 正確なブランドマッチングのために RGB カラー値を使用
+- python-pptx の RGBColor クラスを通じて適用
+- 異なるシステム間でカラーの忠実性を維持

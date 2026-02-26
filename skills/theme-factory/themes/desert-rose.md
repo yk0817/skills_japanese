@@ -1,19 +1,19 @@
 # Desert Rose
 
-A soft and sophisticated theme with dusty, muted tones perfect for elegant presentations.
+くすんだミュートトーンが特徴の、ソフトで洗練されたテーマ。エレガントなプレゼンテーションに最適です。
 
-## Color Palette
+## カラーパレット
 
-- **Dusty Rose**: `#d4a5a5` - Soft primary color
-- **Clay**: `#b87d6d` - Earthy accent
-- **Sand**: `#e8d5c4` - Warm neutral backgrounds
-- **Deep Burgundy**: `#5d2e46` - Rich dark contrast
+- **Dusty Rose**: `#d4a5a5` - 柔らかなプライマリカラー
+- **Clay**: `#b87d6d` - アーシーなアクセント
+- **Sand**: `#e8d5c4` - 温かみのあるニュートラル背景
+- **Deep Burgundy**: `#5d2e46` - 深みのあるダークコントラスト
 
-## Typography
+## タイポグラフィ
 
-- **Headers**: FreeSans Bold
-- **Body Text**: FreeSans
+- **見出し**: FreeSans Bold
+- **本文**: FreeSans
 
-## Best Used For
+## 推奨用途
 
-Fashion presentations, beauty brands, wedding planning, interior design, boutique businesses.
+ファッションプレゼンテーション、ビューティーブランド、ウェディングプランニング、インテリアデザイン、ブティックビジネス。

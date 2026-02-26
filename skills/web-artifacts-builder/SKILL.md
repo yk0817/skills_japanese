@@ -1,74 +1,74 @@
 ---
 name: web-artifacts-builder
-description: Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.
+description: React、Tailwind CSS、shadcn/uiなどのモダンなフロントエンドWeb技術を使用して、精巧なマルチコンポーネントのclaude.ai HTMLアーティファクトを作成するためのツール群。状態管理、ルーティング、shadcn/uiコンポーネントを必要とする複雑なアーティファクト向けであり、単純な単一ファイルのHTML/JSXアーティファクトには不要です。
 license: Complete terms in LICENSE.txt
 ---
 
-# Web Artifacts Builder
+# Webアーティファクトビルダー
 
-To build powerful frontend claude.ai artifacts, follow these steps:
-1. Initialize the frontend repo using `scripts/init-artifact.sh`
-2. Develop your artifact by editing the generated code
-3. Bundle all code into a single HTML file using `scripts/bundle-artifact.sh`
-4. Display artifact to user
-5. (Optional) Test the artifact
+高機能なフロントエンドのclaude.aiアーティファクトを構築するには、以下の手順に従ってください:
+1. `scripts/init-artifact.sh` を使用してフロントエンドリポジトリを初期化する
+2. 生成されたコードを編集してアーティファクトを開発する
+3. `scripts/bundle-artifact.sh` を使用してすべてのコードを単一のHTMLファイルにバンドルする
+4. ユーザーにアーティファクトを表示する
+5. （任意）アーティファクトをテストする
 
-**Stack**: React 18 + TypeScript + Vite + Parcel (bundling) + Tailwind CSS + shadcn/ui
+**技術スタック**: React 18 + TypeScript + Vite + Parcel（バンドル用） + Tailwind CSS + shadcn/ui
 
-## Design & Style Guidelines
+## デザインとスタイルのガイドライン
 
-VERY IMPORTANT: To avoid what is often referred to as "AI slop", avoid using excessive centered layouts, purple gradients, uniform rounded corners, and Inter font.
+非常に重要: いわゆる「AIスロップ」を避けるため、過度な中央寄せレイアウト、紫のグラデーション、画一的な角丸、Interフォントの使用を避けてください。
 
-## Quick Start
+## クイックスタート
 
-### Step 1: Initialize Project
+### ステップ1: プロジェクトの初期化
 
-Run the initialization script to create a new React project:
+初期化スクリプトを実行して新しいReactプロジェクトを作成します:
 ```bash
 bash scripts/init-artifact.sh <project-name>
 cd <project-name>
 ```
 
-This creates a fully configured project with:
-- ✅ React + TypeScript (via Vite)
-- ✅ Tailwind CSS 3.4.1 with shadcn/ui theming system
-- ✅ Path aliases (`@/`) configured
-- ✅ 40+ shadcn/ui components pre-installed
-- ✅ All Radix UI dependencies included
-- ✅ Parcel configured for bundling (via .parcelrc)
-- ✅ Node 18+ compatibility (auto-detects and pins Vite version)
+これにより、以下が構成済みのプロジェクトが作成されます:
+- React + TypeScript（Vite経由）
+- Tailwind CSS 3.4.1（shadcn/uiテーマシステム付き）
+- パスエイリアス（`@/`）設定済み
+- 40以上のshadcn/uiコンポーネントがプリインストール
+- すべてのRadix UI依存関係を含む
+- Parcelのバンドル設定済み（.parcelrc経由）
+- Node 18+互換（Viteバージョンを自動検出・固定）
 
-### Step 2: Develop Your Artifact
+### ステップ2: アーティファクトの開発
 
-To build the artifact, edit the generated files. See **Common Development Tasks** below for guidance.
+アーティファクトを構築するには、生成されたファイルを編集します。ガイダンスについては以下の**一般的な開発タスク**を参照してください。
 
-### Step 3: Bundle to Single HTML File
+### ステップ3: 単一HTMLファイルへのバンドル
 
-To bundle the React app into a single HTML artifact:
+ReactアプリをHTMLアーティファクト1つにバンドルするには:
 ```bash
 bash scripts/bundle-artifact.sh
 ```
 
-This creates `bundle.html` - a self-contained artifact with all JavaScript, CSS, and dependencies inlined. This file can be directly shared in Claude conversations as an artifact.
+これにより、すべてのJavaScript、CSS、依存関係がインライン化された自己完結型のアーティファクト `bundle.html` が作成されます。このファイルはClaudeの会話でアーティファクトとして直接共有できます。
 
-**Requirements**: Your project must have an `index.html` in the root directory.
+**要件**: プロジェクトのルートディレクトリに `index.html` が必要です。
 
-**What the script does**:
-- Installs bundling dependencies (parcel, @parcel/config-default, parcel-resolver-tspaths, html-inline)
-- Creates `.parcelrc` config with path alias support
-- Builds with Parcel (no source maps)
-- Inlines all assets into single HTML using html-inline
+**スクリプトの動作内容**:
+- バンドル用依存関係のインストール（parcel、@parcel/config-default、parcel-resolver-tspaths、html-inline）
+- パスエイリアスサポート付きの`.parcelrc`設定の作成
+- Parcelによるビルド（ソースマップなし）
+- html-inlineを使用してすべてのアセットを単一HTMLにインライン化
 
-### Step 4: Share Artifact with User
+### ステップ4: ユーザーへのアーティファクト共有
 
-Finally, share the bundled HTML file in conversation with the user so they can view it as an artifact.
+最後に、バンドルされたHTMLファイルをユーザーとの会話で共有して、アーティファクトとして表示できるようにします。
 
-### Step 5: Testing/Visualizing the Artifact (Optional)
+### ステップ5: アーティファクトのテスト/表示確認（任意）
 
-Note: This is a completely optional step. Only perform if necessary or requested.
+注意: これは完全に任意のステップです。必要な場合またはリクエストされた場合のみ実行してください。
 
-To test/visualize the artifact, use available tools (including other Skills or built-in tools like Playwright or Puppeteer). In general, avoid testing the artifact upfront as it adds latency between the request and when the finished artifact can be seen. Test later, after presenting the artifact, if requested or if issues arise.
+アーティファクトをテスト/表示確認するには、利用可能なツール（他のSkillsやPlaywright、Puppeteerなどの組み込みツールを含む）を使用します。一般的に、リクエストから完成したアーティファクトが見られるまでの待ち時間が増えるため、事前テストは避けてください。アーティファクトを提示した後、リクエストされた場合や問題が発生した場合にテストしてください。
 
-## Reference
+## リファレンス
 
-- **shadcn/ui components**: https://ui.shadcn.com/docs/components
+- **shadcn/uiコンポーネント**: https://ui.shadcn.com/docs/components

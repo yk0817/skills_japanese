@@ -1,3 +1,3 @@
-# Agent Skills Spec
+# Agent Skills 仕様
 
-The spec is now located at <https://agentskills.io/specification>
+仕様は <https://agentskills.io/specification> に掲載されています。

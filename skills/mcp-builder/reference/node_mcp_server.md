@@ -1,14 +1,14 @@
-# Node/TypeScript MCP Server Implementation Guide
+# Node/TypeScript MCP サーバー実装ガイド
 
-## Overview
+## 概要
 
-This document provides Node/TypeScript-specific best practices and examples for implementing MCP servers using the MCP TypeScript SDK. It covers project structure, server setup, tool registration patterns, input validation with Zod, error handling, and complete working examples.
+このドキュメントでは、MCP TypeScript SDK を使用した MCP サーバー実装のための Node/TypeScript 固有のベストプラクティスと例を提供します。プロジェクト構成、サーバーセットアップ、ツール登録パターン、Zod による入力バリデーション、エラーハンドリング、および完全な動作例について説明します。
 
 ---
 
-## Quick Reference
+## クイックリファレンス
 
-### Key Imports
+### 主要なインポート
 ```typescript
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
@@ -17,7 +17,7 @@ import express from "express";
 import { z } from "zod";
 ```
 
-### Server Initialization
+### サーバーの初期化
 ```typescript
 const server = new McpServer({
   name: "service-mcp-server",
@@ -25,7 +25,7 @@ const server = new McpServer({
 });
 ```
 
-### Tool Registration Pattern
+### ツール登録パターン
 ```typescript
 server.registerTool(
   "tool_name",
@@ -49,34 +49,34 @@ server.registerTool(
 
 ## MCP TypeScript SDK
 
-The official MCP TypeScript SDK provides:
-- `McpServer` class for server initialization
-- `registerTool` method for tool registration
-- Zod schema integration for runtime input validation
-- Type-safe tool handler implementations
+公式の MCP TypeScript SDK は以下を提供します：
+- サーバー初期化用の `McpServer` クラス
+- ツール登録用の `registerTool` メソッド
+- ランタイム入力バリデーション用の Zod スキーマ統合
+- 型安全なツールハンドラー実装
 
-**IMPORTANT - Use Modern APIs Only:**
-- **DO use**: `server.registerTool()`, `server.registerResource()`, `server.registerPrompt()`
-- **DO NOT use**: Old deprecated APIs such as `server.tool()`, `server.setRequestHandler(ListToolsRequestSchema, ...)`, or manual handler registration
-- The `register*` methods provide better type safety, automatic schema handling, and are the recommended approach
+**重要 - 最新の API のみを使用してください：**
+- **使用すべきもの**：`server.registerTool()`、`server.registerResource()`、`server.registerPrompt()`
+- **使用してはならないもの**：`server.tool()`、`server.setRequestHandler(ListToolsRequestSchema, ...)`、手動ハンドラー登録などの非推奨 API
+- `register*` メソッドはより良い型安全性、自動スキーマ処理を提供し、推奨されるアプローチです
 
-See the MCP SDK documentation in the references for complete details.
+詳細についてはリファレンス内の MCP SDK ドキュメントを参照してください。
 
-## Server Naming Convention
+## サーバー命名規則
 
-Node/TypeScript MCP servers must follow this naming pattern:
-- **Format**: `{service}-mcp-server` (lowercase with hyphens)
-- **Examples**: `github-mcp-server`, `jira-mcp-server`, `stripe-mcp-server`
+Node/TypeScript MCP サーバーは以下の命名パターンに従う必要があります：
+- **フォーマット**：`{service}-mcp-server`（ハイフン付き小文字）
+- **例**：`github-mcp-server`、`jira-mcp-server`、`stripe-mcp-server`
 
-The name should be:
-- General (not tied to specific features)
-- Descriptive of the service/API being integrated
-- Easy to infer from the task description
-- Without version numbers or dates
+名前は以下の条件を満たすべきです：
+- 一般的である（特定の機能に紐付かない）
+- 統合するサービス/API を説明的に示す
+- タスクの説明から推測しやすい
+- バージョン番号や日付を含まない
 
-## Project Structure
+## プロジェクト構成
 
-Create the following structure for Node/TypeScript MCP servers:
+Node/TypeScript MCP サーバーには以下の構成を作成します：
 
 ```
 {service}-mcp-server/
@@ -93,25 +93,25 @@ Create the following structure for Node/TypeScript MCP servers:
 └── dist/                 # Built JavaScript files (entry point: dist/index.js)
 ```
 
-## Tool Implementation
+## ツール実装
 
-### Tool Naming
+### ツールの命名
 
-Use snake_case for tool names (e.g., "search_users", "create_project", "get_channel_info") with clear, action-oriented names.
+ツール名には snake_case を使用し（例："search_users"、"create_project"、"get_channel_info"）、明確でアクション指向の名前を付けます。
 
-**Avoid Naming Conflicts**: Include the service context to prevent overlaps:
-- Use "slack_send_message" instead of just "send_message"
-- Use "github_create_issue" instead of just "create_issue"
-- Use "asana_list_tasks" instead of just "list_tasks"
+**命名の競合を避ける**：重複を防ぐためにサービスコンテキストを含めます：
+- `send_message` ではなく `slack_send_message` を使用する
+- `create_issue` ではなく `github_create_issue` を使用する
+- `list_tasks` ではなく `asana_list_tasks` を使用する
 
-### Tool Structure
+### ツールの構造
 
-Tools are registered using the `registerTool` method with the following requirements:
-- Use Zod schemas for runtime input validation and type safety
-- The `description` field must be explicitly provided - JSDoc comments are NOT automatically extracted
-- Explicitly provide `title`, `description`, `inputSchema`, and `annotations`
-- The `inputSchema` must be a Zod schema object (not a JSON schema)
-- Type all parameters and return values explicitly
+ツールは `registerTool` メソッドを使用して以下の要件で登録します：
+- ランタイム入力バリデーションと型安全性のために Zod スキーマを使用する
+- `description` フィールドは明示的に提供する必要がある - JSDoc コメントは自動的に抽出されない
+- `title`、`description`、`inputSchema`、`annotations` を明示的に提供する
+- `inputSchema` は Zod スキーマオブジェクトでなければならない（JSON スキーマではない）
+- すべてのパラメータと戻り値を明示的に型付けする
 
 ```typescript
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -273,9 +273,9 @@ Error Handling:
 );
 ```
 
-## Zod Schemas for Input Validation
+## Zod スキーマによる入力バリデーション
 
-Zod provides runtime type validation:
+Zod はランタイムの型バリデーションを提供します：
 
 ```typescript
 import { z } from "zod";
@@ -321,9 +321,9 @@ const PaginationSchema = z.object({
 });
 ```
 
-## Response Format Options
+## レスポンスフォーマットオプション
 
-Support multiple output formats for flexibility:
+柔軟性のために複数の出力フォーマットをサポートします：
 
 ```typescript
 enum ResponseFormat {
@@ -339,21 +339,21 @@ const inputSchema = z.object({
 });
 ```
 
-**Markdown format**:
-- Use headers, lists, and formatting for clarity
-- Convert timestamps to human-readable format
-- Show display names with IDs in parentheses
-- Omit verbose metadata
-- Group related information logically
+**Markdown フォーマット**：
+- 見出し、リスト、フォーマットを使用して明確に
+- タイムスタンプを人間が読みやすいフォーマットに変換
+- 表示名に括弧付きで ID を表示
+- 冗長なメタデータを省略
+- 関連情報を論理的にグループ化
 
-**JSON format**:
-- Return complete, structured data suitable for programmatic processing
-- Include all available fields and metadata
-- Use consistent field names and types
+**JSON フォーマット**：
+- プログラム的な処理に適した完全な構造化データを返す
+- 利用可能なすべてのフィールドとメタデータを含める
+- 一貫したフィールド名と型を使用
 
-## Pagination Implementation
+## ページネーション実装
 
-For tools that list resources:
+リソースをリストするツール向け：
 
 ```typescript
 const ListSchema = z.object({
@@ -379,9 +379,9 @@ async function listItems(params: z.infer<typeof ListSchema>) {
 }
 ```
 
-## Character Limits and Truncation
+## 文字数制限とトランケーション
 
-Add a CHARACTER_LIMIT constant to prevent overwhelming responses:
+レスポンスが過大になることを防ぐために CHARACTER_LIMIT 定数を追加します：
 
 ```typescript
 // At module level in constants.ts
@@ -405,9 +405,9 @@ async function searchTool(params: SearchInput) {
 }
 ```
 
-## Error Handling
+## エラーハンドリング
 
-Provide clear, actionable error messages:
+明確で実行可能なエラーメッセージを提供します：
 
 ```typescript
 import axios, { AxiosError } from "axios";
@@ -433,9 +433,9 @@ function handleApiError(error: unknown): string {
 }
 ```
 
-## Shared Utilities
+## 共有ユーティリティ
 
-Extract common functionality into reusable functions:
+共通機能を再利用可能な関数に抽出します：
 
 ```typescript
 // Shared API request function
@@ -464,9 +464,9 @@ async function makeApiRequest<T>(
 }
 ```
 
-## Async/Await Best Practices
+## Async/Await のベストプラクティス
 
-Always use async/await for network requests and I/O operations:
+ネットワークリクエストと I/O 操作には常に async/await を使用します：
 
 ```typescript
 // Good: Async network request
@@ -482,15 +482,15 @@ function fetchData(resourceId: string): Promise<ResourceData> {
 }
 ```
 
-## TypeScript Best Practices
+## TypeScript のベストプラクティス
 
-1. **Use Strict TypeScript**: Enable strict mode in tsconfig.json
-2. **Define Interfaces**: Create clear interface definitions for all data structures
-3. **Avoid `any`**: Use proper types or `unknown` instead of `any`
-4. **Zod for Runtime Validation**: Use Zod schemas to validate external data
-5. **Type Guards**: Create type guard functions for complex type checking
-6. **Error Handling**: Always use try-catch with proper error type checking
-7. **Null Safety**: Use optional chaining (`?.`) and nullish coalescing (`??`)
+1. **厳密な TypeScript を使用する**：tsconfig.json で strict モードを有効にする
+2. **インターフェースを定義する**：すべてのデータ構造に対して明確なインターフェース定義を作成する
+3. **`any` を避ける**：`any` の代わりに適切な型または `unknown` を使用する
+4. **ランタイムバリデーションに Zod を使用する**：外部データの検証に Zod スキーマを使用する
+5. **型ガードを使用する**：複雑な型チェック用の型ガード関数を作成する
+6. **エラーハンドリング**：常に適切なエラー型チェック付きの try-catch を使用する
+7. **null 安全性**：オプショナルチェーン（`?.`）と null 合体演算子（`??`）を使用する
 
 ```typescript
 // Good: Type-safe with Zod and interfaces
@@ -523,7 +523,7 @@ async function getUser(id: string): Promise<any> {
 }
 ```
 
-## Package Configuration
+## パッケージ設定
 
 ### package.json
 
@@ -581,7 +581,7 @@ async function getUser(id: string): Promise<any> {
 }
 ```
 
-## Complete Example
+## 完全な例
 
 ```typescript
 #!/usr/bin/env node
@@ -757,11 +757,11 @@ if (transport === 'http') {
 
 ---
 
-## Advanced MCP Features
+## 高度な MCP 機能
 
-### Resource Registration
+### リソース登録
 
-Expose data as resources for efficient, URI-based access:
+効率的な URI ベースのアクセスのためにデータをリソースとして公開します：
 
 ```typescript
 import { ResourceTemplate } from "@modelcontextprotocol/sdk/types.js";
@@ -808,17 +808,17 @@ server.registerResourceList(async () => {
 });
 ```
 
-**When to use Resources vs Tools:**
-- **Resources**: For data access with simple URI-based parameters
-- **Tools**: For complex operations requiring validation and business logic
-- **Resources**: When data is relatively static or template-based
-- **Tools**: When operations have side effects or complex workflows
+**リソースとツールの使い分け：**
+- **リソース**：シンプルな URI ベースのパラメータによるデータアクセス向け
+- **ツール**：バリデーションとビジネスロジックを必要とする複雑な操作向け
+- **リソース**：比較的静的またはテンプレートベースのデータの場合
+- **ツール**：副作用や複雑なワークフローを持つ操作の場合
 
-### Transport Options
+### トランスポートオプション
 
-The TypeScript SDK supports two main transport mechanisms:
+TypeScript SDK は2つの主要なトランスポートメカニズムをサポートしています：
 
-#### Streamable HTTP (Recommended for Remote Servers)
+#### Streamable HTTP（リモートサーバーに推奨）
 
 ```typescript
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
@@ -843,7 +843,7 @@ app.post('/mcp', async (req, res) => {
 app.listen(3000);
 ```
 
-#### stdio (For Local Integrations)
+#### stdio（ローカル統合向け）
 
 ```typescript
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
@@ -852,13 +852,13 @@ const transport = new StdioServerTransport();
 await server.connect(transport);
 ```
 
-**Transport selection:**
-- **Streamable HTTP**: Web services, remote access, multiple clients
-- **stdio**: Command-line tools, local development, subprocess integration
+**トランスポートの選択：**
+- **Streamable HTTP**：Web サービス、リモートアクセス、複数クライアント
+- **stdio**：コマンドラインツール、ローカル開発、サブプロセス統合
 
-### Notification Support
+### 通知サポート
 
-Notify clients when server state changes:
+サーバーの状態が変更されたときにクライアントに通知します：
 
 ```typescript
 // Notify when tools list changes
@@ -872,32 +872,32 @@ server.notification({
 });
 ```
 
-Use notifications sparingly - only when server capabilities genuinely change.
+通知は控えめに使用してください - サーバーの機能が本当に変更されたときのみ使用します。
 
 ---
 
-## Code Best Practices
+## コードのベストプラクティス
 
-### Code Composability and Reusability
+### コードの合成可能性と再利用性
 
-Your implementation MUST prioritize composability and code reuse:
+実装では合成可能性とコードの再利用を最優先しなければなりません：
 
-1. **Extract Common Functionality**:
-   - Create reusable helper functions for operations used across multiple tools
-   - Build shared API clients for HTTP requests instead of duplicating code
-   - Centralize error handling logic in utility functions
-   - Extract business logic into dedicated functions that can be composed
-   - Extract shared markdown or JSON field selection & formatting functionality
+1. **共通機能の抽出**：
+   - 複数のツールで使用される操作に対して再利用可能なヘルパー関数を作成する
+   - コードの重複を避けるために共有 API クライアントを構築する
+   - エラーハンドリングロジックをユーティリティ関数に集約する
+   - ビジネスロジックを合成可能な専用関数に抽出する
+   - 共有の Markdown または JSON フィールド選択・フォーマット機能を抽出する
 
-2. **Avoid Duplication**:
-   - NEVER copy-paste similar code between tools
-   - If you find yourself writing similar logic twice, extract it into a function
-   - Common operations like pagination, filtering, field selection, and formatting should be shared
-   - Authentication/authorization logic should be centralized
+2. **重複を避ける**：
+   - ツール間で類似コードをコピー&ペーストしない
+   - 同様のロジックを2回書いている場合は関数に抽出する
+   - ページネーション、フィルタリング、フィールド選択、フォーマットなどの共通操作は共有すべき
+   - 認証/認可ロジックは集約すべき
 
-## Building and Running
+## ビルドと実行
 
-Always build your TypeScript code before running:
+TypeScript コードは実行前に必ずビルドしてください：
 
 ```bash
 # Build the project
@@ -910,61 +910,61 @@ npm start
 npm run dev
 ```
 
-Always ensure `npm run build` completes successfully before considering the implementation complete.
+実装が完了したと見なす前に、`npm run build` が正常に完了することを必ず確認してください。
 
-## Quality Checklist
+## 品質チェックリスト
 
-Before finalizing your Node/TypeScript MCP server implementation, ensure:
+Node/TypeScript MCP サーバーの実装を完了する前に、以下を確認してください：
 
-### Strategic Design
-- [ ] Tools enable complete workflows, not just API endpoint wrappers
-- [ ] Tool names reflect natural task subdivisions
-- [ ] Response formats optimize for agent context efficiency
-- [ ] Human-readable identifiers used where appropriate
-- [ ] Error messages guide agents toward correct usage
+### 戦略的設計
+- [ ] ツールは API エンドポイントのラッパーではなく、完全なワークフローを可能にする
+- [ ] ツール名は自然なタスクの細分化を反映している
+- [ ] レスポンスフォーマットはエージェントのコンテキスト効率を最適化している
+- [ ] 適切な場所で人間が読みやすい識別子を使用している
+- [ ] エラーメッセージがエージェントを正しい使用方法に導く
 
-### Implementation Quality
-- [ ] FOCUSED IMPLEMENTATION: Most important and valuable tools implemented
-- [ ] All tools registered using `registerTool` with complete configuration
-- [ ] All tools include `title`, `description`, `inputSchema`, and `annotations`
-- [ ] Annotations correctly set (readOnlyHint, destructiveHint, idempotentHint, openWorldHint)
-- [ ] All tools use Zod schemas for runtime input validation with `.strict()` enforcement
-- [ ] All Zod schemas have proper constraints and descriptive error messages
-- [ ] All tools have comprehensive descriptions with explicit input/output types
-- [ ] Descriptions include return value examples and complete schema documentation
-- [ ] Error messages are clear, actionable, and educational
+### 実装品質
+- [ ] 重点実装：最も重要で価値のあるツールが実装されている
+- [ ] すべてのツールが完全な設定で `registerTool` を使用して登録されている
+- [ ] すべてのツールに `title`、`description`、`inputSchema`、`annotations` が含まれている
+- [ ] アノテーションが正しく設定されている（readOnlyHint、destructiveHint、idempotentHint、openWorldHint）
+- [ ] すべてのツールが `.strict()` 強制付きの Zod スキーマでランタイム入力バリデーションを使用している
+- [ ] すべての Zod スキーマに適切な制約と説明的なエラーメッセージがある
+- [ ] すべてのツールに明示的な入出力型を含む包括的な説明がある
+- [ ] 説明に戻り値の例と完全なスキーマドキュメントが含まれている
+- [ ] エラーメッセージが明確で、実行可能で、教育的である
 
-### TypeScript Quality
-- [ ] TypeScript interfaces are defined for all data structures
-- [ ] Strict TypeScript is enabled in tsconfig.json
-- [ ] No use of `any` type - use `unknown` or proper types instead
-- [ ] All async functions have explicit Promise<T> return types
-- [ ] Error handling uses proper type guards (e.g., `axios.isAxiosError`, `z.ZodError`)
+### TypeScript の品質
+- [ ] すべてのデータ構造に TypeScript インターフェースが定義されている
+- [ ] tsconfig.json で厳密な TypeScript が有効になっている
+- [ ] `any` 型を使用していない - `unknown` または適切な型を使用する
+- [ ] すべての async 関数に明示的な Promise<T> 戻り値型がある
+- [ ] エラーハンドリングが適切な型ガードを使用している（例：`axios.isAxiosError`、`z.ZodError`）
 
-### Advanced Features (where applicable)
-- [ ] Resources registered for appropriate data endpoints
-- [ ] Appropriate transport configured (stdio or streamable HTTP)
-- [ ] Notifications implemented for dynamic server capabilities
-- [ ] Type-safe with SDK interfaces
+### 高度な機能（該当する場合）
+- [ ] 適切なデータエンドポイントにリソースが登録されている
+- [ ] 適切なトランスポートが設定されている（stdio または Streamable HTTP）
+- [ ] 動的なサーバー機能に対して通知が実装されている
+- [ ] SDK インターフェースで型安全である
 
-### Project Configuration
-- [ ] Package.json includes all necessary dependencies
-- [ ] Build script produces working JavaScript in dist/ directory
-- [ ] Main entry point is properly configured as dist/index.js
-- [ ] Server name follows format: `{service}-mcp-server`
-- [ ] tsconfig.json properly configured with strict mode
+### プロジェクト設定
+- [ ] package.json に必要なすべての依存関係が含まれている
+- [ ] ビルドスクリプトが dist/ ディレクトリに動作する JavaScript を生成する
+- [ ] メインエントリポイントが dist/index.js として適切に設定されている
+- [ ] サーバー名が `{service}-mcp-server` フォーマットに従っている
+- [ ] tsconfig.json が strict モードで適切に設定されている
 
-### Code Quality
-- [ ] Pagination is properly implemented where applicable
-- [ ] Large responses check CHARACTER_LIMIT constant and truncate with clear messages
-- [ ] Filtering options are provided for potentially large result sets
-- [ ] All network operations handle timeouts and connection errors gracefully
-- [ ] Common functionality is extracted into reusable functions
-- [ ] Return types are consistent across similar operations
+### コード品質
+- [ ] 該当箇所でページネーションが適切に実装されている
+- [ ] 大きなレスポンスが CHARACTER_LIMIT 定数をチェックし、明確なメッセージ付きでトランケーションする
+- [ ] 大量の結果セットに対してフィルタリングオプションが提供されている
+- [ ] すべてのネットワーク操作がタイムアウトと接続エラーを適切に処理する
+- [ ] 共通機能が再利用可能な関数に抽出されている
+- [ ] 類似の操作間で戻り値の型が一貫している
 
-### Testing and Build
-- [ ] `npm run build` completes successfully without errors
-- [ ] dist/index.js created and executable
-- [ ] Server runs: `node dist/index.js --help`
-- [ ] All imports resolve correctly
-- [ ] Sample tool calls work as expected
+### テストとビルド
+- [ ] `npm run build` がエラーなく正常に完了する
+- [ ] dist/index.js が作成され実行可能である
+- [ ] サーバーが実行される：`node dist/index.js --help`
+- [ ] すべてのインポートが正しく解決される
+- [ ] サンプルツール呼び出しが期待通りに動作する

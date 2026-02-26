@@ -1,82 +1,82 @@
 ---
 name: xlsx
-description: "Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new spreadsheet from scratch or from other data sources; or convert between tabular file formats. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \"the xlsx in my downloads\") — and wants something done to it or produced from it. Also trigger for cleaning or restructuring messy tabular data files (malformed rows, misplaced headers, junk data) into proper spreadsheets. The deliverable must be a spreadsheet file. Do NOT trigger when the primary deliverable is a Word document, HTML report, standalone Python script, database pipeline, or Google Sheets API integration, even if tabular data is involved."
+description: "スプレッドシートファイルが主要な入力または出力となるあらゆる場面で使用するスキルです。既存の.xlsx、.xlsm、.csv、.tsvファイルを開く、読み取る、編集する、修正する（列の追加、数式の計算、書式設定、チャート作成、乱雑なデータのクリーニングなど）、新規スプレッドシートをゼロからまたは他のデータソースから作成する、表形式ファイルフォーマット間の変換を行う場合に使用します。ユーザーがスプレッドシートファイルを名前やパスで参照した場合（「ダウンロードにあるxlsx」のようなカジュアルな言及でも）、それに対する操作や生成を求めている場合に特にトリガーされます。また、乱雑な表形式データファイル（不正な行、ずれたヘッダー、ジャンクデータ）を適切なスプレッドシートにクリーニング・再構成する場合にもトリガーされます。成果物はスプレッドシートファイルである必要があります。主要な成果物がWord文書、HTMLレポート、スタンドアロンPythonスクリプト、データベースパイプライン、Google Sheets API統合の場合は、表形式データが含まれていてもトリガーしないでください。"
 license: Proprietary. LICENSE.txt has complete terms
 ---
 
-# Requirements for Outputs
+# 出力の要件
 
-## All Excel files
+## すべてのExcelファイル
 
-### Professional Font
-- Use a consistent, professional font (e.g., Arial, Times New Roman) for all deliverables unless otherwise instructed by the user
+### プロフェッショナルなフォント
+- ユーザーから別途指示がない限り、すべての成果物に一貫したプロフェッショナルなフォント（例：Arial、Times New Roman）を使用してください
 
-### Zero Formula Errors
-- Every Excel model MUST be delivered with ZERO formula errors (#REF!, #DIV/0!, #VALUE!, #N/A, #NAME?)
+### 数式エラーゼロ
+- すべてのExcelモデルは数式エラー（#REF!、#DIV/0!、#VALUE!、#N/A、#NAME?）がゼロの状態で納品しなければなりません
 
-### Preserve Existing Templates (when updating templates)
-- Study and EXACTLY match existing format, style, and conventions when modifying files
-- Never impose standardized formatting on files with established patterns
-- Existing template conventions ALWAYS override these guidelines
+### 既存テンプレートの保持（テンプレート更新時）
+- ファイルを変更する際は、既存のフォーマット、スタイル、規則を正確に調査し一致させてください
+- 確立されたパターンを持つファイルに標準化されたフォーマットを強制しないでください
+- 既存テンプレートの規則は常にこのガイドラインよりも優先されます
 
-## Financial models
+## 財務モデル
 
-### Color Coding Standards
-Unless otherwise stated by the user or existing template
+### 色分け基準
+ユーザーまたは既存テンプレートから別途指示がない限り
 
-#### Industry-Standard Color Conventions
-- **Blue text (RGB: 0,0,255)**: Hardcoded inputs, and numbers users will change for scenarios
-- **Black text (RGB: 0,0,0)**: ALL formulas and calculations
-- **Green text (RGB: 0,128,0)**: Links pulling from other worksheets within same workbook
-- **Red text (RGB: 255,0,0)**: External links to other files
-- **Yellow background (RGB: 255,255,0)**: Key assumptions needing attention or cells that need to be updated
+#### 業界標準の色規則
+- **青テキスト（RGB: 0,0,255）**：ハードコードされた入力値、シナリオ分析でユーザーが変更する数値
+- **黒テキスト（RGB: 0,0,0）**：すべての数式と計算
+- **緑テキスト（RGB: 0,128,0）**：同じワークブック内の他のワークシートからの参照リンク
+- **赤テキスト（RGB: 255,0,0）**：他のファイルへの外部リンク
+- **黄色背景（RGB: 255,255,0）**：注意が必要な主要前提条件、または更新が必要なセル
 
-### Number Formatting Standards
+### 数値フォーマット基準
 
-#### Required Format Rules
-- **Years**: Format as text strings (e.g., "2024" not "2,024")
-- **Currency**: Use $#,##0 format; ALWAYS specify units in headers ("Revenue ($mm)")
-- **Zeros**: Use number formatting to make all zeros "-", including percentages (e.g., "$#,##0;($#,##0);-")
-- **Percentages**: Default to 0.0% format (one decimal)
-- **Multiples**: Format as 0.0x for valuation multiples (EV/EBITDA, P/E)
-- **Negative numbers**: Use parentheses (123) not minus -123
+#### 必須フォーマットルール
+- **年度**：テキスト文字列としてフォーマット（例："2024"、"2,024"ではない）
+- **通貨**：$#,##0形式を使用。ヘッダーに単位を必ず明記（"Revenue ($mm)"）
+- **ゼロ**：数値フォーマットですべてのゼロを"-"に表示（パーセンテージも含む）（例："$#,##0;($#,##0);-"）
+- **パーセンテージ**：デフォルトで0.0%形式（小数点以下1桁）
+- **倍率**：バリュエーション倍率（EV/EBITDA、P/E）は0.0xとしてフォーマット
+- **負の数**：マイナス記号 -123 ではなく括弧 (123) を使用
 
-### Formula Construction Rules
+### 数式構築ルール
 
-#### Assumptions Placement
-- Place ALL assumptions (growth rates, margins, multiples, etc.) in separate assumption cells
-- Use cell references instead of hardcoded values in formulas
-- Example: Use =B5*(1+$B$6) instead of =B5*1.05
+#### 前提条件の配置
+- すべての前提条件（成長率、マージン、倍率など）を別々の前提条件セルに配置
+- 数式内ではハードコードされた値ではなくセル参照を使用
+- 例：=B5*1.05の代わりに=B5*(1+$B$6)を使用
 
-#### Formula Error Prevention
-- Verify all cell references are correct
-- Check for off-by-one errors in ranges
-- Ensure consistent formulas across all projection periods
-- Test with edge cases (zero values, negative numbers)
-- Verify no unintended circular references
+#### 数式エラーの防止
+- すべてのセル参照が正しいことを確認
+- 範囲のオフバイワンエラーを確認
+- すべての予測期間で一貫した数式を確保
+- エッジケース（ゼロ値、負の数）でテスト
+- 意図しない循環参照がないことを確認
 
-#### Documentation Requirements for Hardcodes
-- Comment or in cells beside (if end of table). Format: "Source: [System/Document], [Date], [Specific Reference], [URL if applicable]"
-- Examples:
+#### ハードコードの文書化要件
+- セルの横にコメントまたはメモ（テーブル末尾の場合）。形式："Source: [システム/文書], [日付], [具体的参照], [該当する場合URL]"
+- 例：
   - "Source: Company 10-K, FY2024, Page 45, Revenue Note, [SEC EDGAR URL]"
   - "Source: Company 10-Q, Q2 2025, Exhibit 99.1, [SEC EDGAR URL]"
   - "Source: Bloomberg Terminal, 8/15/2025, AAPL US Equity"
   - "Source: FactSet, 8/20/2025, Consensus Estimates Screen"
 
-# XLSX creation, editing, and analysis
+# XLSXの作成、編集、分析
 
-## Overview
+## 概要
 
-A user may ask you to create, edit, or analyze the contents of an .xlsx file. You have different tools and workflows available for different tasks.
+ユーザーは.xlsxファイルの作成、編集、または内容の分析を依頼する場合があります。タスクに応じて異なるツールとワークフローが利用できます。
 
-## Important Requirements
+## 重要な要件
 
-**LibreOffice Required for Formula Recalculation**: You can assume LibreOffice is installed for recalculating formula values using the `scripts/recalc.py` script. The script automatically configures LibreOffice on first run, including in sandboxed environments where Unix sockets are restricted (handled by `scripts/office/soffice.py`)
+**数式の再計算にはLibreOfficeが必要です**：`scripts/recalc.py`スクリプトを使用して数式の値を再計算するためにLibreOfficeがインストールされていると想定できます。このスクリプトは初回実行時にLibreOfficeを自動設定します（Unixソケットが制限されるサンドボックス環境でも`scripts/office/soffice.py`で対応）。
 
-## Reading and analyzing data
+## データの読み取りと分析
 
-### Data analysis with pandas
-For data analysis, visualization, and basic operations, use **pandas** which provides powerful data manipulation capabilities:
+### pandasによるデータ分析
+データ分析、可視化、基本的な操作には、強力なデータ操作機能を提供する**pandas**を使用してください：
 
 ```python
 import pandas as pd
@@ -94,13 +94,13 @@ df.describe()  # Statistics
 df.to_excel('output.xlsx', index=False)
 ```
 
-## Excel File Workflows
+## Excelファイルのワークフロー
 
-## CRITICAL: Use Formulas, Not Hardcoded Values
+## 重要：ハードコードされた値ではなく数式を使用してください
 
-**Always use Excel formulas instead of calculating values in Python and hardcoding them.** This ensures the spreadsheet remains dynamic and updateable.
+**Pythonで値を計算してハードコードするのではなく、常にExcelの数式を使用してください。** これにより、スプレッドシートが動的で更新可能な状態を維持できます。
 
-### ❌ WRONG - Hardcoding Calculated Values
+### 間違い - ハードコードされた計算値
 ```python
 # Bad: Calculating in Python and hardcoding result
 total = df['Sales'].sum()
@@ -115,7 +115,7 @@ avg = sum(values) / len(values)
 sheet['D20'] = avg  # Hardcodes 42.5
 ```
 
-### ✅ CORRECT - Using Excel Formulas
+### 正解 - Excelの数式を使用
 ```python
 # Good: Let Excel calculate the sum
 sheet['B10'] = '=SUM(B2:B9)'
@@ -127,28 +127,28 @@ sheet['C5'] = '=(C4-C2)/C2'
 sheet['D20'] = '=AVERAGE(D2:D19)'
 ```
 
-This applies to ALL calculations - totals, percentages, ratios, differences, etc. The spreadsheet should be able to recalculate when source data changes.
+これは合計、パーセンテージ、比率、差分など、すべての計算に適用されます。ソースデータが変更された場合にスプレッドシートが再計算できるようにする必要があります。
 
-## Common Workflow
-1. **Choose tool**: pandas for data, openpyxl for formulas/formatting
-2. **Create/Load**: Create new workbook or load existing file
-3. **Modify**: Add/edit data, formulas, and formatting
-4. **Save**: Write to file
-5. **Recalculate formulas (MANDATORY IF USING FORMULAS)**: Use the scripts/recalc.py script
+## 一般的なワークフロー
+1. **ツールを選択**：データにはpandas、数式/書式設定にはopenpyxl
+2. **作成/読み込み**：新規ワークブックを作成するか既存ファイルを読み込む
+3. **変更**：データ、数式、書式設定の追加/編集
+4. **保存**：ファイルに書き出し
+5. **数式の再計算（数式を使用する場合は必須）**：scripts/recalc.pyスクリプトを使用
    ```bash
    python scripts/recalc.py output.xlsx
    ```
-6. **Verify and fix any errors**: 
-   - The script returns JSON with error details
-   - If `status` is `errors_found`, check `error_summary` for specific error types and locations
-   - Fix the identified errors and recalculate again
-   - Common errors to fix:
-     - `#REF!`: Invalid cell references
-     - `#DIV/0!`: Division by zero
-     - `#VALUE!`: Wrong data type in formula
-     - `#NAME?`: Unrecognized formula name
+6. **エラーの確認と修正**：
+   - スクリプトはエラーの詳細をJSON形式で返します
+   - `status`が`errors_found`の場合、`error_summary`で具体的なエラーの種類と場所を確認
+   - 特定されたエラーを修正し、再度再計算
+   - 修正すべき一般的なエラー：
+     - `#REF!`：無効なセル参照
+     - `#DIV/0!`：ゼロによる除算
+     - `#VALUE!`：数式内のデータ型の不一致
+     - `#NAME?`：認識されない数式名
 
-### Creating new Excel files
+### 新規Excelファイルの作成
 
 ```python
 # Using openpyxl for formulas and formatting
@@ -177,7 +177,7 @@ sheet.column_dimensions['A'].width = 20
 wb.save('output.xlsx')
 ```
 
-### Editing existing Excel files
+### 既存Excelファイルの編集
 
 ```python
 # Using openpyxl to preserve formulas and formatting
@@ -204,50 +204,50 @@ new_sheet['A1'] = 'Data'
 wb.save('modified.xlsx')
 ```
 
-## Recalculating formulas
+## 数式の再計算
 
-Excel files created or modified by openpyxl contain formulas as strings but not calculated values. Use the provided `scripts/recalc.py` script to recalculate formulas:
+openpyxlで作成または変更されたExcelファイルには、数式が文字列として含まれますが計算結果は含まれません。数式を再計算するには、提供されている`scripts/recalc.py`スクリプトを使用してください：
 
 ```bash
 python scripts/recalc.py <excel_file> [timeout_seconds]
 ```
 
-Example:
+例：
 ```bash
 python scripts/recalc.py output.xlsx 30
 ```
 
-The script:
-- Automatically sets up LibreOffice macro on first run
-- Recalculates all formulas in all sheets
-- Scans ALL cells for Excel errors (#REF!, #DIV/0!, etc.)
-- Returns JSON with detailed error locations and counts
-- Works on both Linux and macOS
+スクリプトの機能：
+- 初回実行時にLibreOfficeマクロを自動設定
+- すべてのシートのすべての数式を再計算
+- すべてのセルをExcelエラー（#REF!、#DIV/0!など）についてスキャン
+- エラーの場所と件数の詳細をJSON形式で返す
+- LinuxとmacOSの両方で動作
 
-## Formula Verification Checklist
+## 数式検証チェックリスト
 
-Quick checks to ensure formulas work correctly:
+数式が正しく動作することを確認するためのクイックチェック：
 
-### Essential Verification
-- [ ] **Test 2-3 sample references**: Verify they pull correct values before building full model
-- [ ] **Column mapping**: Confirm Excel columns match (e.g., column 64 = BL, not BK)
-- [ ] **Row offset**: Remember Excel rows are 1-indexed (DataFrame row 5 = Excel row 6)
+### 基本的な検証
+- [ ] **サンプル参照を2-3件テスト**：完全なモデルを構築する前に正しい値を参照しているか確認
+- [ ] **列のマッピング**：Excelの列が一致しているか確認（例：列64 = BL、BKではない）
+- [ ] **行のオフセット**：Excelの行は1始まり（DataFrameの行5 = Excelの行6）
 
-### Common Pitfalls
-- [ ] **NaN handling**: Check for null values with `pd.notna()`
-- [ ] **Far-right columns**: FY data often in columns 50+ 
-- [ ] **Multiple matches**: Search all occurrences, not just first
-- [ ] **Division by zero**: Check denominators before using `/` in formulas (#DIV/0!)
-- [ ] **Wrong references**: Verify all cell references point to intended cells (#REF!)
-- [ ] **Cross-sheet references**: Use correct format (Sheet1!A1) for linking sheets
+### よくある落とし穴
+- [ ] **NaN処理**：`pd.notna()`でnull値を確認
+- [ ] **右端の列**：FYデータは多くの場合列50以上にある
+- [ ] **複数の一致**：最初の一致だけでなくすべての出現を検索
+- [ ] **ゼロ除算**：数式で`/`を使用する前に分母を確認（#DIV/0!）
+- [ ] **間違った参照**：すべてのセル参照が意図したセルを指しているか確認（#REF!）
+- [ ] **シート間参照**：シート間のリンクには正しい形式（Sheet1!A1）を使用
 
-### Formula Testing Strategy
-- [ ] **Start small**: Test formulas on 2-3 cells before applying broadly
-- [ ] **Verify dependencies**: Check all cells referenced in formulas exist
-- [ ] **Test edge cases**: Include zero, negative, and very large values
+### 数式テスト戦略
+- [ ] **小さく始める**：広く適用する前に2-3セルで数式をテスト
+- [ ] **依存関係を確認**：数式で参照されるすべてのセルが存在することを確認
+- [ ] **エッジケースをテスト**：ゼロ、負の値、非常に大きな値を含める
 
-### Interpreting scripts/recalc.py Output
-The script returns JSON with error details:
+### scripts/recalc.pyの出力の解釈
+スクリプトはエラーの詳細をJSON形式で返します：
 ```json
 {
   "status": "success",           // or "errors_found"
@@ -262,31 +262,31 @@ The script returns JSON with error details:
 }
 ```
 
-## Best Practices
+## ベストプラクティス
 
-### Library Selection
-- **pandas**: Best for data analysis, bulk operations, and simple data export
-- **openpyxl**: Best for complex formatting, formulas, and Excel-specific features
+### ライブラリの選択
+- **pandas**：データ分析、一括操作、シンプルなデータエクスポートに最適
+- **openpyxl**：複雑な書式設定、数式、Excel固有の機能に最適
 
-### Working with openpyxl
-- Cell indices are 1-based (row=1, column=1 refers to cell A1)
-- Use `data_only=True` to read calculated values: `load_workbook('file.xlsx', data_only=True)`
-- **Warning**: If opened with `data_only=True` and saved, formulas are replaced with values and permanently lost
-- For large files: Use `read_only=True` for reading or `write_only=True` for writing
-- Formulas are preserved but not evaluated - use scripts/recalc.py to update values
+### openpyxlでの作業
+- セルのインデックスは1始まり（row=1、column=1はセルA1を指す）
+- 計算結果の値を読み取るには`data_only=True`を使用：`load_workbook('file.xlsx', data_only=True)`
+- **注意**：`data_only=True`で開いて保存すると、数式が値に置き換えられ永久に失われます
+- 大きなファイルの場合：読み取りには`read_only=True`、書き込みには`write_only=True`を使用
+- 数式は保持されますが評価されません - 値を更新するにはscripts/recalc.pyを使用
 
-### Working with pandas
-- Specify data types to avoid inference issues: `pd.read_excel('file.xlsx', dtype={'id': str})`
-- For large files, read specific columns: `pd.read_excel('file.xlsx', usecols=['A', 'C', 'E'])`
-- Handle dates properly: `pd.read_excel('file.xlsx', parse_dates=['date_column'])`
+### pandasでの作業
+- 推論の問題を避けるためにデータ型を指定：`pd.read_excel('file.xlsx', dtype={'id': str})`
+- 大きなファイルの場合は特定の列を読み取り：`pd.read_excel('file.xlsx', usecols=['A', 'C', 'E'])`
+- 日付を適切に処理：`pd.read_excel('file.xlsx', parse_dates=['date_column'])`
 
-## Code Style Guidelines
-**IMPORTANT**: When generating Python code for Excel operations:
-- Write minimal, concise Python code without unnecessary comments
-- Avoid verbose variable names and redundant operations
-- Avoid unnecessary print statements
+## コードスタイルガイドライン
+**重要**：Excel操作用のPythonコードを生成する際：
+- 不要なコメントのない最小限で簡潔なPythonコードを記述
+- 冗長な変数名や不要な操作を避ける
+- 不要なprint文を避ける
 
-**For Excel files themselves**:
-- Add comments to cells with complex formulas or important assumptions
-- Document data sources for hardcoded values
-- Include notes for key calculations and model sections
+**Excelファイル自体について**：
+- 複雑な数式や重要な前提条件にはセルにコメントを追加
+- ハードコードされた値のデータソースを文書化
+- 主要な計算やモデルセクションにメモを含める

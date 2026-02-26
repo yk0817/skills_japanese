@@ -1,19 +1,19 @@
 # Sunset Boulevard
 
-A warm and vibrant theme inspired by golden hour sunsets, perfect for energetic and creative presentations.
+ゴールデンアワーの夕焼けにインスパイアされた、温かく鮮やかなテーマ。エネルギッシュでクリエイティブなプレゼンテーションに最適です。
 
-## Color Palette
+## カラーパレット
 
-- **Burnt Orange**: `#e76f51` - Primary accent color
-- **Coral**: `#f4a261` - Secondary warm accent
-- **Warm Sand**: `#e9c46a` - Highlighting and backgrounds
-- **Deep Purple**: `#264653` - Dark contrast and text
+- **Burnt Orange**: `#e76f51` - プライマリアクセントカラー
+- **Coral**: `#f4a261` - セカンダリウォームアクセント
+- **Warm Sand**: `#e9c46a` - ハイライトと背景
+- **Deep Purple**: `#264653` - ダークコントラストとテキスト
 
-## Typography
+## タイポグラフィ
 
-- **Headers**: DejaVu Serif Bold
-- **Body Text**: DejaVu Sans
+- **見出し**: DejaVu Serif Bold
+- **本文**: DejaVu Sans
 
-## Best Used For
+## 推奨用途
 
-Creative pitches, marketing presentations, lifestyle brands, event promotions, inspirational content.
+クリエイティブピッチ、マーケティングプレゼンテーション、ライフスタイルブランド、イベントプロモーション、インスピレーショナルコンテンツ。

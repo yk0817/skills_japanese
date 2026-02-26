@@ -1,16 +1,16 @@
 ---
 name: pdf
-description: Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.
+description: PDFファイルに関するあらゆる操作を行う際に使用するスキルです。PDFからのテキストや表の読み取り・抽出、複数PDFの結合・マージ、PDFの分割、ページの回転、透かしの追加、新規PDFの作成、PDFフォームの入力、PDFの暗号化・復号化、画像の抽出、スキャンされたPDFのOCR処理による検索可能化などが含まれます。ユーザーが.pdfファイルに言及したり、PDFの生成を依頼した場合に使用してください。
 license: Proprietary. LICENSE.txt has complete terms
 ---
 
-# PDF Processing Guide
+# PDF処理ガイド
 
-## Overview
+## 概要
 
-This guide covers essential PDF processing operations using Python libraries and command-line tools. For advanced features, JavaScript libraries, and detailed examples, see REFERENCE.md. If you need to fill out a PDF form, read FORMS.md and follow its instructions.
+このガイドでは、Pythonライブラリとコマンドラインツールを使用した基本的なPDF処理操作を説明します。高度な機能、JavaScriptライブラリ、詳細な例についてはREFERENCE.mdを参照してください。PDFフォームに記入する必要がある場合は、FORMS.mdを読み、その指示に従ってください。
 
-## Quick Start
+## クイックスタート
 
 ```python
 from pypdf import PdfReader, PdfWriter
@@ -25,11 +25,11 @@ for page in reader.pages:
     text += page.extract_text()
 ```
 
-## Python Libraries
+## Pythonライブラリ
 
-### pypdf - Basic Operations
+### pypdf - 基本操作
 
-#### Merge PDFs
+#### PDFの結合
 ```python
 from pypdf import PdfWriter, PdfReader
 
@@ -43,7 +43,7 @@ with open("merged.pdf", "wb") as output:
     writer.write(output)
 ```
 
-#### Split PDF
+#### PDFの分割
 ```python
 reader = PdfReader("input.pdf")
 for i, page in enumerate(reader.pages):
@@ -53,7 +53,7 @@ for i, page in enumerate(reader.pages):
         writer.write(output)
 ```
 
-#### Extract Metadata
+#### メタデータの抽出
 ```python
 reader = PdfReader("document.pdf")
 meta = reader.metadata
@@ -63,7 +63,7 @@ print(f"Subject: {meta.subject}")
 print(f"Creator: {meta.creator}")
 ```
 
-#### Rotate Pages
+#### ページの回転
 ```python
 reader = PdfReader("input.pdf")
 writer = PdfWriter()
@@ -76,9 +76,9 @@ with open("rotated.pdf", "wb") as output:
     writer.write(output)
 ```
 
-### pdfplumber - Text and Table Extraction
+### pdfplumber - テキストと表の抽出
 
-#### Extract Text with Layout
+#### レイアウトを保持したテキスト抽出
 ```python
 import pdfplumber
 
@@ -88,7 +88,7 @@ with pdfplumber.open("document.pdf") as pdf:
         print(text)
 ```
 
-#### Extract Tables
+#### 表の抽出
 ```python
 with pdfplumber.open("document.pdf") as pdf:
     for i, page in enumerate(pdf.pages):
@@ -99,7 +99,7 @@ with pdfplumber.open("document.pdf") as pdf:
                 print(row)
 ```
 
-#### Advanced Table Extraction
+#### 高度な表抽出
 ```python
 import pandas as pd
 
@@ -118,9 +118,9 @@ if all_tables:
     combined_df.to_excel("extracted_tables.xlsx", index=False)
 ```
 
-### reportlab - Create PDFs
+### reportlab - PDF作成
 
-#### Basic PDF Creation
+#### 基本的なPDF作成
 ```python
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
@@ -139,7 +139,7 @@ c.line(100, height - 140, 400, height - 140)
 c.save()
 ```
 
-#### Create PDF with Multiple Pages
+#### 複数ページのPDF作成
 ```python
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak
@@ -166,11 +166,11 @@ story.append(Paragraph("Content for page 2", styles['Normal']))
 doc.build(story)
 ```
 
-#### Subscripts and Superscripts
+#### 下付き文字と上付き文字
 
-**IMPORTANT**: Never use Unicode subscript/superscript characters (₀₁₂₃₄₅₆₇₈₉, ⁰¹²³⁴⁵⁶⁷⁸⁹) in ReportLab PDFs. The built-in fonts do not include these glyphs, causing them to render as solid black boxes.
+**重要**: ReportLabのPDFでは、Unicode下付き文字・上付き文字（₀₁₂₃₄₅₆₇₈₉、⁰¹²³⁴⁵⁶⁷⁸⁹）を絶対に使用しないでください。内蔵フォントにはこれらのグリフが含まれておらず、黒い四角として表示されます。
 
-Instead, use ReportLab's XML markup tags in Paragraph objects:
+代わりに、ParagraphオブジェクトでReportLabのXMLマークアップタグを使用してください：
 ```python
 from reportlab.platypus import Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
@@ -184,9 +184,9 @@ chemical = Paragraph("H<sub>2</sub>O", styles['Normal'])
 squared = Paragraph("x<super>2</super> + y<super>2</super>", styles['Normal'])
 ```
 
-For canvas-drawn text (not Paragraph objects), manually adjust font the size and position rather than using Unicode subscripts/superscripts.
+canvasで描画するテキスト（Paragraphオブジェクト以外）では、Unicode下付き文字・上付き文字の代わりに、フォントサイズと位置を手動で調整してください。
 
-## Command-Line Tools
+## コマンドラインツール
 
 ### pdftotext (poppler-utils)
 ```bash
@@ -216,7 +216,7 @@ qpdf input.pdf output.pdf --rotate=+90:1  # Rotate page 1 by 90 degrees
 qpdf --password=mypassword --decrypt encrypted.pdf decrypted.pdf
 ```
 
-### pdftk (if available)
+### pdftk（利用可能な場合）
 ```bash
 # Merge
 pdftk file1.pdf file2.pdf cat output merged.pdf
@@ -228,9 +228,9 @@ pdftk input.pdf burst
 pdftk input.pdf rotate 1east output rotated.pdf
 ```
 
-## Common Tasks
+## よくあるタスク
 
-### Extract Text from Scanned PDFs
+### スキャンされたPDFからのテキスト抽出
 ```python
 # Requires: pip install pytesseract pdf2image
 import pytesseract
@@ -249,7 +249,7 @@ for i, image in enumerate(images):
 print(text)
 ```
 
-### Add Watermark
+### 透かしの追加
 ```python
 from pypdf import PdfReader, PdfWriter
 
@@ -268,7 +268,7 @@ with open("watermarked.pdf", "wb") as output:
     writer.write(output)
 ```
 
-### Extract Images
+### 画像の抽出
 ```bash
 # Using pdfimages (poppler-utils)
 pdfimages -j input.pdf output_prefix
@@ -276,7 +276,7 @@ pdfimages -j input.pdf output_prefix
 # This extracts all images as output_prefix-000.jpg, output_prefix-001.jpg, etc.
 ```
 
-### Password Protection
+### パスワード保護
 ```python
 from pypdf import PdfReader, PdfWriter
 
@@ -293,22 +293,22 @@ with open("encrypted.pdf", "wb") as output:
     writer.write(output)
 ```
 
-## Quick Reference
+## クイックリファレンス
 
-| Task | Best Tool | Command/Code |
+| タスク | 最適なツール | コマンド/コード |
 |------|-----------|--------------|
-| Merge PDFs | pypdf | `writer.add_page(page)` |
-| Split PDFs | pypdf | One page per file |
-| Extract text | pdfplumber | `page.extract_text()` |
-| Extract tables | pdfplumber | `page.extract_tables()` |
-| Create PDFs | reportlab | Canvas or Platypus |
-| Command line merge | qpdf | `qpdf --empty --pages ...` |
-| OCR scanned PDFs | pytesseract | Convert to image first |
-| Fill PDF forms | pdf-lib or pypdf (see FORMS.md) | See FORMS.md |
+| PDFの結合 | pypdf | `writer.add_page(page)` |
+| PDFの分割 | pypdf | 1ページ1ファイル |
+| テキスト抽出 | pdfplumber | `page.extract_text()` |
+| 表の抽出 | pdfplumber | `page.extract_tables()` |
+| PDF作成 | reportlab | CanvasまたはPlatypus |
+| コマンドラインでの結合 | qpdf | `qpdf --empty --pages ...` |
+| スキャンPDFのOCR | pytesseract | まず画像に変換 |
+| PDFフォームの入力 | pdf-libまたはpypdf（FORMS.md参照） | FORMS.md参照 |
 
-## Next Steps
+## 次のステップ
 
-- For advanced pypdfium2 usage, see REFERENCE.md
-- For JavaScript libraries (pdf-lib), see REFERENCE.md
-- If you need to fill out a PDF form, follow the instructions in FORMS.md
-- For troubleshooting guides, see REFERENCE.md
+- pypdfium2の高度な使い方については、REFERENCE.mdを参照してください
+- JavaScriptライブラリ（pdf-lib）については、REFERENCE.mdを参照してください
+- PDFフォームに記入する必要がある場合は、FORMS.mdの指示に従ってください
+- トラブルシューティングガイドについては、REFERENCE.mdを参照してください

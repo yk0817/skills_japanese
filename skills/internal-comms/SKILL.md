@@ -1,32 +1,32 @@
 ---
 name: internal-comms
-description: A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).
+description: 社内で使われるフォーマットに合わせて、あらゆる種類の社内コミュニケーションを書くためのリソース集です。社内コミュニケーション（ステータスレポート、リーダーシップ向けアップデート、3Pアップデート、社内ニュースレター、FAQ、インシデントレポート、プロジェクト進捗報告など）の作成を依頼された場合に、Claudeはこのスキルを使用してください。
 license: Complete terms in LICENSE.txt
 ---
 
-## When to use this skill
-To write internal communications, use this skill for:
-- 3P updates (Progress, Plans, Problems)
-- Company newsletters
-- FAQ responses
-- Status reports
-- Leadership updates
-- Project updates
-- Incident reports
+## このスキルを使うタイミング
+社内コミュニケーションを作成するには、以下の用途でこのスキルを使用してください:
+- 3Pアップデート（Progress、Plans、Problems）
+- 社内ニュースレター
+- FAQ回答
+- ステータスレポート
+- リーダーシップ向けアップデート
+- プロジェクト進捗報告
+- インシデントレポート
 
-## How to use this skill
+## このスキルの使い方
 
-To write any internal communication:
+社内コミュニケーションを作成するには:
 
-1. **Identify the communication type** from the request
-2. **Load the appropriate guideline file** from the `examples/` directory:
-    - `examples/3p-updates.md` - For Progress/Plans/Problems team updates
-    - `examples/company-newsletter.md` - For company-wide newsletters
-    - `examples/faq-answers.md` - For answering frequently asked questions
-    - `examples/general-comms.md` - For anything else that doesn't explicitly match one of the above
-3. **Follow the specific instructions** in that file for formatting, tone, and content gathering
+1. **コミュニケーションの種類を特定する** リクエストから
+2. **適切なガイドラインファイルを読み込む** `examples/` ディレクトリから:
+    - `examples/3p-updates.md` - Progress/Plans/Problemsのチームアップデート用
+    - `examples/company-newsletter.md` - 全社向けニュースレター用
+    - `examples/faq-answers.md` - よくある質問への回答用
+    - `examples/general-comms.md` - 上記のいずれにも明確に該当しないもの用
+3. **そのファイルの具体的な指示に従う** フォーマット、トーン、コンテンツ収集について
 
-If the communication type doesn't match any existing guideline, ask for clarification or more context about the desired format.
+コミュニケーションの種類が既存のガイドラインに該当しない場合は、希望するフォーマットについて明確化を求めるか、追加のコンテキストを尋ねてください。
 
-## Keywords
-3P updates, company newsletter, company comms, weekly update, faqs, common questions, updates, internal comms
+## キーワード
+3Pアップデート、社内ニュースレター、社内コミュニケーション、週次アップデート、FAQ、よくある質問、進捗報告、社内連絡

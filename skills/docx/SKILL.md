@@ -1,32 +1,32 @@
 ---
 name: docx
-description: "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation."
+description: "Word文書（.docxファイル）の作成、読み取り、編集、操作を行う際に使用するスキルです。「Word文書」「Wordドキュメント」「.docx」への言及や、目次・見出し・ページ番号・レターヘッドなどの書式を含むプロフェッショナルな文書の作成依頼がトリガーとなります。また、.docxファイルからのコンテンツの抽出・再構成、文書内の画像の挿入・置換、Wordファイルでの検索・置換、変更履歴やコメントの操作、コンテンツを整ったWord文書に変換する際にも使用します。「レポート」「メモ」「手紙」「テンプレート」などをWordまたは.docxファイルとして依頼された場合に使用してください。PDF、スプレッドシート、Googleドキュメント、文書生成に関係しない一般的なコーディングタスクには使用しないでください。"
 license: Proprietary. LICENSE.txt has complete terms
 ---
 
-# DOCX creation, editing, and analysis
+# DOCXの作成、編集、分析
 
-## Overview
+## 概要
 
-A .docx file is a ZIP archive containing XML files.
+.docxファイルはXMLファイルを含むZIPアーカイブです。
 
-## Quick Reference
+## クイックリファレンス
 
-| Task | Approach |
+| タスク | アプローチ |
 |------|----------|
-| Read/analyze content | `pandoc` or unpack for raw XML |
-| Create new document | Use `docx-js` - see Creating New Documents below |
-| Edit existing document | Unpack → edit XML → repack - see Editing Existing Documents below |
+| コンテンツの読み取り・分析 | `pandoc`または展開して生XMLを参照 |
+| 新規文書の作成 | `docx-js`を使用 - 下記「新規文書の作成」を参照 |
+| 既存文書の編集 | 展開 → XML編集 → 再パック - 下記「既存文書の編集」を参照 |
 
-### Converting .doc to .docx
+### .docから.docxへの変換
 
-Legacy `.doc` files must be converted before editing:
+レガシーの`.doc`ファイルは編集前に変換が必要です：
 
 ```bash
 python scripts/office/soffice.py --headless --convert-to docx document.doc
 ```
 
-### Reading Content
+### コンテンツの読み取り
 
 ```bash
 # Text extraction with tracked changes
@@ -36,16 +36,16 @@ pandoc --track-changes=all document.docx -o output.md
 python scripts/office/unpack.py document.docx unpacked/
 ```
 
-### Converting to Images
+### 画像への変換
 
 ```bash
 python scripts/office/soffice.py --headless --convert-to pdf document.docx
 pdftoppm -jpeg -r 150 document.pdf page
 ```
 
-### Accepting Tracked Changes
+### 変更履歴の承認
 
-To produce a clean document with all tracked changes accepted (requires LibreOffice):
+すべての変更履歴を承認したクリーンな文書を生成するには（LibreOfficeが必要）：
 
 ```bash
 python scripts/accept_changes.py input.docx output.docx
@@ -53,11 +53,11 @@ python scripts/accept_changes.py input.docx output.docx
 
 ---
 
-## Creating New Documents
+## 新規文書の作成
 
-Generate .docx files with JavaScript, then validate. Install: `npm install -g docx`
+JavaScriptで.docxファイルを生成し、バリデーションを行います。インストール：`npm install -g docx`
 
-### Setup
+### セットアップ
 ```javascript
 const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, ImageRun,
         Header, Footer, AlignmentType, PageOrientation, LevelFormat, ExternalHyperlink,
@@ -71,13 +71,13 @@ const doc = new Document({ sections: [{ children: [/* content */] }] });
 Packer.toBuffer(doc).then(buffer => fs.writeFileSync("doc.docx", buffer));
 ```
 
-### Validation
-After creating the file, validate it. If validation fails, unpack, fix the XML, and repack.
+### バリデーション
+ファイル作成後にバリデーションを行います。バリデーションに失敗した場合は、展開してXMLを修正し、再パックしてください。
 ```bash
 python scripts/office/validate.py doc.docx
 ```
 
-### Page Size
+### ページサイズ
 
 ```javascript
 // CRITICAL: docx-js defaults to A4, not US Letter
@@ -96,14 +96,14 @@ sections: [{
 }]
 ```
 
-**Common page sizes (DXA units, 1440 DXA = 1 inch):**
+**一般的なページサイズ（DXA単位、1440 DXA = 1インチ）：**
 
-| Paper | Width | Height | Content Width (1" margins) |
+| 用紙 | 幅 | 高さ | コンテンツ幅（1インチマージン） |
 |-------|-------|--------|---------------------------|
-| US Letter | 12,240 | 15,840 | 9,360 |
-| A4 (default) | 11,906 | 16,838 | 9,026 |
+| USレター | 12,240 | 15,840 | 9,360 |
+| A4（デフォルト） | 11,906 | 16,838 | 9,026 |
 
-**Landscape orientation:** docx-js swaps width/height internally, so pass portrait dimensions and let it handle the swap:
+**横向き：** docx-jsは内部的に幅と高さを入れ替えるため、縦向きの寸法を渡して入れ替えを任せてください：
 ```javascript
 size: {
   width: 12240,   // Pass SHORT edge as width
@@ -113,9 +113,9 @@ size: {
 // Content width = 15840 - left margin - right margin (uses the long edge)
 ```
 
-### Styles (Override Built-in Headings)
+### スタイル（組み込み見出しのオーバーライド）
 
-Use Arial as the default font (universally supported). Keep titles black for readability.
+デフォルトフォントにはArialを使用してください（ユニバーサルサポート）。タイトルは読みやすさのため黒にしてください。
 
 ```javascript
 const doc = new Document({
@@ -139,7 +139,7 @@ const doc = new Document({
 });
 ```
 
-### Lists (NEVER use unicode bullets)
+### リスト（Unicode箇条書き文字は絶対に使用しない）
 
 ```javascript
 // ❌ WRONG - never manually insert bullet characters
@@ -173,9 +173,9 @@ const doc = new Document({
 // Different reference = restarts (1,2,3 then 1,2,3)
 ```
 
-### Tables
+### テーブル
 
-**CRITICAL: Tables need dual widths** - set both `columnWidths` on the table AND `width` on each cell. Without both, tables render incorrectly on some platforms.
+**重要：テーブルには二重の幅設定が必要です** - テーブルの`columnWidths`と各セルの`width`の両方を設定してください。両方がないと、一部のプラットフォームでテーブルが正しくレンダリングされません。
 
 ```javascript
 // CRITICAL: Always set table width for consistent rendering
@@ -202,9 +202,9 @@ new Table({
 })
 ```
 
-**Table width calculation:**
+**テーブル幅の計算：**
 
-Always use `WidthType.DXA` — `WidthType.PERCENTAGE` breaks in Google Docs.
+常に`WidthType.DXA`を使用してください。`WidthType.PERCENTAGE`はGoogleドキュメントで動作しません。
 
 ```javascript
 // Table width = sum of columnWidths = content width
@@ -213,14 +213,14 @@ width: { size: 9360, type: WidthType.DXA },
 columnWidths: [7000, 2360]  // Must sum to table width
 ```
 
-**Width rules:**
-- **Always use `WidthType.DXA`** — never `WidthType.PERCENTAGE` (incompatible with Google Docs)
-- Table width must equal the sum of `columnWidths`
-- Cell `width` must match corresponding `columnWidth`
-- Cell `margins` are internal padding - they reduce content area, not add to cell width
-- For full-width tables: use content width (page width minus left and right margins)
+**幅のルール：**
+- **常に`WidthType.DXA`を使用** - `WidthType.PERCENTAGE`は使用しない（Googleドキュメントと非互換）
+- テーブル幅は`columnWidths`の合計と一致する必要がある
+- セルの`width`は対応する`columnWidth`と一致する必要がある
+- セルの`margins`は内部パディング - コンテンツ領域を縮小するもので、セル幅には加算されない
+- 全幅テーブルの場合：コンテンツ幅（ページ幅から左右のマージンを引いた値）を使用
 
-### Images
+### 画像
 
 ```javascript
 // CRITICAL: type parameter is REQUIRED
@@ -234,7 +234,7 @@ new Paragraph({
 })
 ```
 
-### Page Breaks
+### 改ページ
 
 ```javascript
 // CRITICAL: PageBreak must be inside a Paragraph
@@ -244,7 +244,7 @@ new Paragraph({ children: [new PageBreak()] })
 new Paragraph({ pageBreakBefore: true, children: [new TextRun("New page")] })
 ```
 
-### Hyperlinks
+### ハイパーリンク
 
 ```javascript
 // External link
@@ -267,7 +267,7 @@ new Paragraph({ children: [new InternalHyperlink({
 })]})
 ```
 
-### Footnotes
+### 脚注
 
 ```javascript
 const doc = new Document({
@@ -288,7 +288,7 @@ const doc = new Document({
 });
 ```
 
-### Tab Stops
+### タブストップ
 
 ```javascript
 // Right-align text on same line (e.g., date opposite a title)
@@ -316,7 +316,7 @@ new Paragraph({
 })
 ```
 
-### Multi-Column Layouts
+### 段組みレイアウト
 
 ```javascript
 // Equal-width columns
@@ -347,16 +347,16 @@ sections: [{
 }]
 ```
 
-Force a column break with a new section using `type: SectionType.NEXT_COLUMN`.
+`type: SectionType.NEXT_COLUMN`を使用した新しいセクションで段区切りを強制できます。
 
-### Table of Contents
+### 目次
 
 ```javascript
 // CRITICAL: Headings must use HeadingLevel ONLY - no custom styles
 new TableOfContents("Table of Contents", { hyperlink: true, headingStyleRange: "1-3" })
 ```
 
-### Headers/Footers
+### ヘッダー/フッター
 
 ```javascript
 sections: [{
@@ -375,111 +375,111 @@ sections: [{
 }]
 ```
 
-### Critical Rules for docx-js
+### docx-jsの重要なルール
 
-- **Set page size explicitly** - docx-js defaults to A4; use US Letter (12240 x 15840 DXA) for US documents
-- **Landscape: pass portrait dimensions** - docx-js swaps width/height internally; pass short edge as `width`, long edge as `height`, and set `orientation: PageOrientation.LANDSCAPE`
-- **Never use `\n`** - use separate Paragraph elements
-- **Never use unicode bullets** - use `LevelFormat.BULLET` with numbering config
-- **PageBreak must be in Paragraph** - standalone creates invalid XML
-- **ImageRun requires `type`** - always specify png/jpg/etc
-- **Always set table `width` with DXA** - never use `WidthType.PERCENTAGE` (breaks in Google Docs)
-- **Tables need dual widths** - `columnWidths` array AND cell `width`, both must match
-- **Table width = sum of columnWidths** - for DXA, ensure they add up exactly
-- **Always add cell margins** - use `margins: { top: 80, bottom: 80, left: 120, right: 120 }` for readable padding
-- **Use `ShadingType.CLEAR`** - never SOLID for table shading
-- **Never use tables as dividers/rules** - cells have minimum height and render as empty boxes (including in headers/footers); use `border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: "2E75B6", space: 1 } }` on a Paragraph instead. For two-column footers, use tab stops (see Tab Stops section), not tables
-- **TOC requires HeadingLevel only** - no custom styles on heading paragraphs
-- **Override built-in styles** - use exact IDs: "Heading1", "Heading2", etc.
-- **Include `outlineLevel`** - required for TOC (0 for H1, 1 for H2, etc.)
+- **ページサイズを明示的に設定する** - docx-jsのデフォルトはA4。米国向け文書にはUSレター（12240 x 15840 DXA）を使用
+- **横向きの場合：縦向きの寸法を渡す** - docx-jsは内部的に幅と高さを入れ替える。短辺を`width`に、長辺を`height`に設定し、`orientation: PageOrientation.LANDSCAPE`を指定
+- **`\n`は使用しない** - 別々のParagraph要素を使用
+- **Unicode箇条書き文字は使用しない** - numbering設定で`LevelFormat.BULLET`を使用
+- **PageBreakはParagraph内に配置** - 単独で使用すると無効なXMLになる
+- **ImageRunには`type`が必須** - 必ずpng/jpg等を指定
+- **テーブルの`width`は常にDXAで設定** - `WidthType.PERCENTAGE`は使用しない（Googleドキュメントで不具合）
+- **テーブルには二重の幅設定が必要** - `columnWidths`配列とセルの`width`の両方が一致する必要がある
+- **テーブル幅 = columnWidthsの合計** - DXAの場合、正確に合計が一致すること
+- **常にセルマージンを追加** - 読みやすいパディングとして`margins: { top: 80, bottom: 80, left: 120, right: 120 }`を使用
+- **`ShadingType.CLEAR`を使用** - テーブルのシェーディングにはSOLIDを使用しない
+- **テーブルを区切り線として使用しない** - セルには最小高さがあり空のボックスとして表示される（ヘッダー/フッターも同様）。代わりにParagraphで`border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: "2E75B6", space: 1 } }`を使用。2カラムフッターにはテーブルではなくタブストップ（タブストップセクション参照）を使用
+- **目次にはHeadingLevelのみが必要** - 見出し段落にカスタムスタイルを使用しない
+- **組み込みスタイルをオーバーライド** - 正確なIDを使用："Heading1"、"Heading2"など
+- **`outlineLevel`を含める** - 目次に必要（H1は0、H2は1、など）
 
 ---
 
-## Editing Existing Documents
+## 既存文書の編集
 
-**Follow all 3 steps in order.**
+**3つのステップすべてを順番に実行してください。**
 
-### Step 1: Unpack
+### ステップ1：展開
 ```bash
 python scripts/office/unpack.py document.docx unpacked/
 ```
-Extracts XML, pretty-prints, merges adjacent runs, and converts smart quotes to XML entities (`&#x201C;` etc.) so they survive editing. Use `--merge-runs false` to skip run merging.
+XMLを抽出し、整形し、隣接するランを結合し、スマートクォートをXMLエンティティ（`&#x201C;`など）に変換して編集後も維持されるようにします。ラン結合をスキップするには`--merge-runs false`を使用してください。
 
-### Step 2: Edit XML
+### ステップ2：XMLの編集
 
-Edit files in `unpacked/word/`. See XML Reference below for patterns.
+`unpacked/word/`内のファイルを編集します。パターンについては下記のXMLリファレンスを参照してください。
 
-**Use "Claude" as the author** for tracked changes and comments, unless the user explicitly requests use of a different name.
+**変更履歴とコメントの著者には"Claude"を使用してください**（ユーザーが明示的に別の名前を要求しない限り）。
 
-**Use the Edit tool directly for string replacement. Do not write Python scripts.** Scripts introduce unnecessary complexity. The Edit tool shows exactly what is being replaced.
+**文字列置換にはEditツールを直接使用してください。Pythonスクリプトは書かないでください。** スクリプトは不必要な複雑さをもたらします。Editツールは何が置換されるかを正確に示します。
 
-**CRITICAL: Use smart quotes for new content.** When adding text with apostrophes or quotes, use XML entities to produce smart quotes:
+**重要：新しいコンテンツにはスマートクォートを使用してください。** アポストロフィや引用符を含むテキストを追加する際は、XMLエンティティを使用してスマートクォートを生成してください：
 ```xml
 <!-- Use these entities for professional typography -->
 <w:t>Here&#x2019;s a quote: &#x201C;Hello&#x201D;</w:t>
 ```
-| Entity | Character |
+| エンティティ | 文字 |
 |--------|-----------|
-| `&#x2018;` | ‘ (left single) |
-| `&#x2019;` | ’ (right single / apostrophe) |
-| `&#x201C;` | “ (left double) |
-| `&#x201D;` | ” (right double) |
+| `&#x2018;` | ' (左シングル) |
+| `&#x2019;` | ' (右シングル / アポストロフィ) |
+| `&#x201C;` | " (左ダブル) |
+| `&#x201D;` | " (右ダブル) |
 
-**Adding comments:** Use `comment.py` to handle boilerplate across multiple XML files (text must be pre-escaped XML):
+**コメントの追加：** 複数のXMLファイルにまたがるボイラープレートを処理するには`comment.py`を使用してください（テキストは事前にエスケープ済みXMLである必要があります）：
 ```bash
 python scripts/comment.py unpacked/ 0 "Comment text with &amp; and &#x2019;"
 python scripts/comment.py unpacked/ 1 "Reply text" --parent 0  # reply to comment 0
 python scripts/comment.py unpacked/ 0 "Text" --author "Custom Author"  # custom author name
 ```
-Then add markers to document.xml (see Comments in XML Reference).
+その後、document.xmlにマーカーを追加してください（XMLリファレンスのコメントを参照）。
 
-### Step 3: Pack
+### ステップ3：パック
 ```bash
 python scripts/office/pack.py unpacked/ output.docx --original document.docx
 ```
-Validates with auto-repair, condenses XML, and creates DOCX. Use `--validate false` to skip.
+自動修復付きでバリデーションを行い、XMLを圧縮してDOCXを作成します。スキップするには`--validate false`を使用してください。
 
-**Auto-repair will fix:**
-- `durableId` >= 0x7FFFFFFF (regenerates valid ID)
-- Missing `xml:space="preserve"` on `<w:t>` with whitespace
+**自動修復で修正されるもの：**
+- `durableId` >= 0x7FFFFFFF（有効なIDを再生成）
+- 空白を含む`<w:t>`で欠落している`xml:space="preserve"`
 
-**Auto-repair won't fix:**
-- Malformed XML, invalid element nesting, missing relationships, schema violations
+**自動修復で修正されないもの：**
+- 不正なXML、無効な要素のネスト、欠落したリレーションシップ、スキーマ違反
 
-### Common Pitfalls
+### よくある落とし穴
 
-- **Replace entire `<w:r>` elements**: When adding tracked changes, replace the whole `<w:r>...</w:r>` block with `<w:del>...<w:ins>...` as siblings. Don't inject tracked change tags inside a run.
-- **Preserve `<w:rPr>` formatting**: Copy the original run's `<w:rPr>` block into your tracked change runs to maintain bold, font size, etc.
+- **`<w:r>`要素全体を置換する**：変更履歴を追加する際は、`<w:r>...</w:r>`ブロック全体を`<w:del>...<w:ins>...`として兄弟要素に置換してください。ラン内に変更履歴タグを挿入しないでください。
+- **`<w:rPr>`フォーマットを保持する**：太字やフォントサイズなどを維持するため、元のランの`<w:rPr>`ブロックを変更履歴のランにコピーしてください。
 
 ---
 
-## XML Reference
+## XMLリファレンス
 
-### Schema Compliance
+### スキーマ準拠
 
-- **Element order in `<w:pPr>`**: `<w:pStyle>`, `<w:numPr>`, `<w:spacing>`, `<w:ind>`, `<w:jc>`, `<w:rPr>` last
-- **Whitespace**: Add `xml:space="preserve"` to `<w:t>` with leading/trailing spaces
-- **RSIDs**: Must be 8-digit hex (e.g., `00AB1234`)
+- **`<w:pPr>`内の要素順序**: `<w:pStyle>`, `<w:numPr>`, `<w:spacing>`, `<w:ind>`, `<w:jc>`, `<w:rPr>`は最後
+- **空白**: 先頭/末尾にスペースがある`<w:t>`には`xml:space="preserve"`を追加
+- **RSID**: 8桁の16進数（例：`00AB1234`）
 
-### Tracked Changes
+### 変更履歴
 
-**Insertion:**
+**挿入：**
 ```xml
 <w:ins w:id="1" w:author="Claude" w:date="2025-01-01T00:00:00Z">
   <w:r><w:t>inserted text</w:t></w:r>
 </w:ins>
 ```
 
-**Deletion:**
+**削除：**
 ```xml
 <w:del w:id="2" w:author="Claude" w:date="2025-01-01T00:00:00Z">
   <w:r><w:delText>deleted text</w:delText></w:r>
 </w:del>
 ```
 
-**Inside `<w:del>`**: Use `<w:delText>` instead of `<w:t>`, and `<w:delInstrText>` instead of `<w:instrText>`.
+**`<w:del>`内部**：`<w:t>`の代わりに`<w:delText>`を使用し、`<w:instrText>`の代わりに`<w:delInstrText>`を使用してください。
 
-**Minimal edits** - only mark what changes:
+**最小限の編集** - 変更箇所のみをマークしてください：
 ```xml
 <!-- Change "30 days" to "60 days" -->
 <w:r><w:t>The term is </w:t></w:r>
@@ -492,7 +492,7 @@ Validates with auto-repair, condenses XML, and creates DOCX. Use `--validate fal
 <w:r><w:t> days.</w:t></w:r>
 ```
 
-**Deleting entire paragraphs/list items** - when removing ALL content from a paragraph, also mark the paragraph mark as deleted so it merges with the next paragraph. Add `<w:del/>` inside `<w:pPr><w:rPr>`:
+**段落/リスト項目全体の削除** - 段落からすべてのコンテンツを削除する場合、次の段落と結合されるよう段落マークも削除済みとしてマークしてください。`<w:pPr><w:rPr>`内に`<w:del/>`を追加します：
 ```xml
 <w:p>
   <w:pPr>
@@ -506,9 +506,9 @@ Validates with auto-repair, condenses XML, and creates DOCX. Use `--validate fal
   </w:del>
 </w:p>
 ```
-Without the `<w:del/>` in `<w:pPr><w:rPr>`, accepting changes leaves an empty paragraph/list item.
+`<w:pPr><w:rPr>`内に`<w:del/>`がないと、変更を承認した際に空の段落/リスト項目が残ります。
 
-**Rejecting another author's insertion** - nest deletion inside their insertion:
+**別の著者の挿入を拒否する** - 挿入の中に削除をネストします：
 ```xml
 <w:ins w:author="Jane" w:id="5">
   <w:del w:author="Claude" w:id="10">
@@ -517,7 +517,7 @@ Without the `<w:del/>` in `<w:pPr><w:rPr>`, accepting changes leaves an empty pa
 </w:ins>
 ```
 
-**Restoring another author's deletion** - add insertion after (don't modify their deletion):
+**別の著者の削除を復元する** - 削除の後に挿入を追加します（削除を変更しない）：
 ```xml
 <w:del w:author="Jane" w:id="5">
   <w:r><w:delText>deleted text</w:delText></w:r>
@@ -527,11 +527,11 @@ Without the `<w:del/>` in `<w:pPr><w:rPr>`, accepting changes leaves an empty pa
 </w:ins>
 ```
 
-### Comments
+### コメント
 
-After running `comment.py` (see Step 2), add markers to document.xml. For replies, use `--parent` flag and nest markers inside the parent's.
+`comment.py`を実行した後（ステップ2参照）、document.xmlにマーカーを追加します。返信の場合は、`--parent`フラグを使用し、マーカーを親のマーカー内にネストしてください。
 
-**CRITICAL: `<w:commentRangeStart>` and `<w:commentRangeEnd>` are siblings of `<w:r>`, never inside `<w:r>`.**
+**重要：`<w:commentRangeStart>`と`<w:commentRangeEnd>`は`<w:r>`の兄弟要素であり、`<w:r>`の中に入れてはいけません。**
 
 ```xml
 <!-- Comment markers are direct children of w:p, never inside w:r -->
@@ -553,18 +553,18 @@ After running `comment.py` (see Step 2), add markers to document.xml. For replie
 <w:r><w:rPr><w:rStyle w:val="CommentReference"/></w:rPr><w:commentReference w:id="1"/></w:r>
 ```
 
-### Images
+### 画像
 
-1. Add image file to `word/media/`
-2. Add relationship to `word/_rels/document.xml.rels`:
+1. `word/media/`に画像ファイルを追加
+2. `word/_rels/document.xml.rels`にリレーションシップを追加：
 ```xml
 <Relationship Id="rId5" Type=".../image" Target="media/image1.png"/>
 ```
-3. Add content type to `[Content_Types].xml`:
+3. `[Content_Types].xml`にコンテンツタイプを追加：
 ```xml
 <Default Extension="png" ContentType="image/png"/>
 ```
-4. Reference in document.xml:
+4. document.xmlで参照：
 ```xml
 <w:drawing>
   <wp:inline>
@@ -582,9 +582,9 @@ After running `comment.py` (see Step 2), add markers to document.xml. For replie
 
 ---
 
-## Dependencies
+## 依存関係
 
-- **pandoc**: Text extraction
-- **docx**: `npm install -g docx` (new documents)
-- **LibreOffice**: PDF conversion (auto-configured for sandboxed environments via `scripts/office/soffice.py`)
-- **Poppler**: `pdftoppm` for images
+- **pandoc**: テキスト抽出
+- **docx**: `npm install -g docx`（新規文書用）
+- **LibreOffice**: PDF変換（サンドボックス環境では`scripts/office/soffice.py`により自動設定）
+- **Poppler**: 画像変換用の`pdftoppm`

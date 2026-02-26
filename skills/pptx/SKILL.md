@@ -1,22 +1,22 @@
 ---
 name: pptx
-description: "Use this skill any time a .pptx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates, layouts, speaker notes, or comments. Trigger whenever the user mentions \"deck,\" \"slides,\" \"presentation,\" or references a .pptx filename, regardless of what they plan to do with the content afterward. If a .pptx file needs to be opened, created, or touched, use this skill."
+description: ".pptxファイルが入力、出力、またはその両方として関わるあらゆる場面で使用するスキルです。スライドデッキ、ピッチデック、プレゼンテーションの作成、.pptxファイルの読み取り・解析・テキスト抽出（抽出したコンテンツをメールや要約など別の目的で使用する場合も含む）、既存プレゼンテーションの編集・修正・更新、スライドファイルの結合・分割、テンプレート・レイアウト・スピーカーノート・コメントの操作が含まれます。「デッキ」「スライド」「プレゼンテーション」への言及や、.pptxファイル名への参照がある場合にトリガーされます（その後コンテンツをどう利用するかに関わらず）。.pptxファイルを開く、作成する、操作する必要がある場合にこのスキルを使用してください。"
 license: Proprietary. LICENSE.txt has complete terms
 ---
 
-# PPTX Skill
+# PPTXスキル
 
-## Quick Reference
+## クイックリファレンス
 
-| Task | Guide |
+| タスク | ガイド |
 |------|-------|
-| Read/analyze content | `python -m markitdown presentation.pptx` |
-| Edit or create from template | Read [editing.md](editing.md) |
-| Create from scratch | Read [pptxgenjs.md](pptxgenjs.md) |
+| コンテンツの読み取り・分析 | `python -m markitdown presentation.pptx` |
+| テンプレートからの編集・作成 | [editing.md](editing.md)を参照 |
+| ゼロからの作成 | [pptxgenjs.md](pptxgenjs.md)を参照 |
 
 ---
 
-## Reading Content
+## コンテンツの読み取り
 
 ```bash
 # Text extraction
@@ -31,75 +31,75 @@ python scripts/office/unpack.py presentation.pptx unpacked/
 
 ---
 
-## Editing Workflow
+## 編集ワークフロー
 
-**Read [editing.md](editing.md) for full details.**
+**詳細は[editing.md](editing.md)を参照してください。**
 
-1. Analyze template with `thumbnail.py`
-2. Unpack → manipulate slides → edit content → clean → pack
-
----
-
-## Creating from Scratch
-
-**Read [pptxgenjs.md](pptxgenjs.md) for full details.**
-
-Use when no template or reference presentation is available.
+1. `thumbnail.py`でテンプレートを分析
+2. 展開 → スライド操作 → コンテンツ編集 → クリーンアップ → パック
 
 ---
 
-## Design Ideas
+## ゼロからの作成
 
-**Don't create boring slides.** Plain bullets on a white background won't impress anyone. Consider ideas from this list for each slide.
+**詳細は[pptxgenjs.md](pptxgenjs.md)を参照してください。**
 
-### Before Starting
+テンプレートや参考プレゼンテーションがない場合に使用します。
 
-- **Pick a bold, content-informed color palette**: The palette should feel designed for THIS topic. If swapping your colors into a completely different presentation would still "work," you haven't made specific enough choices.
-- **Dominance over equality**: One color should dominate (60-70% visual weight), with 1-2 supporting tones and one sharp accent. Never give all colors equal weight.
-- **Dark/light contrast**: Dark backgrounds for title + conclusion slides, light for content ("sandwich" structure). Or commit to dark throughout for a premium feel.
-- **Commit to a visual motif**: Pick ONE distinctive element and repeat it — rounded image frames, icons in colored circles, thick single-side borders. Carry it across every slide.
+---
 
-### Color Palettes
+## デザインのアイデア
 
-Choose colors that match your topic — don't default to generic blue. Use these palettes as inspiration:
+**退屈なスライドを作らないでください。** 白背景にプレーンな箇条書きでは誰にも感銘を与えられません。各スライドについて、以下のリストからアイデアを検討してください。
 
-| Theme | Primary | Secondary | Accent |
+### 作業を始める前に
+
+- **大胆で内容に即した配色を選ぶ**：配色はこのトピックのためにデザインされたと感じられるものにしてください。まったく別のプレゼンテーションに色を入れ替えても違和感がないなら、十分に特化した選択ができていません。
+- **均等ではなく優劣をつける**：1つの色を支配的に（視覚的な重み60-70%）、1-2色をサポートトーンとして、1色をシャープなアクセントとして使用してください。すべての色に同じ重みを与えないでください。
+- **明暗のコントラスト**：タイトルと結論のスライドには暗い背景、コンテンツには明るい背景を使用（「サンドイッチ」構造）。またはプレミアム感のために全体を暗くする方法もあります。
+- **ビジュアルモチーフを決める**：1つの特徴的な要素を選び繰り返してください。角丸の画像フレーム、色付き丸の中のアイコン、太い片側ボーダーなど。すべてのスライドで一貫して使用してください。
+
+### カラーパレット
+
+トピックに合った色を選んでください。汎用的な青にデフォルトしないこと。以下のパレットをインスピレーションとして使用してください：
+
+| テーマ | プライマリ | セカンダリ | アクセント |
 |-------|---------|-----------|--------|
-| **Midnight Executive** | `1E2761` (navy) | `CADCFC` (ice blue) | `FFFFFF` (white) |
-| **Forest & Moss** | `2C5F2D` (forest) | `97BC62` (moss) | `F5F5F5` (cream) |
-| **Coral Energy** | `F96167` (coral) | `F9E795` (gold) | `2F3C7E` (navy) |
-| **Warm Terracotta** | `B85042` (terracotta) | `E7E8D1` (sand) | `A7BEAE` (sage) |
-| **Ocean Gradient** | `065A82` (deep blue) | `1C7293` (teal) | `21295C` (midnight) |
-| **Charcoal Minimal** | `36454F` (charcoal) | `F2F2F2` (off-white) | `212121` (black) |
-| **Teal Trust** | `028090` (teal) | `00A896` (seafoam) | `02C39A` (mint) |
-| **Berry & Cream** | `6D2E46` (berry) | `A26769` (dusty rose) | `ECE2D0` (cream) |
-| **Sage Calm** | `84B59F` (sage) | `69A297` (eucalyptus) | `50808E` (slate) |
-| **Cherry Bold** | `990011` (cherry) | `FCF6F5` (off-white) | `2F3C7E` (navy) |
+| **ミッドナイトエグゼクティブ** | `1E2761` (ネイビー) | `CADCFC` (アイスブルー) | `FFFFFF` (ホワイト) |
+| **フォレスト&モス** | `2C5F2D` (フォレスト) | `97BC62` (モス) | `F5F5F5` (クリーム) |
+| **コーラルエナジー** | `F96167` (コーラル) | `F9E795` (ゴールド) | `2F3C7E` (ネイビー) |
+| **ウォームテラコッタ** | `B85042` (テラコッタ) | `E7E8D1` (サンド) | `A7BEAE` (セージ) |
+| **オーシャングラデーション** | `065A82` (ディープブルー) | `1C7293` (ティール) | `21295C` (ミッドナイト) |
+| **チャコールミニマル** | `36454F` (チャコール) | `F2F2F2` (オフホワイト) | `212121` (ブラック) |
+| **ティールトラスト** | `028090` (ティール) | `00A896` (シーフォーム) | `02C39A` (ミント) |
+| **ベリー&クリーム** | `6D2E46` (ベリー) | `A26769` (ダスティローズ) | `ECE2D0` (クリーム) |
+| **セージカーム** | `84B59F` (セージ) | `69A297` (ユーカリ) | `50808E` (スレート) |
+| **チェリーボールド** | `990011` (チェリー) | `FCF6F5` (オフホワイト) | `2F3C7E` (ネイビー) |
 
-### For Each Slide
+### 各スライドについて
 
-**Every slide needs a visual element** — image, chart, icon, or shape. Text-only slides are forgettable.
+**すべてのスライドにはビジュアル要素が必要です** - 画像、チャート、アイコン、またはシェイプ。テキストだけのスライドは記憶に残りません。
 
-**Layout options:**
-- Two-column (text left, illustration on right)
-- Icon + text rows (icon in colored circle, bold header, description below)
-- 2x2 or 2x3 grid (image on one side, grid of content blocks on other)
-- Half-bleed image (full left or right side) with content overlay
+**レイアウトオプション：**
+- 2カラム（左にテキスト、右にイラスト）
+- アイコン＋テキスト行（色付き丸の中にアイコン、太字の見出し、下に説明文）
+- 2x2または2x3グリッド（片側に画像、もう片側にコンテンツブロックのグリッド）
+- ハーフブリード画像（左または右全面）とコンテンツオーバーレイ
 
-**Data display:**
-- Large stat callouts (big numbers 60-72pt with small labels below)
-- Comparison columns (before/after, pros/cons, side-by-side options)
-- Timeline or process flow (numbered steps, arrows)
+**データ表示：**
+- 大きな数値の強調表示（60-72ptの大きな数字と下に小さなラベル）
+- 比較カラム（ビフォー/アフター、長所/短所、横並びオプション）
+- タイムラインまたはプロセスフロー（番号付きステップ、矢印）
 
-**Visual polish:**
-- Icons in small colored circles next to section headers
-- Italic accent text for key stats or taglines
+**ビジュアルの仕上げ：**
+- セクションヘッダーの横に小さな色付き丸の中のアイコン
+- 重要な統計やキャッチフレーズにイタリックのアクセントテキスト
 
-### Typography
+### タイポグラフィ
 
-**Choose an interesting font pairing** — don't default to Arial. Pick a header font with personality and pair it with a clean body font.
+**魅力的なフォントの組み合わせを選んでください** - Arialにデフォルトしないこと。個性のある見出しフォントとクリーンな本文フォントを組み合わせてください。
 
-| Header Font | Body Font |
+| 見出しフォント | 本文フォント |
 |-------------|-----------|
 | Georgia | Calibri |
 | Arial Black | Arial |
@@ -110,61 +110,61 @@ Choose colors that match your topic — don't default to generic blue. Use these
 | Palatino | Garamond |
 | Consolas | Calibri |
 
-| Element | Size |
+| 要素 | サイズ |
 |---------|------|
-| Slide title | 36-44pt bold |
-| Section header | 20-24pt bold |
-| Body text | 14-16pt |
-| Captions | 10-12pt muted |
+| スライドタイトル | 36-44pt 太字 |
+| セクションヘッダー | 20-24pt 太字 |
+| 本文テキスト | 14-16pt |
+| キャプション | 10-12pt 控えめ |
 
-### Spacing
+### スペーシング
 
-- 0.5" minimum margins
-- 0.3-0.5" between content blocks
-- Leave breathing room—don't fill every inch
+- 最小マージン0.5インチ
+- コンテンツブロック間0.3-0.5インチ
+- 余白を残してください。すべてのスペースを埋め尽くさないこと
 
-### Avoid (Common Mistakes)
+### 避けるべきこと（よくある間違い）
 
-- **Don't repeat the same layout** — vary columns, cards, and callouts across slides
-- **Don't center body text** — left-align paragraphs and lists; center only titles
-- **Don't skimp on size contrast** — titles need 36pt+ to stand out from 14-16pt body
-- **Don't default to blue** — pick colors that reflect the specific topic
-- **Don't mix spacing randomly** — choose 0.3" or 0.5" gaps and use consistently
-- **Don't style one slide and leave the rest plain** — commit fully or keep it simple throughout
-- **Don't create text-only slides** — add images, icons, charts, or visual elements; avoid plain title + bullets
-- **Don't forget text box padding** — when aligning lines or shapes with text edges, set `margin: 0` on the text box or offset the shape to account for padding
-- **Don't use low-contrast elements** — icons AND text need strong contrast against the background; avoid light text on light backgrounds or dark text on dark backgrounds
-- **NEVER use accent lines under titles** — these are a hallmark of AI-generated slides; use whitespace or background color instead
+- **同じレイアウトを繰り返さない** - スライドごとにカラム、カード、コールアウトを変えてください
+- **本文テキストを中央揃えにしない** - 段落やリストは左揃え。中央揃えはタイトルだけ
+- **サイズのコントラストを怠らない** - タイトルは14-16ptの本文から際立たせるために36pt以上が必要
+- **青にデフォルトしない** - 特定のトピックを反映した色を選ぶ
+- **スペーシングをランダムにしない** - 0.3インチまたは0.5インチの間隔を選び、一貫して使用
+- **1枚だけスタイルを適用して残りをプレーンにしない** - 全体を通してデザインするか、シンプルに統一する
+- **テキストだけのスライドを作らない** - 画像、アイコン、チャート、ビジュアル要素を追加。プレーンなタイトル＋箇条書きを避ける
+- **テキストボックスのパディングを忘れない** - 線やシェイプをテキストの端に揃える際、テキストボックスに`margin: 0`を設定するか、パディングを考慮してシェイプをオフセットする
+- **低コントラストの要素を使わない** - アイコンとテキストの両方が背景に対して強いコントラストが必要。明るい背景に薄いテキストや暗い背景に暗いテキストを避ける
+- **タイトル下のアクセントラインは絶対に使わない** - これはAI生成スライドの特徴です。代わりに余白や背景色を使用してください
 
 ---
 
-## QA (Required)
+## QA（必須）
 
-**Assume there are problems. Your job is to find them.**
+**問題があるものと想定してください。あなたの仕事はそれを見つけることです。**
 
-Your first render is almost never correct. Approach QA as a bug hunt, not a confirmation step. If you found zero issues on first inspection, you weren't looking hard enough.
+最初のレンダリングがそのまま正しいことはほぼありません。QAを確認作業としてではなく、バグ探しとして取り組んでください。最初の確認で問題が1つも見つからなかったなら、十分に注意深く見ていません。
 
-### Content QA
+### コンテンツQA
 
 ```bash
 python -m markitdown output.pptx
 ```
 
-Check for missing content, typos, wrong order.
+コンテンツの欠落、タイプミス、順序の間違いを確認してください。
 
-**When using templates, check for leftover placeholder text:**
+**テンプレート使用時は、残っているプレースホルダーテキストを確認してください：**
 
 ```bash
 python -m markitdown output.pptx | grep -iE "xxxx|lorem|ipsum|this.*(page|slide).*layout"
 ```
 
-If grep returns results, fix them before declaring success.
+grepが結果を返した場合は、完了宣言の前に修正してください。
 
-### Visual QA
+### ビジュアルQA
 
-**⚠️ USE SUBAGENTS** — even for 2-3 slides. You've been staring at the code and will see what you expect, not what's there. Subagents have fresh eyes.
+**サブエージェントを使用してください** - 2-3枚のスライドでも同様です。あなたはコードを見続けているため、実際にあるものではなく期待するものを見てしまいます。サブエージェントは新鮮な目を持っています。
 
-Convert slides to images (see [Converting to Images](#converting-to-images)), then use this prompt:
+スライドを画像に変換し（[画像への変換](#画像への変換)を参照）、以下のプロンプトを使用してください：
 
 ```
 Visually inspect these slides. Assume there are issues — find them.
@@ -192,30 +192,30 @@ Read and analyze these images:
 Report ALL issues found, including minor ones.
 ```
 
-### Verification Loop
+### 検証ループ
 
-1. Generate slides → Convert to images → Inspect
-2. **List issues found** (if none found, look again more critically)
-3. Fix issues
-4. **Re-verify affected slides** — one fix often creates another problem
-5. Repeat until a full pass reveals no new issues
+1. スライド生成 → 画像に変換 → 確認
+2. **見つかった問題をリストアップ**（問題が見つからなかった場合は、より厳しい目で再確認）
+3. 問題を修正
+4. **影響を受けたスライドを再検証** - 1つの修正が別の問題を生むことが多い
+5. 完全なパスで新たな問題が見つからなくなるまで繰り返す
 
-**Do not declare success until you've completed at least one fix-and-verify cycle.**
+**少なくとも1回の修正と検証のサイクルを完了するまで、完了宣言をしないでください。**
 
 ---
 
-## Converting to Images
+## 画像への変換
 
-Convert presentations to individual slide images for visual inspection:
+ビジュアル確認のために、プレゼンテーションを個別のスライド画像に変換します：
 
 ```bash
 python scripts/office/soffice.py --headless --convert-to pdf output.pptx
 pdftoppm -jpeg -r 150 output.pdf slide
 ```
 
-This creates `slide-01.jpg`, `slide-02.jpg`, etc.
+これにより`slide-01.jpg`、`slide-02.jpg`などが作成されます。
 
-To re-render specific slides after fixes:
+修正後に特定のスライドのみを再レンダリングするには：
 
 ```bash
 pdftoppm -jpeg -r 150 -f N -l N output.pdf slide-fixed
@@ -223,10 +223,10 @@ pdftoppm -jpeg -r 150 -f N -l N output.pdf slide-fixed
 
 ---
 
-## Dependencies
+## 依存関係
 
-- `pip install "markitdown[pptx]"` - text extraction
-- `pip install Pillow` - thumbnail grids
-- `npm install -g pptxgenjs` - creating from scratch
-- LibreOffice (`soffice`) - PDF conversion (auto-configured for sandboxed environments via `scripts/office/soffice.py`)
-- Poppler (`pdftoppm`) - PDF to images
+- `pip install "markitdown[pptx]"` - テキスト抽出
+- `pip install Pillow` - サムネイルグリッド
+- `npm install -g pptxgenjs` - ゼロからの作成
+- LibreOffice (`soffice`) - PDF変換（サンドボックス環境では`scripts/office/soffice.py`により自動設定）
+- Poppler (`pdftoppm`) - PDFから画像への変換

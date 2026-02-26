@@ -1,57 +1,57 @@
-# Editing Presentations
+# プレゼンテーションの編集
 
-## Template-Based Workflow
+## テンプレートベースのワークフロー
 
-When using an existing presentation as a template:
+既存のプレゼンテーションをテンプレートとして使用する場合：
 
-1. **Analyze existing slides**:
+1. **既存のスライドを分析する**：
    ```bash
    python scripts/thumbnail.py template.pptx
    python -m markitdown template.pptx
    ```
-   Review `thumbnails.jpg` to see layouts, and markitdown output to see placeholder text.
+   `thumbnails.jpg` でレイアウトを確認し、markitdown の出力でプレースホルダーテキストを確認します。
 
-2. **Plan slide mapping**: For each content section, choose a template slide.
+2. **スライドのマッピングを計画する**：各コンテンツセクションに対してテンプレートスライドを選択します。
 
-   ⚠️ **USE VARIED LAYOUTS** — monotonous presentations are a common failure mode. Don't default to basic title + bullet slides. Actively seek out:
-   - Multi-column layouts (2-column, 3-column)
-   - Image + text combinations
-   - Full-bleed images with text overlay
-   - Quote or callout slides
-   - Section dividers
-   - Stat/number callouts
-   - Icon grids or icon + text rows
+   **多様なレイアウトを使用してください** -- 単調なプレゼンテーションはよくある失敗パターンです。基本的なタイトル + 箇条書きスライドばかりにしないでください。以下のようなレイアウトを積極的に探してください：
+   - 複数カラムレイアウト（2カラム、3カラム）
+   - 画像 + テキストの組み合わせ
+   - テキストオーバーレイ付きのフルブリード画像
+   - 引用またはコールアウトスライド
+   - セクション区切り
+   - 統計/数値のコールアウト
+   - アイコングリッドまたはアイコン + テキストの行
 
-   **Avoid:** Repeating the same text-heavy layout for every slide.
+   **避けるべきこと：** すべてのスライドで同じテキスト多めのレイアウトを繰り返すこと。
 
-   Match content type to layout style (e.g., key points → bullet slide, team info → multi-column, testimonials → quote slide).
+   コンテンツの種類をレイアウトスタイルに合わせます（例：要点 → 箇条書きスライド、チーム情報 → 複数カラム、お客様の声 → 引用スライド）。
 
-3. **Unpack**: `python scripts/office/unpack.py template.pptx unpacked/`
+3. **展開する**：`python scripts/office/unpack.py template.pptx unpacked/`
 
-4. **Build presentation** (do this yourself, not with subagents):
-   - Delete unwanted slides (remove from `<p:sldIdLst>`)
-   - Duplicate slides you want to reuse (`add_slide.py`)
-   - Reorder slides in `<p:sldIdLst>`
-   - **Complete all structural changes before step 5**
+4. **プレゼンテーションを構築する**（サブエージェントではなく自分で行う）：
+   - 不要なスライドを削除する（`<p:sldIdLst>` から削除）
+   - 再利用したいスライドを複製する（`add_slide.py`）
+   - `<p:sldIdLst>` でスライドを並べ替える
+   - **ステップ 5 の前にすべての構造的変更を完了する**
 
-5. **Edit content**: Update text in each `slide{N}.xml`.
-   **Use subagents here if available** — slides are separate XML files, so subagents can edit in parallel.
+5. **コンテンツを編集する**：各 `slide{N}.xml` のテキストを更新します。
+   **サブエージェントが利用可能な場合はここで使用してください** -- スライドは別々の XML ファイルなので、サブエージェントが並行して編集できます。
 
-6. **Clean**: `python scripts/clean.py unpacked/`
+6. **クリーンアップ**：`python scripts/clean.py unpacked/`
 
-7. **Pack**: `python scripts/office/pack.py unpacked/ output.pptx --original template.pptx`
+7. **パッキング**：`python scripts/office/pack.py unpacked/ output.pptx --original template.pptx`
 
 ---
 
-## Scripts
+## スクリプト
 
-| Script | Purpose |
+| スクリプト | 用途 |
 |--------|---------|
-| `unpack.py` | Extract and pretty-print PPTX |
-| `add_slide.py` | Duplicate slide or create from layout |
-| `clean.py` | Remove orphaned files |
-| `pack.py` | Repack with validation |
-| `thumbnail.py` | Create visual grid of slides |
+| `unpack.py` | PPTX を展開して整形表示 |
+| `add_slide.py` | スライドの複製またはレイアウトから作成 |
+| `clean.py` | 孤立したファイルを削除 |
+| `pack.py` | バリデーション付きで再パッキング |
+| `thumbnail.py` | スライドのビジュアルグリッドを作成 |
 
 ### unpack.py
 
@@ -59,7 +59,7 @@ When using an existing presentation as a template:
 python scripts/office/unpack.py input.pptx unpacked/
 ```
 
-Extracts PPTX, pretty-prints XML, escapes smart quotes.
+PPTX を展開し、XML を整形表示し、スマートクォートをエスケープします。
 
 ### add_slide.py
 
@@ -68,7 +68,7 @@ python scripts/add_slide.py unpacked/ slide2.xml      # Duplicate slide
 python scripts/add_slide.py unpacked/ slideLayout2.xml # From layout
 ```
 
-Prints `<p:sldId>` to add to `<p:sldIdLst>` at desired position.
+目的の位置の `<p:sldIdLst>` に追加する `<p:sldId>` を出力します。
 
 ### clean.py
 
@@ -76,7 +76,7 @@ Prints `<p:sldId>` to add to `<p:sldIdLst>` at desired position.
 python scripts/clean.py unpacked/
 ```
 
-Removes slides not in `<p:sldIdLst>`, unreferenced media, orphaned rels.
+`<p:sldIdLst>` にないスライド、参照されていないメディア、孤立した rels を削除します。
 
 ### pack.py
 
@@ -84,7 +84,7 @@ Removes slides not in `<p:sldIdLst>`, unreferenced media, orphaned rels.
 python scripts/office/pack.py unpacked/ output.pptx --original input.pptx
 ```
 
-Validates, repairs, condenses XML, re-encodes smart quotes.
+バリデーション、修復、XML の圧縮、スマートクォートの再エンコードを行います。
 
 ### thumbnail.py
 
@@ -92,78 +92,78 @@ Validates, repairs, condenses XML, re-encodes smart quotes.
 python scripts/thumbnail.py input.pptx [output_prefix] [--cols N]
 ```
 
-Creates `thumbnails.jpg` with slide filenames as labels. Default 3 columns, max 12 per grid.
+スライドファイル名をラベルとした `thumbnails.jpg` を作成します。デフォルトは3列、グリッドあたり最大12枚。
 
-**Use for template analysis only** (choosing layouts). For visual QA, use `soffice` + `pdftoppm` to create full-resolution individual slide images—see SKILL.md.
-
----
-
-## Slide Operations
-
-Slide order is in `ppt/presentation.xml` → `<p:sldIdLst>`.
-
-**Reorder**: Rearrange `<p:sldId>` elements.
-
-**Delete**: Remove `<p:sldId>`, then run `clean.py`.
-
-**Add**: Use `add_slide.py`. Never manually copy slide files—the script handles notes references, Content_Types.xml, and relationship IDs that manual copying misses.
+**テンプレート分析にのみ使用してください**（レイアウトの選択）。ビジュアル QA には、`soffice` + `pdftoppm` を使用してフル解像度の個別スライド画像を作成してください -- SKILL.md を参照。
 
 ---
 
-## Editing Content
+## スライド操作
 
-**Subagents:** If available, use them here (after completing step 4). Each slide is a separate XML file, so subagents can edit in parallel. In your prompt to subagents, include:
-- The slide file path(s) to edit
-- **"Use the Edit tool for all changes"**
-- The formatting rules and common pitfalls below
+スライドの順序は `ppt/presentation.xml` → `<p:sldIdLst>` にあります。
 
-For each slide:
-1. Read the slide's XML
-2. Identify ALL placeholder content—text, images, charts, icons, captions
-3. Replace each placeholder with final content
+**並べ替え**：`<p:sldId>` 要素を並べ替えます。
 
-**Use the Edit tool, not sed or Python scripts.** The Edit tool forces specificity about what to replace and where, yielding better reliability.
+**削除**：`<p:sldId>` を削除してから `clean.py` を実行します。
 
-### Formatting Rules
-
-- **Bold all headers, subheadings, and inline labels**: Use `b="1"` on `<a:rPr>`. This includes:
-  - Slide titles
-  - Section headers within a slide
-  - Inline labels like (e.g.: "Status:", "Description:") at the start of a line
-- **Never use unicode bullets (•)**: Use proper list formatting with `<a:buChar>` or `<a:buAutoNum>`
-- **Bullet consistency**: Let bullets inherit from the layout. Only specify `<a:buChar>` or `<a:buNone>`.
+**追加**：`add_slide.py` を使用します。手動でスライドファイルをコピーしないでください -- スクリプトがノート参照、Content_Types.xml、リレーションシップ ID を処理しますが、手動コピーではこれらが漏れます。
 
 ---
 
-## Common Pitfalls
+## コンテンツの編集
 
-### Template Adaptation
+**サブエージェント：** 利用可能な場合は、ここで使用してください（ステップ 4 の完了後）。各スライドは別々の XML ファイルなので、サブエージェントが並行して編集できます。サブエージェントへのプロンプトには以下を含めてください：
+- 編集するスライドファイルのパス
+- **「すべての変更に Edit ツールを使用してください」**
+- 以下のフォーマットルールとよくある落とし穴
 
-When source content has fewer items than the template:
-- **Remove excess elements entirely** (images, shapes, text boxes), don't just clear text
-- Check for orphaned visuals after clearing text content
-- Run visual QA to catch mismatched counts
+各スライドについて：
+1. スライドの XML を読む
+2. すべてのプレースホルダーコンテンツを特定する -- テキスト、画像、チャート、アイコン、キャプション
+3. 各プレースホルダーを最終コンテンツに置き換える
 
-When replacing text with different length content:
-- **Shorter replacements**: Usually safe
-- **Longer replacements**: May overflow or wrap unexpectedly
-- Test with visual QA after text changes
-- Consider truncating or splitting content to fit the template's design constraints
+**sed や Python スクリプトではなく、Edit ツールを使用してください。** Edit ツールは何をどこに置き換えるかを明確に指定するため、より高い信頼性が得られます。
 
-**Template slots ≠ Source items**: If template has 4 team members but source has 3 users, delete the 4th member's entire group (image + text boxes), not just the text.
+### フォーマットルール
 
-### Multi-Item Content
+- **すべての見出し、サブ見出し、インラインラベルを太字にする**：`<a:rPr>` で `b="1"` を使用します。以下が含まれます：
+  - スライドタイトル
+  - スライド内のセクション見出し
+  - 行頭のインラインラベル（例："Status:"、"Description:"）
+- **Unicode の箇条書き記号（・）を使用しない**：`<a:buChar>` または `<a:buAutoNum>` で適切なリストフォーマットを使用する
+- **箇条書きの一貫性**：箇条書きはレイアウトから継承させる。`<a:buChar>` または `<a:buNone>` のみを指定する。
 
-If source has multiple items (numbered lists, multiple sections), create separate `<a:p>` elements for each — **never concatenate into one string**.
+---
 
-**❌ WRONG** — all items in one paragraph:
+## よくある落とし穴
+
+### テンプレートの適応
+
+ソースコンテンツのアイテム数がテンプレートより少ない場合：
+- **余分な要素を完全に削除する**（画像、シェイプ、テキストボックス）、テキストをクリアするだけではない
+- テキストコンテンツをクリアした後に孤立したビジュアルがないか確認する
+- ビジュアル QA を実行してアイテム数の不一致を検出する
+
+異なる長さのコンテンツでテキストを置換する場合：
+- **短い置換**：通常安全
+- **長い置換**：オーバーフローしたり予期しない折り返しが発生する可能性がある
+- テキスト変更後にビジュアル QA でテストする
+- テンプレートのデザイン制約に合わせてコンテンツを切り詰めたり分割したりすることを検討する
+
+**テンプレートのスロット ≠ ソースのアイテム**：テンプレートに4人のチームメンバーがあるがソースに3人のユーザーがいる場合、4番目のメンバーのグループ全体（画像 + テキストボックス）を削除し、テキストだけでなく全体を削除する。
+
+### 複数アイテムのコンテンツ
+
+ソースに複数のアイテム（番号付きリスト、複数のセクション）がある場合、それぞれに別々の `<a:p>` 要素を作成する -- **1つの文字列に連結しない**。
+
+**間違い** -- すべてのアイテムが1つの段落に：
 ```xml
 <a:p>
   <a:r><a:rPr .../><a:t>Step 1: Do the first thing. Step 2: Do the second thing.</a:t></a:r>
 </a:p>
 ```
 
-**✅ CORRECT** — separate paragraphs with bold headers:
+**正しい** -- 太字見出し付きの別々の段落：
 ```xml
 <a:p>
   <a:pPr algn="l"><a:lnSpc><a:spcPts val="3919"/></a:lnSpc></a:pPr>
@@ -180,26 +180,26 @@ If source has multiple items (numbered lists, multiple sections), create separat
 <!-- continue pattern -->
 ```
 
-Copy `<a:pPr>` from the original paragraph to preserve line spacing. Use `b="1"` on headers.
+行間を保持するために元の段落から `<a:pPr>` をコピーします。見出しには `b="1"` を使用します。
 
-### Smart Quotes
+### スマートクォート
 
-Handled automatically by unpack/pack. But the Edit tool converts smart quotes to ASCII.
+unpack/pack で自動的に処理されます。ただし Edit ツールはスマートクォートを ASCII に変換します。
 
-**When adding new text with quotes, use XML entities:**
+**引用符を含む新しいテキストを追加する場合は、XML エンティティを使用してください：**
 
 ```xml
 <a:t>the &#x201C;Agreement&#x201D;</a:t>
 ```
 
-| Character | Name | Unicode | XML Entity |
+| 文字 | 名前 | Unicode | XML エンティティ |
 |-----------|------|---------|------------|
-| `“` | Left double quote | U+201C | `&#x201C;` |
-| `”` | Right double quote | U+201D | `&#x201D;` |
-| `‘` | Left single quote | U+2018 | `&#x2018;` |
-| `’` | Right single quote | U+2019 | `&#x2019;` |
+| `\u201C` | 左二重引用符 | U+201C | `&#x201C;` |
+| `\u201D` | 右二重引用符 | U+201D | `&#x201D;` |
+| `\u2018` | 左単一引用符 | U+2018 | `&#x2018;` |
+| `\u2019` | 右単一引用符 | U+2019 | `&#x2019;` |
 
-### Other
+### その他
 
-- **Whitespace**: Use `xml:space="preserve"` on `<a:t>` with leading/trailing spaces
-- **XML parsing**: Use `defusedxml.minidom`, not `xml.etree.ElementTree` (corrupts namespaces)
+- **空白**：先頭/末尾にスペースがある `<a:t>` には `xml:space="preserve"` を使用する
+- **XML パース**：`xml.etree.ElementTree` ではなく `defusedxml.minidom` を使用する（名前空間が破損するため）

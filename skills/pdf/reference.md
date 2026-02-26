@@ -1,13 +1,13 @@
-# PDF Processing Advanced Reference
+# PDF 処理上級リファレンス
 
-This document contains advanced PDF processing features, detailed examples, and additional libraries not covered in the main skill instructions.
+このドキュメントには、メインのスキル説明では扱わない高度な PDF 処理機能、詳細な例、および追加ライブラリが含まれています。
 
-## pypdfium2 Library (Apache/BSD License)
+## pypdfium2 ライブラリ（Apache/BSD ライセンス）
 
-### Overview
-pypdfium2 is a Python binding for PDFium (Chromium's PDF library). It's excellent for fast PDF rendering, image generation, and serves as a PyMuPDF replacement.
+### 概要
+pypdfium2 は PDFium（Chromium の PDF ライブラリ）の Python バインディングです。高速な PDF レンダリング、画像生成に優れており、PyMuPDF の代替として機能します。
 
-### Render PDF to Images
+### PDF を画像にレンダリング
 ```python
 import pypdfium2 as pdfium
 from PIL import Image
@@ -33,7 +33,7 @@ for i, page in enumerate(pdf):
     img.save(f"page_{i+1}.jpg", "JPEG", quality=90)
 ```
 
-### Extract Text with pypdfium2
+### pypdfium2 でテキストを抽出
 ```python
 import pypdfium2 as pdfium
 
@@ -43,13 +43,13 @@ for i, page in enumerate(pdf):
     print(f"Page {i+1} text length: {len(text)} chars")
 ```
 
-## JavaScript Libraries
+## JavaScript ライブラリ
 
-### pdf-lib (MIT License)
+### pdf-lib（MIT ライセンス）
 
-pdf-lib is a powerful JavaScript library for creating and modifying PDF documents in any JavaScript environment.
+pdf-lib は、あらゆる JavaScript 環境で PDF ドキュメントを作成・変更するための強力な JavaScript ライブラリです。
 
-#### Load and Manipulate Existing PDF
+#### 既存の PDF を読み込んで操作
 ```javascript
 import { PDFDocument } from 'pdf-lib';
 import fs from 'fs';
@@ -77,7 +77,7 @@ async function manipulatePDF() {
 }
 ```
 
-#### Create Complex PDFs from Scratch
+#### ゼロから複雑な PDF を作成
 ```javascript
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import fs from 'fs';
@@ -138,7 +138,7 @@ async function createPDF() {
 }
 ```
 
-#### Advanced Merge and Split Operations
+#### 高度な結合と分割操作
 ```javascript
 import { PDFDocument } from 'pdf-lib';
 import fs from 'fs';
@@ -167,11 +167,11 @@ async function mergePDFs() {
 }
 ```
 
-### pdfjs-dist (Apache License)
+### pdfjs-dist（Apache ライセンス）
 
-PDF.js is Mozilla's JavaScript library for rendering PDFs in the browser.
+PDF.js は、ブラウザで PDF をレンダリングするための Mozilla の JavaScript ライブラリです。
 
-#### Basic PDF Loading and Rendering
+#### 基本的な PDF の読み込みとレンダリング
 ```javascript
 import * as pdfjsLib from 'pdfjs-dist';
 
@@ -205,7 +205,7 @@ async function renderPDF() {
 }
 ```
 
-#### Extract Text with Coordinates
+#### 座標付きでテキストを抽出
 ```javascript
 import * as pdfjsLib from 'pdfjs-dist';
 
@@ -241,7 +241,7 @@ async function extractText() {
 }
 ```
 
-#### Extract Annotations and Forms
+#### アノテーションとフォームの抽出
 ```javascript
 import * as pdfjsLib from 'pdfjs-dist';
 
@@ -262,11 +262,11 @@ async function extractAnnotations() {
 }
 ```
 
-## Advanced Command-Line Operations
+## 高度なコマンドライン操作
 
-### poppler-utils Advanced Features
+### poppler-utils の高度な機能
 
-#### Extract Text with Bounding Box Coordinates
+#### バウンディングボックス座標付きでテキストを抽出
 ```bash
 # Extract text with bounding box coordinates (essential for structured data)
 pdftotext -bbox-layout document.pdf output.xml
@@ -274,7 +274,7 @@ pdftotext -bbox-layout document.pdf output.xml
 # The XML output contains precise coordinates for each text element
 ```
 
-#### Advanced Image Conversion
+#### 高度な画像変換
 ```bash
 # Convert to PNG images with specific resolution
 pdftoppm -png -r 300 document.pdf output_prefix
@@ -286,7 +286,7 @@ pdftoppm -png -r 600 -f 1 -l 3 document.pdf high_res_pages
 pdftoppm -jpeg -jpegopt quality=85 -r 200 document.pdf jpeg_output
 ```
 
-#### Extract Embedded Images
+#### 埋め込み画像の抽出
 ```bash
 # Extract all embedded images with metadata
 pdfimages -j -p document.pdf page_images
@@ -298,9 +298,9 @@ pdfimages -list document.pdf
 pdfimages -all document.pdf images/img
 ```
 
-### qpdf Advanced Features
+### qpdf の高度な機能
 
-#### Complex Page Manipulation
+#### 複雑なページ操作
 ```bash
 # Split PDF into groups of pages
 qpdf --split-pages=3 input.pdf output_group_%02d.pdf
@@ -312,7 +312,7 @@ qpdf input.pdf --pages input.pdf 1,3-5,8,10-end -- extracted.pdf
 qpdf --empty --pages doc1.pdf 1-3 doc2.pdf 5-7 doc3.pdf 2,4 -- combined.pdf
 ```
 
-#### PDF Optimization and Repair
+#### PDF の最適化と修復
 ```bash
 # Optimize PDF for web (linearize for streaming)
 qpdf --linearize input.pdf optimized.pdf
@@ -328,7 +328,7 @@ qpdf --fix-qdf damaged.pdf repaired.pdf
 qpdf --show-all-pages input.pdf > structure.txt
 ```
 
-#### Advanced Encryption
+#### 高度な暗号化
 ```bash
 # Add password protection with specific permissions
 qpdf --encrypt user_pass owner_pass 256 --print=none --modify=none -- input.pdf encrypted.pdf
@@ -340,34 +340,34 @@ qpdf --show-encryption encrypted.pdf
 qpdf --password=secret123 --decrypt encrypted.pdf decrypted.pdf
 ```
 
-## Advanced Python Techniques
+## Python の高度なテクニック
 
-### pdfplumber Advanced Features
+### pdfplumber の高度な機能
 
-#### Extract Text with Precise Coordinates
+#### 精密な座標付きでテキストを抽出
 ```python
 import pdfplumber
 
 with pdfplumber.open("document.pdf") as pdf:
     page = pdf.pages[0]
-    
+
     # Extract all text with coordinates
     chars = page.chars
     for char in chars[:10]:  # First 10 characters
         print(f"Char: '{char['text']}' at x:{char['x0']:.1f} y:{char['y0']:.1f}")
-    
+
     # Extract text by bounding box (left, top, right, bottom)
     bbox_text = page.within_bbox((100, 100, 400, 200)).extract_text()
 ```
 
-#### Advanced Table Extraction with Custom Settings
+#### カスタム設定による高度なテーブル抽出
 ```python
 import pdfplumber
 import pandas as pd
 
 with pdfplumber.open("complex_table.pdf") as pdf:
     page = pdf.pages[0]
-    
+
     # Extract tables with custom settings for complex layouts
     table_settings = {
         "vertical_strategy": "lines",
@@ -376,15 +376,15 @@ with pdfplumber.open("complex_table.pdf") as pdf:
         "intersection_tolerance": 15
     }
     tables = page.extract_tables(table_settings)
-    
+
     # Visual debugging for table extraction
     img = page.to_image(resolution=150)
     img.save("debug_layout.png")
 ```
 
-### reportlab Advanced Features
+### reportlab の高度な機能
 
-#### Create Professional Reports with Tables
+#### テーブル付きの本格的なレポートを作成
 ```python
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
@@ -423,17 +423,17 @@ elements.append(table)
 doc.build(elements)
 ```
 
-## Complex Workflows
+## 複雑なワークフロー
 
-### Extract Figures/Images from PDF
+### PDF から図/画像を抽出
 
-#### Method 1: Using pdfimages (fastest)
+#### 方法 1：pdfimages を使用（最速）
 ```bash
 # Extract all images with original quality
 pdfimages -all document.pdf images/img
 ```
 
-#### Method 2: Using pypdfium2 + Image Processing
+#### 方法 2：pypdfium2 + 画像処理
 ```python
 import pypdfium2 as pdfium
 from PIL import Image
@@ -441,26 +441,26 @@ import numpy as np
 
 def extract_figures(pdf_path, output_dir):
     pdf = pdfium.PdfDocument(pdf_path)
-    
+
     for page_num, page in enumerate(pdf):
         # Render high-resolution page
         bitmap = page.render(scale=3.0)
         img = bitmap.to_pil()
-        
+
         # Convert to numpy for processing
         img_array = np.array(img)
-        
+
         # Simple figure detection (non-white regions)
         mask = np.any(img_array != [255, 255, 255], axis=2)
-        
+
         # Find contours and extract bounding boxes
         # (This is simplified - real implementation would need more sophisticated detection)
-        
+
         # Save detected figures
         # ... implementation depends on specific needs
 ```
 
-### Batch PDF Processing with Error Handling
+### エラーハンドリング付きバッチ PDF 処理
 ```python
 import os
 import glob
@@ -472,7 +472,7 @@ logger = logging.getLogger(__name__)
 
 def batch_process_pdfs(input_dir, operation='merge'):
     pdf_files = glob.glob(os.path.join(input_dir, "*.pdf"))
-    
+
     if operation == 'merge':
         writer = PdfWriter()
         for pdf_file in pdf_files:
@@ -484,10 +484,10 @@ def batch_process_pdfs(input_dir, operation='merge'):
             except Exception as e:
                 logger.error(f"Failed to process {pdf_file}: {e}")
                 continue
-        
+
         with open("batch_merged.pdf", "wb") as output:
             writer.write(output)
-    
+
     elif operation == 'extract_text':
         for pdf_file in pdf_files:
             try:
@@ -495,18 +495,18 @@ def batch_process_pdfs(input_dir, operation='merge'):
                 text = ""
                 for page in reader.pages:
                     text += page.extract_text()
-                
+
                 output_file = pdf_file.replace('.pdf', '.txt')
                 with open(output_file, 'w', encoding='utf-8') as f:
                     f.write(text)
                 logger.info(f"Extracted text from: {pdf_file}")
-                
+
             except Exception as e:
                 logger.error(f"Failed to extract text from {pdf_file}: {e}")
                 continue
 ```
 
-### Advanced PDF Cropping
+### 高度な PDF クロッピング
 ```python
 from pypdf import PdfWriter, PdfReader
 
@@ -525,48 +525,48 @@ with open("cropped.pdf", "wb") as output:
     writer.write(output)
 ```
 
-## Performance Optimization Tips
+## パフォーマンス最適化のヒント
 
-### 1. For Large PDFs
-- Use streaming approaches instead of loading entire PDF in memory
-- Use `qpdf --split-pages` for splitting large files
-- Process pages individually with pypdfium2
+### 1. 大きな PDF の場合
+- PDF 全体をメモリにロードする代わりにストリーミングアプローチを使用する
+- 大きなファイルの分割には `qpdf --split-pages` を使用する
+- pypdfium2 でページを個別に処理する
 
-### 2. For Text Extraction
-- `pdftotext -bbox-layout` is fastest for plain text extraction
-- Use pdfplumber for structured data and tables
-- Avoid `pypdf.extract_text()` for very large documents
+### 2. テキスト抽出の場合
+- プレーンテキスト抽出には `pdftotext -bbox-layout` が最速
+- 構造化データとテーブルには pdfplumber を使用する
+- 非常に大きなドキュメントでは `pypdf.extract_text()` を避ける
 
-### 3. For Image Extraction
-- `pdfimages` is much faster than rendering pages
-- Use low resolution for previews, high resolution for final output
+### 3. 画像抽出の場合
+- `pdfimages` はページをレンダリングするよりもはるかに高速
+- プレビューには低解像度、最終出力には高解像度を使用する
 
-### 4. For Form Filling
-- pdf-lib maintains form structure better than most alternatives
-- Pre-validate form fields before processing
+### 4. フォーム記入の場合
+- pdf-lib はほとんどの代替手段よりもフォーム構造を適切に維持する
+- 処理前にフォームフィールドを事前検証する
 
-### 5. Memory Management
+### 5. メモリ管理
 ```python
 # Process PDFs in chunks
 def process_large_pdf(pdf_path, chunk_size=10):
     reader = PdfReader(pdf_path)
     total_pages = len(reader.pages)
-    
+
     for start_idx in range(0, total_pages, chunk_size):
         end_idx = min(start_idx + chunk_size, total_pages)
         writer = PdfWriter()
-        
+
         for i in range(start_idx, end_idx):
             writer.add_page(reader.pages[i])
-        
+
         # Process chunk
         with open(f"chunk_{start_idx//chunk_size}.pdf", "wb") as output:
             writer.write(output)
 ```
 
-## Troubleshooting Common Issues
+## よくある問題のトラブルシューティング
 
-### Encrypted PDFs
+### 暗号化された PDF
 ```python
 # Handle password-protected PDFs
 from pypdf import PdfReader
@@ -579,14 +579,14 @@ except Exception as e:
     print(f"Failed to decrypt: {e}")
 ```
 
-### Corrupted PDFs
+### 破損した PDF
 ```bash
 # Use qpdf to repair
 qpdf --check corrupted.pdf
 qpdf --replace-input corrupted.pdf
 ```
 
-### Text Extraction Issues
+### テキスト抽出の問題
 ```python
 # Fallback to OCR for scanned PDFs
 import pytesseract
@@ -600,13 +600,13 @@ def extract_text_with_ocr(pdf_path):
     return text
 ```
 
-## License Information
+## ライセンス情報
 
-- **pypdf**: BSD License
-- **pdfplumber**: MIT License
-- **pypdfium2**: Apache/BSD License
-- **reportlab**: BSD License
-- **poppler-utils**: GPL-2 License
-- **qpdf**: Apache License
-- **pdf-lib**: MIT License
-- **pdfjs-dist**: Apache License
+- **pypdf**: BSD ライセンス
+- **pdfplumber**: MIT ライセンス
+- **pypdfium2**: Apache/BSD ライセンス
+- **reportlab**: BSD ライセンス
+- **poppler-utils**: GPL-2 ライセンス
+- **qpdf**: Apache ライセンス
+- **pdf-lib**: MIT ライセンス
+- **pdfjs-dist**: Apache ライセンス

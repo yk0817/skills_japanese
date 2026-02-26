@@ -1,19 +1,19 @@
 # Modern Minimalist
 
-A clean and contemporary theme with a sophisticated grayscale palette for maximum versatility.
+洗練されたグレースケールパレットを採用した、クリーンでコンテンポラリーなテーマ。あらゆる用途に対応する高い汎用性が特徴です。
 
-## Color Palette
+## カラーパレット
 
-- **Charcoal**: `#36454f` - Primary dark color
-- **Slate Gray**: `#708090` - Medium gray for accents
-- **Light Gray**: `#d3d3d3` - Backgrounds and dividers
-- **White**: `#ffffff` - Text and clean backgrounds
+- **Charcoal**: `#36454f` - プライマリダークカラー
+- **Slate Gray**: `#708090` - アクセント用のミディアムグレー
+- **Light Gray**: `#d3d3d3` - 背景と区切り線
+- **White**: `#ffffff` - テキストとクリーンな背景
 
-## Typography
+## タイポグラフィ
 
-- **Headers**: DejaVu Sans Bold
-- **Body Text**: DejaVu Sans
+- **見出し**: DejaVu Sans Bold
+- **本文**: DejaVu Sans
 
-## Best Used For
+## 推奨用途
 
-Tech presentations, architecture portfolios, design showcases, modern business proposals, data visualization.
+テックプレゼンテーション、建築ポートフォリオ、デザインショーケース、モダンなビジネス提案書、データビジュアライゼーション。

@@ -1,14 +1,14 @@
-# Python MCP Server Implementation Guide
+# Python MCP サーバー実装ガイド
 
-## Overview
+## 概要
 
-This document provides Python-specific best practices and examples for implementing MCP servers using the MCP Python SDK. It covers server setup, tool registration patterns, input validation with Pydantic, error handling, and complete working examples.
+このドキュメントでは、MCP Python SDK を使用した MCP サーバー実装のための Python 固有のベストプラクティスと例を提供します。サーバーセットアップ、ツール登録パターン、Pydantic による入力バリデーション、エラーハンドリング、および完全な動作例について説明します。
 
 ---
 
-## Quick Reference
+## クイックリファレンス
 
-### Key Imports
+### 主要なインポート
 ```python
 from mcp.server.fastmcp import FastMCP
 from pydantic import BaseModel, Field, field_validator, ConfigDict
@@ -17,12 +17,12 @@ from enum import Enum
 import httpx
 ```
 
-### Server Initialization
+### サーバーの初期化
 ```python
 mcp = FastMCP("service_mcp")
 ```
 
-### Tool Registration Pattern
+### ツール登録パターン
 ```python
 @mcp.tool(name="tool_name", annotations={...})
 async def tool_function(params: InputModel) -> str:
@@ -32,42 +32,42 @@ async def tool_function(params: InputModel) -> str:
 
 ---
 
-## MCP Python SDK and FastMCP
+## MCP Python SDK と FastMCP
 
-The official MCP Python SDK provides FastMCP, a high-level framework for building MCP servers. It provides:
-- Automatic description and inputSchema generation from function signatures and docstrings
-- Pydantic model integration for input validation
-- Decorator-based tool registration with `@mcp.tool`
+公式の MCP Python SDK は、MCP サーバーを構築するための高レベルフレームワークである FastMCP を提供します。以下の機能があります：
+- 関数シグネチャと docstring からの description と inputSchema の自動生成
+- 入力バリデーション用の Pydantic モデル統合
+- `@mcp.tool` によるデコレータベースのツール登録
 
-**For complete SDK documentation, use WebFetch to load:**
+**完全な SDK ドキュメントについては、WebFetch を使用して以下を読み込んでください：**
 `https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/README.md`
 
-## Server Naming Convention
+## サーバー命名規則
 
-Python MCP servers must follow this naming pattern:
-- **Format**: `{service}_mcp` (lowercase with underscores)
-- **Examples**: `github_mcp`, `jira_mcp`, `stripe_mcp`
+Python MCP サーバーは以下の命名パターンに従う必要があります：
+- **フォーマット**：`{service}_mcp`（アンダースコア付き小文字）
+- **例**：`github_mcp`、`jira_mcp`、`stripe_mcp`
 
-The name should be:
-- General (not tied to specific features)
-- Descriptive of the service/API being integrated
-- Easy to infer from the task description
-- Without version numbers or dates
+名前は以下の条件を満たすべきです：
+- 一般的である（特定の機能に紐付かない）
+- 統合するサービス/API を説明的に示す
+- タスクの説明から推測しやすい
+- バージョン番号や日付を含まない
 
-## Tool Implementation
+## ツール実装
 
-### Tool Naming
+### ツールの命名
 
-Use snake_case for tool names (e.g., "search_users", "create_project", "get_channel_info") with clear, action-oriented names.
+ツール名には snake_case を使用し（例："search_users"、"create_project"、"get_channel_info"）、明確でアクション指向の名前を付けます。
 
-**Avoid Naming Conflicts**: Include the service context to prevent overlaps:
-- Use "slack_send_message" instead of just "send_message"
-- Use "github_create_issue" instead of just "create_issue"
-- Use "asana_list_tasks" instead of just "list_tasks"
+**命名の競合を避ける**：重複を防ぐためにサービスコンテキストを含めます：
+- `send_message` ではなく `slack_send_message` を使用する
+- `create_issue` ではなく `github_create_issue` を使用する
+- `list_tasks` ではなく `asana_list_tasks` を使用する
 
-### Tool Structure with FastMCP
+### FastMCP によるツール構造
 
-Tools are defined using the `@mcp.tool` decorator with Pydantic models for input validation:
+ツールは `@mcp.tool` デコレータと入力バリデーション用の Pydantic モデルを使用して定義します：
 
 ```python
 from pydantic import BaseModel, Field, ConfigDict
@@ -118,13 +118,13 @@ async def service_tool_name(params: ServiceToolInput) -> str:
     pass
 ```
 
-## Pydantic v2 Key Features
+## Pydantic v2 の主要機能
 
-- Use `model_config` instead of nested `Config` class
-- Use `field_validator` instead of deprecated `validator`
-- Use `model_dump()` instead of deprecated `dict()`
-- Validators require `@classmethod` decorator
-- Type hints are required for validator methods
+- ネストされた `Config` クラスの代わりに `model_config` を使用する
+- 非推奨の `validator` の代わりに `field_validator` を使用する
+- 非推奨の `dict()` の代わりに `model_dump()` を使用する
+- バリデータには `@classmethod` デコレータが必要
+- バリデータメソッドには型ヒントが必要
 
 ```python
 from pydantic import BaseModel, Field, field_validator, ConfigDict
@@ -147,9 +147,9 @@ class CreateUserInput(BaseModel):
         return v.lower()
 ```
 
-## Response Format Options
+## レスポンスフォーマットオプション
 
-Support multiple output formats for flexibility:
+柔軟性のために複数の出力フォーマットをサポートします：
 
 ```python
 from enum import Enum
@@ -167,21 +167,21 @@ class UserSearchInput(BaseModel):
     )
 ```
 
-**Markdown format**:
-- Use headers, lists, and formatting for clarity
-- Convert timestamps to human-readable format (e.g., "2024-01-15 10:30:00 UTC" instead of epoch)
-- Show display names with IDs in parentheses (e.g., "@john.doe (U123456)")
-- Omit verbose metadata (e.g., show only one profile image URL, not all sizes)
-- Group related information logically
+**Markdown フォーマット**：
+- 見出し、リスト、フォーマットを使用して明確に
+- タイムスタンプを人間が読みやすいフォーマットに変換する（例：epoch の代わりに "2024-01-15 10:30:00 UTC"）
+- 表示名に括弧付きで ID を表示する（例："@john.doe (U123456)"）
+- 冗長なメタデータを省略する（例：すべてのサイズではなく、プロフィール画像の URL を1つだけ表示）
+- 関連情報を論理的にグループ化する
 
-**JSON format**:
-- Return complete, structured data suitable for programmatic processing
-- Include all available fields and metadata
-- Use consistent field names and types
+**JSON フォーマット**：
+- プログラム的な処理に適した完全な構造化データを返す
+- 利用可能なすべてのフィールドとメタデータを含める
+- 一貫したフィールド名と型を使用する
 
-## Pagination Implementation
+## ページネーション実装
 
-For tools that list resources:
+リソースをリストするツール向け：
 
 ```python
 class ListInput(BaseModel):
@@ -204,9 +204,9 @@ async def list_items(params: ListInput) -> str:
     return json.dumps(response, indent=2)
 ```
 
-## Error Handling
+## エラーハンドリング
 
-Provide clear, actionable error messages:
+明確で実行可能なエラーメッセージを提供します：
 
 ```python
 def _handle_api_error(e: Exception) -> str:
@@ -224,9 +224,9 @@ def _handle_api_error(e: Exception) -> str:
     return f"Error: Unexpected error occurred: {type(e).__name__}"
 ```
 
-## Shared Utilities
+## 共有ユーティリティ
 
-Extract common functionality into reusable functions:
+共通機能を再利用可能な関数に抽出します：
 
 ```python
 # Shared API request function
@@ -243,9 +243,9 @@ async def _make_api_request(endpoint: str, method: str = "GET", **kwargs) -> dic
         return response.json()
 ```
 
-## Async/Await Best Practices
+## Async/Await のベストプラクティス
 
-Always use async/await for network requests and I/O operations:
+ネットワークリクエストと I/O 操作には常に async/await を使用します：
 
 ```python
 # Good: Async network request
@@ -261,9 +261,9 @@ def fetch_data(resource_id: str) -> dict:
     return response.json()
 ```
 
-## Type Hints
+## 型ヒント
 
-Use type hints throughout:
+全体を通じて型ヒントを使用します：
 
 ```python
 from typing import Optional, List, Dict, Any
@@ -273,9 +273,9 @@ async def get_user(user_id: str) -> Dict[str, Any]:
     return {"id": data["id"], "name": data["name"]}
 ```
 
-## Tool Docstrings
+## ツールの docstring
 
-Every tool must have comprehensive docstrings with explicit type information:
+すべてのツールには明示的な型情報を含む包括的な docstring が必要です：
 
 ```python
 async def search_users(params: UserSearchInput) -> str:
@@ -327,9 +327,9 @@ async def search_users(params: UserSearchInput) -> str:
     '''
 ```
 
-## Complete Example
+## 完全な例
 
-See below for a complete Python MCP server example:
+以下は完全な Python MCP サーバーの例です：
 
 ```python
 #!/usr/bin/env python3
@@ -473,11 +473,11 @@ if __name__ == "__main__":
 
 ---
 
-## Advanced FastMCP Features
+## FastMCP の高度な機能
 
-### Context Parameter Injection
+### Context パラメータインジェクション
 
-FastMCP can automatically inject a `Context` parameter into tools for advanced capabilities like logging, progress reporting, resource reading, and user interaction:
+FastMCP はログ記録、進捗レポート、リソース読み取り、ユーザーインタラクションなどの高度な機能のために `Context` パラメータをツールに自動的にインジェクトできます：
 
 ```python
 from mcp.server.fastmcp import FastMCP, Context
@@ -517,16 +517,16 @@ async def interactive_tool(resource_id: str, ctx: Context) -> str:
     return await api_call(resource_id, api_key)
 ```
 
-**Context capabilities:**
-- `ctx.report_progress(progress, message)` - Report progress for long operations
-- `ctx.log_info(message, data)` / `ctx.log_error()` / `ctx.log_debug()` - Logging
-- `ctx.elicit(prompt, input_type)` - Request input from users
-- `ctx.fastmcp.name` - Access server configuration
-- `ctx.read_resource(uri)` - Read MCP resources
+**Context の機能：**
+- `ctx.report_progress(progress, message)` - 長時間操作の進捗レポート
+- `ctx.log_info(message, data)` / `ctx.log_error()` / `ctx.log_debug()` - ログ記録
+- `ctx.elicit(prompt, input_type)` - ユーザーからの入力要求
+- `ctx.fastmcp.name` - サーバー設定へのアクセス
+- `ctx.read_resource(uri)` - MCP リソースの読み取り
 
-### Resource Registration
+### リソース登録
 
-Expose data as resources for efficient, template-based access:
+効率的なテンプレートベースのアクセスのためにデータをリソースとして公開します：
 
 ```python
 @mcp.resource("file://documents/{name}")
@@ -547,13 +547,13 @@ async def get_setting(key: str, ctx: Context) -> str:
     return json.dumps(settings.get(key, {}))
 ```
 
-**When to use Resources vs Tools:**
-- **Resources**: For data access with simple parameters (URI templates)
-- **Tools**: For complex operations with validation and business logic
+**リソースとツールの使い分け：**
+- **リソース**：シンプルなパラメータ（URI テンプレート）によるデータアクセス向け
+- **ツール**：バリデーションとビジネスロジックを伴う複雑な操作向け
 
-### Structured Output Types
+### 構造化出力型
 
-FastMCP supports multiple return types beyond strings:
+FastMCP は文字列以外の複数の戻り値型をサポートしています：
 
 ```python
 from typing import TypedDict
@@ -586,9 +586,9 @@ async def get_user_detailed(user_id: str) -> DetailedUser:
     return DetailedUser(**user)
 ```
 
-### Lifespan Management
+### ライフスパン管理
 
-Initialize resources that persist across requests:
+リクエスト間で持続するリソースを初期化します：
 
 ```python
 from contextlib import asynccontextmanager
@@ -616,9 +616,9 @@ async def query_data(query: str, ctx: Context) -> str:
     return format_results(results)
 ```
 
-### Transport Options
+### トランスポートオプション
 
-FastMCP supports two main transport mechanisms:
+FastMCP は2つの主要なトランスポートメカニズムをサポートしています：
 
 ```python
 # stdio transport (for local tools) - default
@@ -630,90 +630,90 @@ if __name__ == "__main__":
     mcp.run(transport="streamable_http", port=8000)
 ```
 
-**Transport selection:**
-- **stdio**: Command-line tools, local integrations, subprocess execution
-- **Streamable HTTP**: Web services, remote access, multiple clients
+**トランスポートの選択：**
+- **stdio**：コマンドラインツール、ローカル統合、サブプロセス実行
+- **Streamable HTTP**：Web サービス、リモートアクセス、複数クライアント
 
 ---
 
-## Code Best Practices
+## コードのベストプラクティス
 
-### Code Composability and Reusability
+### コードの合成可能性と再利用性
 
-Your implementation MUST prioritize composability and code reuse:
+実装では合成可能性とコードの再利用を最優先しなければなりません：
 
-1. **Extract Common Functionality**:
-   - Create reusable helper functions for operations used across multiple tools
-   - Build shared API clients for HTTP requests instead of duplicating code
-   - Centralize error handling logic in utility functions
-   - Extract business logic into dedicated functions that can be composed
-   - Extract shared markdown or JSON field selection & formatting functionality
+1. **共通機能の抽出**：
+   - 複数のツールで使用される操作に対して再利用可能なヘルパー関数を作成する
+   - コードの重複を避けるために共有 API クライアントを構築する
+   - エラーハンドリングロジックをユーティリティ関数に集約する
+   - ビジネスロジックを合成可能な専用関数に抽出する
+   - 共有の Markdown または JSON フィールド選択・フォーマット機能を抽出する
 
-2. **Avoid Duplication**:
-   - NEVER copy-paste similar code between tools
-   - If you find yourself writing similar logic twice, extract it into a function
-   - Common operations like pagination, filtering, field selection, and formatting should be shared
-   - Authentication/authorization logic should be centralized
+2. **重複を避ける**：
+   - ツール間で類似コードをコピー&ペーストしない
+   - 同様のロジックを2回書いている場合は関数に抽出する
+   - ページネーション、フィルタリング、フィールド選択、フォーマットなどの共通操作は共有すべき
+   - 認証/認可ロジックは集約すべき
 
-### Python-Specific Best Practices
+### Python 固有のベストプラクティス
 
-1. **Use Type Hints**: Always include type annotations for function parameters and return values
-2. **Pydantic Models**: Define clear Pydantic models for all input validation
-3. **Avoid Manual Validation**: Let Pydantic handle input validation with constraints
-4. **Proper Imports**: Group imports (standard library, third-party, local)
-5. **Error Handling**: Use specific exception types (httpx.HTTPStatusError, not generic Exception)
-6. **Async Context Managers**: Use `async with` for resources that need cleanup
-7. **Constants**: Define module-level constants in UPPER_CASE
+1. **型ヒントを使用する**：関数パラメータと戻り値には常に型アノテーションを含める
+2. **Pydantic モデル**：すべての入力バリデーションに対して明確な Pydantic モデルを定義する
+3. **手動バリデーションを避ける**：制約付きの Pydantic に入力バリデーションを任せる
+4. **適切なインポート**：インポートをグループ化する（標準ライブラリ、サードパーティ、ローカル）
+5. **エラーハンドリング**：汎用的な Exception ではなく、特定の例外型（httpx.HTTPStatusError）を使用する
+6. **非同期コンテキストマネージャ**：クリーンアップが必要なリソースには `async with` を使用する
+7. **定数**：モジュールレベルの定数を UPPER_CASE で定義する
 
-## Quality Checklist
+## 品質チェックリスト
 
-Before finalizing your Python MCP server implementation, ensure:
+Python MCP サーバーの実装を完了する前に、以下を確認してください：
 
-### Strategic Design
-- [ ] Tools enable complete workflows, not just API endpoint wrappers
-- [ ] Tool names reflect natural task subdivisions
-- [ ] Response formats optimize for agent context efficiency
-- [ ] Human-readable identifiers used where appropriate
-- [ ] Error messages guide agents toward correct usage
+### 戦略的設計
+- [ ] ツールは API エンドポイントのラッパーではなく、完全なワークフローを可能にする
+- [ ] ツール名は自然なタスクの細分化を反映している
+- [ ] レスポンスフォーマットはエージェントのコンテキスト効率を最適化している
+- [ ] 適切な場所で人間が読みやすい識別子を使用している
+- [ ] エラーメッセージがエージェントを正しい使用方法に導く
 
-### Implementation Quality
-- [ ] FOCUSED IMPLEMENTATION: Most important and valuable tools implemented
-- [ ] All tools have descriptive names and documentation
-- [ ] Return types are consistent across similar operations
-- [ ] Error handling is implemented for all external calls
-- [ ] Server name follows format: `{service}_mcp`
-- [ ] All network operations use async/await
-- [ ] Common functionality is extracted into reusable functions
-- [ ] Error messages are clear, actionable, and educational
-- [ ] Outputs are properly validated and formatted
+### 実装品質
+- [ ] 重点実装：最も重要で価値のあるツールが実装されている
+- [ ] すべてのツールに説明的な名前とドキュメントがある
+- [ ] 類似の操作間で戻り値の型が一貫している
+- [ ] すべての外部呼び出しにエラーハンドリングが実装されている
+- [ ] サーバー名が `{service}_mcp` フォーマットに従っている
+- [ ] すべてのネットワーク操作が async/await を使用している
+- [ ] 共通機能が再利用可能な関数に抽出されている
+- [ ] エラーメッセージが明確で、実行可能で、教育的である
+- [ ] 出力が適切にバリデーションおよびフォーマットされている
 
-### Tool Configuration
-- [ ] All tools implement 'name' and 'annotations' in the decorator
-- [ ] Annotations correctly set (readOnlyHint, destructiveHint, idempotentHint, openWorldHint)
-- [ ] All tools use Pydantic BaseModel for input validation with Field() definitions
-- [ ] All Pydantic Fields have explicit types and descriptions with constraints
-- [ ] All tools have comprehensive docstrings with explicit input/output types
-- [ ] Docstrings include complete schema structure for dict/JSON returns
-- [ ] Pydantic models handle input validation (no manual validation needed)
+### ツール設定
+- [ ] すべてのツールがデコレータで 'name' と 'annotations' を実装している
+- [ ] アノテーションが正しく設定されている（readOnlyHint、destructiveHint、idempotentHint、openWorldHint）
+- [ ] すべてのツールが Field() 定義付きの Pydantic BaseModel を入力バリデーションに使用している
+- [ ] すべての Pydantic Field に明示的な型、説明、制約がある
+- [ ] すべてのツールに明示的な入出力型を含む包括的な docstring がある
+- [ ] docstring に dict/JSON 戻り値の完全なスキーマ構造が含まれている
+- [ ] Pydantic モデルが入力バリデーションを処理する（手動バリデーション不要）
 
-### Advanced Features (where applicable)
-- [ ] Context injection used for logging, progress, or elicitation
-- [ ] Resources registered for appropriate data endpoints
-- [ ] Lifespan management implemented for persistent connections
-- [ ] Structured output types used (TypedDict, Pydantic models)
-- [ ] Appropriate transport configured (stdio or streamable HTTP)
+### 高度な機能（該当する場合）
+- [ ] ログ記録、進捗、またはユーザー入力要求に Context インジェクションを使用している
+- [ ] 適切なデータエンドポイントにリソースが登録されている
+- [ ] 永続的な接続にライフスパン管理が実装されている
+- [ ] 構造化出力型（TypedDict、Pydantic モデル）を使用している
+- [ ] 適切なトランスポートが設定されている（stdio または Streamable HTTP）
 
-### Code Quality
-- [ ] File includes proper imports including Pydantic imports
-- [ ] Pagination is properly implemented where applicable
-- [ ] Filtering options are provided for potentially large result sets
-- [ ] All async functions are properly defined with `async def`
-- [ ] HTTP client usage follows async patterns with proper context managers
-- [ ] Type hints are used throughout the code
-- [ ] Constants are defined at module level in UPPER_CASE
+### コード品質
+- [ ] ファイルに Pydantic インポートを含む適切なインポートがある
+- [ ] 該当箇所でページネーションが適切に実装されている
+- [ ] 大量の結果セットに対してフィルタリングオプションが提供されている
+- [ ] すべての async 関数が `async def` で適切に定義されている
+- [ ] HTTP クライアントの使用が適切なコンテキストマネージャ付きの非同期パターンに従っている
+- [ ] コード全体で型ヒントが使用されている
+- [ ] 定数がモジュールレベルで UPPER_CASE で定義されている
 
-### Testing
-- [ ] Server runs successfully: `python your_server.py --help`
-- [ ] All imports resolve correctly
-- [ ] Sample tool calls work as expected
-- [ ] Error scenarios handled gracefully
+### テスト
+- [ ] サーバーが正常に実行される：`python your_server.py --help`
+- [ ] すべてのインポートが正しく解決される
+- [ ] サンプルツール呼び出しが期待通りに動作する
+- [ ] エラーシナリオが適切に処理される

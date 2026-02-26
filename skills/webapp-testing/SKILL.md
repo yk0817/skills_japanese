@@ -1,19 +1,19 @@
 ---
 name: webapp-testing
-description: Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.
+description: Playwrightを使用してローカルWebアプリケーションを操作・テストするためのツールキット。フロントエンドの機能検証、UIの動作デバッグ、ブラウザのスクリーンショット取得、ブラウザログの確認をサポートします。
 license: Complete terms in LICENSE.txt
 ---
 
-# Web Application Testing
+# Webアプリケーションテスト
 
-To test local web applications, write native Python Playwright scripts.
+ローカルWebアプリケーションをテストするには、PythonのPlaywrightスクリプトを記述します。
 
-**Helper Scripts Available**:
-- `scripts/with_server.py` - Manages server lifecycle (supports multiple servers)
+**利用可能なヘルパースクリプト**:
+- `scripts/with_server.py` - サーバーのライフサイクルを管理（複数サーバー対応）
 
-**Always run scripts with `--help` first** to see usage. DO NOT read the source until you try running the script first and find that a customized solution is abslutely necessary. These scripts can be very large and thus pollute your context window. They exist to be called directly as black-box scripts rather than ingested into your context window.
+**スクリプトは必ず最初に `--help` を付けて実行してください。** 使い方を確認するためです。スクリプトを実行してみて、カスタマイズが本当に必要だと判明するまでソースコードを読まないでください。これらのスクリプトは非常に大きく、コンテキストウィンドウを圧迫する可能性があります。コンテキストウィンドウに取り込むのではなく、ブラックボックスとして直接呼び出すことを前提に設計されています。
 
-## Decision Tree: Choosing Your Approach
+## 判断ツリー: アプローチの選び方
 
 ```
 User task → Is it static HTML?
@@ -32,16 +32,16 @@ User task → Is it static HTML?
             4. Execute actions with discovered selectors
 ```
 
-## Example: Using with_server.py
+## 使用例: with_server.py
 
-To start a server, run `--help` first, then use the helper:
+サーバーを起動するには、まず `--help` を実行してから、ヘルパーを使用します:
 
-**Single server:**
+**単一サーバーの場合:**
 ```bash
 python scripts/with_server.py --server "npm run dev" --port 5173 -- python your_automation.py
 ```
 
-**Multiple servers (e.g., backend + frontend):**
+**複数サーバーの場合（例: バックエンド + フロントエンド）:**
 ```bash
 python scripts/with_server.py \
   --server "cd backend && python server.py" --port 3000 \
@@ -49,7 +49,7 @@ python scripts/with_server.py \
   -- python your_automation.py
 ```
 
-To create an automation script, include only Playwright logic (servers are managed automatically):
+自動化スクリプトを作成する際は、Playwrightのロジックのみを含めてください（サーバーは自動的に管理されます）:
 ```python
 from playwright.sync_api import sync_playwright
 
@@ -62,35 +62,35 @@ with sync_playwright() as p:
     browser.close()
 ```
 
-## Reconnaissance-Then-Action Pattern
+## 偵察してから実行するパターン
 
-1. **Inspect rendered DOM**:
+1. **レンダリング済みDOMを検査する**:
    ```python
    page.screenshot(path='/tmp/inspect.png', full_page=True)
    content = page.content()
    page.locator('button').all()
    ```
 
-2. **Identify selectors** from inspection results
+2. 検査結果から**セレクタを特定する**
 
-3. **Execute actions** using discovered selectors
+3. 発見したセレクタを使って**アクションを実行する**
 
-## Common Pitfall
+## よくある落とし穴
 
-❌ **Don't** inspect the DOM before waiting for `networkidle` on dynamic apps
-✅ **Do** wait for `page.wait_for_load_state('networkidle')` before inspection
+- **やってはいけないこと**: 動的アプリで `networkidle` を待たずにDOMを検査する
+- **正しいやり方**: 検査の前に `page.wait_for_load_state('networkidle')` を待つ
 
-## Best Practices
+## ベストプラクティス
 
-- **Use bundled scripts as black boxes** - To accomplish a task, consider whether one of the scripts available in `scripts/` can help. These scripts handle common, complex workflows reliably without cluttering the context window. Use `--help` to see usage, then invoke directly. 
-- Use `sync_playwright()` for synchronous scripts
-- Always close the browser when done
-- Use descriptive selectors: `text=`, `role=`, CSS selectors, or IDs
-- Add appropriate waits: `page.wait_for_selector()` or `page.wait_for_timeout()`
+- **バンドルされたスクリプトをブラックボックスとして使用する** - タスクを達成するために、`scripts/` にあるスクリプトが役立つかどうかを検討してください。これらのスクリプトは、コンテキストウィンドウを圧迫することなく、一般的で複雑なワークフローを確実に処理します。`--help` で使い方を確認してから直接呼び出してください。
+- 同期スクリプトには `sync_playwright()` を使用する
+- 完了時には必ずブラウザを閉じる
+- 説明的なセレクタを使用する: `text=`、`role=`、CSSセレクタ、またはID
+- 適切な待機を追加する: `page.wait_for_selector()` または `page.wait_for_timeout()`
 
-## Reference Files
+## リファレンスファイル
 
-- **examples/** - Examples showing common patterns:
-  - `element_discovery.py` - Discovering buttons, links, and inputs on a page
-  - `static_html_automation.py` - Using file:// URLs for local HTML
-  - `console_logging.py` - Capturing console logs during automation
+- **examples/** - 一般的なパターンを示す例:
+  - `element_discovery.py` - ページ上のボタン、リンク、入力要素の発見
+  - `static_html_automation.py` - ローカルHTMLに対するfile:// URLの使用
+  - `console_logging.py` - 自動化中のコンソールログのキャプチャ
